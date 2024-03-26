@@ -1,0 +1,7 @@
+@import './../../styles/variables.scss';
+
+
+// Using the mixin container from the variables file in the styles folder.
+.loginContainer {
+    @include form-container;
+}
