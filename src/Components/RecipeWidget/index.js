@@ -22,12 +22,12 @@ export default function Widget({ food }) {
             }
         }
         getRecipes();
-    }, [])
+    })
     return (
         <div className="widgetContainer">
             {recipes.map((recipe, index) => (
                 <div key={index} className="widgetCard">
-                    <img src={recipe.recipe.image}></img>
+                    <img src={recipe.recipe.image} alt={recipe.recipe.label}></img>
                     <h2>{recipe.recipe.label}</h2>
                     <div className="recipeInfo">
                         {recipe.recipe.mealType}
