@@ -1,0 +1,11 @@
+.scoutFooter{
+    display: flex;
+    justify-content: space-between;
+    padding: 3em;
+
+    .footerLink, .footerText{
+        display: flex;
+        gap: 1em;
+    }
+
+}
