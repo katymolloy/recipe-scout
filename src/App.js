@@ -9,7 +9,7 @@ import { useState } from 'react';
 function App() {
   const [authenticated, setAuthenticated] = useState(false)
 
-  const login = (state) => {
+  const setLoggedIn = (state) => {
     setAuthenticated(state);
   
   }
@@ -21,8 +21,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Landing/>} />
           <Route path='/cookbook' element={<Cookbook isLoggedIn={authenticated}/>} />
-          <Route path='/login' element={<Login onLogin={login} />} />
-          <Route path='/register' element={<Register/>} />
+          <Route path='/login' element={<Login onLogin={setLoggedIn} />} />
+          <Route path='/register' element={<Register onRegister={setLoggedIn}/>} />
         </Routes>
       </Router>
     </div>
