@@ -24,7 +24,7 @@ export default function Register({ onRegister }) {
             .then((userCredential) => {
                 const user = userCredential.user.uid;
                 writeToDatabase(user);
-                onRegister(true)
+                onRegister(true, user);
                 navigate('/cookbook')
             })
             .catch((error) => {

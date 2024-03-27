@@ -15,8 +15,8 @@ export default function LoginPage({ onLogin }) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
-        onLogin(true);
+        const user = userCredential.user.uid;
+        onLogin(true, user);
         
         navigate("/cookbook");
         // ...

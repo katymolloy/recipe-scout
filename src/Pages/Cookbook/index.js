@@ -1,13 +1,34 @@
 import { Link } from "react-router-dom"
 import './cookbook.scss'
+import { useEffect, useState } from "react"
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore'
+import { getFirestoreInstance } from "../../firebase";
 
-export default function Cookbook({ isLoggedIn }) {
+export default function Cookbook({ isLoggedIn, currentUser }) {
+    const [name, setName] = useState('');
+
+    const db = getFirestoreInstance();
+
+    useEffect(() => {
+        const getUserData = async () => {
+            const docRef = doc(db, 'users', currentUser)
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                console.log(docSnap.data())
+                setName(docSnap.data().first)
+            } else {
+                console.log('No data for current user')
+            }
+        }
+        getUserData();
+    })
     return (
         <>
             {isLoggedIn ?
 
                 <div>
                     <div className="header"> <h1>My Cookbook</h1> <Link to={'/'}>Home</Link></div>
+                    <div>Welcome back {name}!</div>
 
                 </div>
 
