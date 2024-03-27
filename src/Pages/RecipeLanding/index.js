@@ -5,7 +5,7 @@ import CTA from "../../Components/RegisterCTA"
 import {useState } from "react"
 
 
-export default function Landing({isAuthenticated}) {
+export default function Landing({isAuthenticated, currentUser}) {
     const [recipes, setRecipes] = useState([])
     const [query, setQuery] = useState('')
 
@@ -21,13 +21,13 @@ export default function Landing({isAuthenticated}) {
             <input type="text"></input><button type="button" onClick={searchHandler}>Search</button>
 
             <h2>Fuel the Gains</h2>
-            <Widget food={'chicken'} userLoggedIn={isAuthenticated} />
+            <Widget food={'chicken'} userLoggedIn={isAuthenticated} currentUser={currentUser}/>
 
     <CTA />
             <h2>Delicious Desserts</h2>
-            <Widget food={'dessert'} userLoggedIn={isAuthenticated}/>
+            <Widget food={'dessert'} userLoggedIn={isAuthenticated} currentUser={currentUser}/>
             <h2>Fresh Salad Ideas</h2>
-            <Widget food={'salad'} userLoggedIn={isAuthenticated}/>
+            <Widget food={'salad'} userLoggedIn={isAuthenticated} currentUser={currentUser}/>
             <Footer />
         </>
     )

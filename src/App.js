@@ -20,9 +20,9 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path='/' element={<Landing isAuthenticated={authenticated} />} />
+          <Route path='/' element={<Landing isAuthenticated={authenticated} currentUser={userId}/>} />
           <Route path='/cookbook' element={<Cookbook isLoggedIn={authenticated} currentUser={userId} />} />
-          <Route path='/login' element={<Login onLogin={setLoggedIn} />} />
+          <Route path='/login' element={<Login onLogin={setLoggedIn}  />} />
           <Route path='/register' element={<Register onRegister={setLoggedIn} />} />
         </Routes>
       </Router>

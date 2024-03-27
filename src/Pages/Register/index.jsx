@@ -51,6 +51,7 @@ export default function Register({ onRegister }) {
             email: email,
             first: firstName,
             last: lastName,
+            recipes: [],
         }).then(() => {
             console.log('New user added to db')
         }).catch((error) => {

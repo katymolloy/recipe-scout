@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import './widget.scss'
 import { FaHeart } from "react-icons/fa";
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { arrayUnion, doc, getDoc, setDoc } from 'firebase/firestore'
 import { getFirestoreInstance } from "../../firebase";
 
-export default function Widget({ food, userLoggedIn }) {
+export default function Widget({ food, userLoggedIn, currentUser }) {
     const db = getFirestoreInstance();
     const [recipes, setRecipes] = useState([])
 
@@ -19,29 +19,26 @@ export default function Widget({ food, userLoggedIn }) {
             let docName = food + 'Widget'
             const docRef = doc(db, 'recipes', docName)
             const docSnap = await getDoc(docRef)
-            if(docSnap.exists()){
+            if (docSnap.exists()) {
                 console.log('Widget data retrieved')
                 setRecipes(docSnap.data().recipes)
-            }else{
+            } else {
                 console.log('Error retrieving widget data from db')
             }
-
         }
         getRecipes();
     }, [])
 
+
+    // have to first check for duplicated
     const saveRecipe = async (uri) => {
-        if (userLoggedIn) {
+        console.log(uri)
+        console.log(currentUser)
+        const recipeRef = doc(db, 'users', currentUser);
 
-            await setDoc(doc(db, "users", userLoggedIn), {
-                recipes: uri
-            }).then(() => {
-                console.log('Recipe saved')
-            }).catch((error) => {
-                console.log('Error saving recipe: ', error)
-            })
-        }
-
+        await setDoc(recipeRef, {
+            recipes: arrayUnion(uri)
+        }, { merge: true })
     }
 
     return (
