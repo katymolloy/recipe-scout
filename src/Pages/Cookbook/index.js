@@ -3,6 +3,7 @@ import './cookbook.scss'
 import { useEffect, useState } from "react"
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore'
 import { getFirestoreInstance } from "../../firebase";
+import { IoEllipseSharp } from "react-icons/io5";
 
 export default function Cookbook({ isLoggedIn, currentUser }) {
     const [name, setName] = useState('');
@@ -10,17 +11,22 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
     const db = getFirestoreInstance();
 
     useEffect(() => {
-        const getUserData = async () => {
-            const docRef = doc(db, 'users', currentUser)
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                console.log(docSnap.data())
-                setName(docSnap.data().first)
-            } else {
-                console.log('No data for current user')
+        if(isLoggedIn === true){
+            const getUserData = async () => {
+                const docRef = doc(db, 'users', currentUser)
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    console.log(docSnap.data())
+                    setName(docSnap.data().first)
+                } else {
+                    console.log('No data for current user')
+                }
             }
+            getUserData();
+        }else{
+            return;
         }
-        getUserData();
+       
     })
     return (
         <>
