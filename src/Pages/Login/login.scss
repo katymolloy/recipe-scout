@@ -2,7 +2,7 @@
 
 // Using the mixin container from the variables file in the styles folder.
 .loginContainer {
-  // @include form-container;
+  @include form-container;
 
   ul {
     list-style-type: none;
