@@ -1,36 +1,47 @@
 import { useEffect, useState } from "react"
 import './widget.scss'
 import { FaHeart } from "react-icons/fa";
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { getFirestoreInstance } from "../../firebase";
 
 export default function Widget({ food, userLoggedIn }) {
     const db = getFirestoreInstance();
     const [recipes, setRecipes] = useState([])
-    const apiEnd = 'https://api.edamam.com/search?app_id=adae4dea&app_key=c5651d467486b3320642ff5762e7442c&q='
+
+    // matt's api credentials: 
+    // const apiEnd = 'https://api.edamam.com/search?app_id=d521788b&app_key=c569f8cb415ada401f91221c983f3608&q='
+
+    // my (katy) api end
+    // const apiEnd = 'https://api.edamam.com/search?app_id=adae4dea&app_key=c5651d467486b3320642ff5762e7442c&q='
 
     useEffect(() => {
         const getRecipes = async () => {
-            try {
-                let getData = apiEnd + food
-                const response = await fetch(getData)
-                const recipes = await response.json();
-                console.log(recipes.hits)
-                let apiResponse = recipes.hits
-                let topFourRecipe = apiResponse.slice(1, 5)
-                setRecipes(topFourRecipe)
-            } catch {
-                console.log('Error retreiving recipes')
-
+            let docName = food + 'Widget'
+            const docRef = doc(db, 'recipes', docName)
+            const docSnap = await getDoc(docRef)
+            if(docSnap.exists()){
+                console.log('Widget data retrieved')
+                setRecipes(docSnap.data().recipes)
+            }else{
+                console.log('Error retrieving widget data from db')
             }
+
         }
         getRecipes();
-    })
+    }, [])
 
     const saveRecipe = async (uri) => {
-    //     await setDoc(doc(db, "users", currentUser), {
-    //         recipes:
-    //   });
+        if (userLoggedIn) {
+
+            await setDoc(doc(db, "users", userLoggedIn), {
+                recipes: uri
+            }).then(() => {
+                console.log('Recipe saved')
+            }).catch((error) => {
+                console.log('Error saving recipe: ', error)
+            })
+        }
+
     }
 
     return (
