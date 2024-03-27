@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
 import './widget.scss'
 import { FaHeart } from "react-icons/fa";
-import { arrayUnion, doc, getDoc, setDoc } from 'firebase/firestore'
-import { getFirestoreInstance } from "../../firebase";
+import { getFirestoreInstance, getRecipes, saveRecipe } from "../../firebase";
 
 export default function Widget({ food, userLoggedIn, currentUser }) {
     const db = getFirestoreInstance();
@@ -16,55 +15,21 @@ export default function Widget({ food, userLoggedIn, currentUser }) {
     // const apiEnd = 'https://api.edamam.com/search?app_id=adae4dea&app_key=c5651d467486b3320642ff5762e7442c&q='
 
     useEffect(() => {
-        const getRecipes = async () => {
-            let docName = food + 'Widget'
-            const docRef = doc(db, 'recipes', docName)
-            const docSnap = await getDoc(docRef)
-            if (docSnap.exists()) {
-                console.log('Widget data retrieved')
-                setRecipes(docSnap.data().recipes)
-            } else {
-                console.log('Error retrieving widget data from db')
-            }
-        }
-        getRecipes();
+        getRecipes(db, food, setRecipes);
     }, [])
 
-
-    // have to first check for duplicated
-    const saveRecipe = async (uri) => {
-        const recipeRef = doc(db, 'users', currentUser);
-        const docRef = doc(db, 'users', currentUser);
-
-        const docSnap = await getDoc(docRef)
-        if (docSnap.exists()) {
-            setSavedRecipes(docSnap.data().recipes)
-            if (savedRecipes.length > 0) {
-                savedRecipes.forEach((recipe) => {
-                    if (recipe !== uri) {
-                        setDoc(recipeRef, {
-                            recipes: arrayUnion(uri)
-                        }, { merge: true })
-                    } else {
-                        console.log('Recipe already saved')
-                    }
-                })
-            } else {
-                setDoc(recipeRef, {
-                    recipes: arrayUnion(uri)
-                }, { merge: true })
-            }
-        } else {
-            console.log('Error retrieving user recipes from database')
-        }
+    const saveRecipeHandler = (uri) => {
+        saveRecipe(db, uri, currentUser, setSavedRecipes, savedRecipes)
     }
+    // have to first check for duplicated
+
 
     return (
         <div className="widgetContainer">
             {recipes.map((recipe, index) => (
 
                 <div key={index} className="widgetCard">
-                    {userLoggedIn ? <div onClick={() => saveRecipe(recipe.recipe.uri)}> <FaHeart /></div> : ''}
+                    {userLoggedIn ? <div onClick={() => saveRecipeHandler(recipe.recipe.uri)}> <FaHeart /></div> : ''}
                     <img src={recipe.recipe.image} alt={recipe.recipe.label}></img>
                     <h2>{recipe.recipe.label}</h2>
                     <div className="recipeInfo">

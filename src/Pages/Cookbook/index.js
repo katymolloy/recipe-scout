@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom"
 import './cookbook.scss'
 import { useEffect, useState } from "react"
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore'
-import { getFirestoreInstance } from "../../firebase";
+import { getFirestoreInstance, getUserData } from "../../firebase";
 import { IoEllipseSharp } from "react-icons/io5";
 
 export default function Cookbook({ isLoggedIn, currentUser }) {
@@ -13,21 +12,7 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
 
     useEffect(() => {
         if (isLoggedIn === true) {
-            const getUserData = async () => {
-                const docRef = doc(db, 'users', currentUser)
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    console.log(docSnap.data())
-                    setName(docSnap.data().first)
-                    setSavedRecipes(docSnap.data().recipes)
-                    if (savedRecipes.length > 0) {
-                        getSavedRecipes();
-                    }
-                } else {
-                    console.log('No data for current user')
-                }
-            }
-            getUserData();
+            getUserData(db, currentUser, setName, setSavedRecipes, savedRecipes);
         } else {
             return;
         }
@@ -55,11 +40,9 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
     return (
         <>
             {isLoggedIn ?
-
                 <div>
                     <div className="header"> <h1>My Cookbook</h1> <Link to={'/'}>Home</Link></div>
                     <div>Welcome back {name}!</div>
-
                 </div>
 
                 :
