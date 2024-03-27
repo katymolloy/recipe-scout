@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./login.scss";
 import { useNavigate, Link } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function LoginPage({ onLogin }) {
@@ -17,14 +18,14 @@ export default function LoginPage({ onLogin }) {
         // Signed in
         const user = userCredential.user.uid;
         onLogin(true, user);
-        
+
         navigate("/cookbook");
         // ...
       })
       .catch((error) => {
         let errArray = []
-        if(error.code === 'auth/invalid-email'){
-          errArray.push( <>
+        if (error.code === 'auth/invalid-email') {
+          errArray.push(<>
             No user found, would you like to{' '}
             <Link to="/register">register instead?</Link>
           </>)
@@ -36,7 +37,9 @@ export default function LoginPage({ onLogin }) {
   return (
     <div className="container loginContainer">
       <div className="card">
-        <Link to={"/"}>Home</Link>
+        <Link to={"/"} className="backLink">
+          <IoArrowBack />
+        </Link>
         <h1 className="title">Welcome Back</h1>
         <p className="sub">Please Sign In to get Started</p>
         <form className="loginForm">

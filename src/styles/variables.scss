@@ -28,6 +28,7 @@ $green-color: #1db954;
         width: 100%;
         margin-bottom: -62px;
         margin-top: 15px;
+        margin-left: -5rem;
         font-size: 32px;
         color: #000;
         transition: .3s;
@@ -57,6 +58,7 @@ $green-color: #1db954;
         button {
           margin: 10px;
           width: 336px;
+          font-size: 1.2rem;
           padding: 15px;
           margin-top: 30px;
           border: none;
@@ -80,6 +82,7 @@ $green-color: #1db954;
   
     .title {
       text-transform: uppercase;
+      margin-bottom: -10px;
     }
   
     .sub {
