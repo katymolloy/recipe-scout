@@ -7,27 +7,36 @@ import { IoEllipseSharp } from "react-icons/io5";
 
 export default function Cookbook({ isLoggedIn, currentUser }) {
     const [name, setName] = useState('');
+    const [savedRecipes, setSavedRecipes] = useState([])
 
     const db = getFirestoreInstance();
 
     useEffect(() => {
-        if(isLoggedIn === true){
+        if (isLoggedIn === true) {
             const getUserData = async () => {
                 const docRef = doc(db, 'users', currentUser)
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     console.log(docSnap.data())
                     setName(docSnap.data().first)
+                    setSavedRecipes(docSnap.data().recipes)
+                    console.log(savedRecipes)
                 } else {
                     console.log('No data for current user')
                 }
             }
             getUserData();
-        }else{
+        } else {
             return;
         }
-       
-    })
+    }, [])
+
+
+    const getSavedRecipes = async () => {
+        console.log(savedRecipes)
+        // api calls to grab all the recipes here
+    }
+
     return (
         <>
             {isLoggedIn ?

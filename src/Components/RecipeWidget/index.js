@@ -7,6 +7,7 @@ import { getFirestoreInstance } from "../../firebase";
 export default function Widget({ food, userLoggedIn, currentUser }) {
     const db = getFirestoreInstance();
     const [recipes, setRecipes] = useState([])
+    const [savedRecipes, setSavedRecipes] = useState([])
 
     // matt's api credentials: 
     // const apiEnd = 'https://api.edamam.com/search?app_id=d521788b&app_key=c569f8cb415ada401f91221c983f3608&q='
@@ -32,13 +33,30 @@ export default function Widget({ food, userLoggedIn, currentUser }) {
 
     // have to first check for duplicated
     const saveRecipe = async (uri) => {
-        console.log(uri)
-        console.log(currentUser)
         const recipeRef = doc(db, 'users', currentUser);
+        const docRef = doc(db, 'users', currentUser);
 
-        await setDoc(recipeRef, {
-            recipes: arrayUnion(uri)
-        }, { merge: true })
+        const docSnap = await getDoc(docRef)
+        if (docSnap.exists()) {
+            setSavedRecipes(docSnap.data().recipes)
+            if (savedRecipes.length > 0) {
+                savedRecipes.forEach((recipe) => {
+                    if (recipe !== uri) {
+                        setDoc(recipeRef, {
+                            recipes: arrayUnion(uri)
+                        }, { merge: true })
+                    } else {
+                        console.log('Recipe already saved')
+                    }
+                })
+            } else {
+                setDoc(recipeRef, {
+                    recipes: arrayUnion(uri)
+                }, { merge: true })
+            }
+        } else {
+            console.log('Error retrieving user recipes from database')
+        }
     }
 
     return (
