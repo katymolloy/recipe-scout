@@ -20,7 +20,9 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
                     console.log(docSnap.data())
                     setName(docSnap.data().first)
                     setSavedRecipes(docSnap.data().recipes)
-                    console.log(savedRecipes)
+                    if (savedRecipes.length > 0) {
+                        getSavedRecipes();
+                    }
                 } else {
                     console.log('No data for current user')
                 }
@@ -32,9 +34,22 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
     }, [])
 
 
-    const getSavedRecipes = async () => {
+    const getSavedRecipes = () => {
         console.log(savedRecipes)
         // api calls to grab all the recipes here
+        const baseUrl = 'https://api.edamam.com/api/recipes/v2/by-uri?'
+        const cred = '&app_id=d521788b&app_key=c569f8cb415ada401f91221c983f3608'
+        savedRecipes.forEach((recipeUri) => {
+            let url = baseUrl + recipeUri + cred;
+            fetch(url)
+                .then(() => {
+                    console.log('data retrieved')
+                }).catch((error) => {
+                    console.log(`Error getting saved recipes from API: ${error}`); 
+                })
+        })
+
+
     }
 
     return (
