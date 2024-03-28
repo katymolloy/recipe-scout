@@ -1,18 +1,82 @@
-header{
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    color: #fff;
+    transition: .4s;
+    height: 100px;
 
-    nav{
-        ul{
-            list-style-type: none;
-            display: flex;
-            gap: 1em;
+    span {
+        display: flex;
+        align-items: center;
+        margin-left: 100px;
+
+        .iconbg {
+            margin-right: 10px;
+            background-color: #fff;
+            padding: 5px 9px;
+            border-radius: 50px;
+            border: none;
+        }
+
+        .logo {
+            width: 25px;
+            height: 100%;
+
         }
     }
 
-    .login-reg{
+    nav {
+        ul {
+            list-style-type: none;
+            display: flex;
+            gap: 1em;
+
+            li {
+                a {
+                    color: #fff;
+                    text-decoration: none;
+                    padding-bottom: 4px;
+                    transition: .3s;
+
+                    &:hover {
+                        border-bottom: 2px solid #fff;
+                        padding-bottom: 2px;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    .login-reg {
         display: flex;
         gap: 1em;
+        margin-right: 100px;
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            padding-bottom: 4px;
+            transition: .3s;
+
+            &:hover {
+                border-bottom: 2px solid #fff;
+                padding-bottom: 2px;
+            }
+        }
     }
+}
+
+.scroll {
+    background-color: #09b561;
+    background-image: url(../../../public/images/blob-scene-haikei.png);
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: cover;
+    height: 70px;
 }

@@ -2,10 +2,12 @@ import Header from "../../Components/Header"
 import Footer from "../../Components/Footer"
 import Widget from "../../Components/RecipeWidget"
 import CTA from "../../Components/RegisterCTA"
-import {useState } from "react"
+import { useState } from "react"
+
+import "./landing.scss";
 
 
-export default function Landing({isAuthenticated, currentUser}) {
+export default function Landing({ isAuthenticated, currentUser }) {
     const [recipes, setRecipes] = useState([])
     const [query, setQuery] = useState('')
 
@@ -17,17 +19,18 @@ export default function Landing({isAuthenticated, currentUser}) {
     return (
         <>
             <Header />
-            <h1>Explore Over 1 Million Unique Recipes</h1>
-            <input type="text"></input><button type="button" onClick={searchHandler}>Search</button>
-
+            <div className="hero">
+                <h1>Explore Over 1 Million Unique Recipes</h1>
+                <input type="text"></input><button type="button" onClick={searchHandler}>Search</button>
+            </div>
             <h2>Fuel the Gains</h2>
-            <Widget food={'chicken'} userLoggedIn={isAuthenticated} currentUser={currentUser}/>
+            <Widget food={'chicken'} userLoggedIn={isAuthenticated} currentUser={currentUser} />
 
-    <CTA />
+            <CTA />
             <h2>Delicious Desserts</h2>
-            <Widget food={'dessert'} userLoggedIn={isAuthenticated} currentUser={currentUser}/>
+            <Widget food={'dessert'} userLoggedIn={isAuthenticated} currentUser={currentUser} />
             <h2>Fresh Salad Ideas</h2>
-            <Widget food={'salad'} userLoggedIn={isAuthenticated} currentUser={currentUser}/>
+            <Widget food={'salad'} userLoggedIn={isAuthenticated} currentUser={currentUser} />
             <Footer />
         </>
     )

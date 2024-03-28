@@ -67,6 +67,7 @@ export default function Register({ onRegister }) {
                 <Link to={"/"} className="backLink">
                     <IoArrowBack />
                 </Link>
+                <img src="/images/recipelogo.png" className="logo"></img>
                 <h1 className="title">Create An Account</h1>
                 <p className="sub">Lets get you Started</p>
                 <form className="registerPage">
@@ -102,7 +103,7 @@ export default function Register({ onRegister }) {
                             onChange={(e) => setEmail(e.target.value)}
                         ></input>
                     </div>
-                    
+
                     <div>
                         <input
                             type="text"

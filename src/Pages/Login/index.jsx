@@ -40,6 +40,7 @@ export default function LoginPage({ onLogin }) {
         <Link to={"/"} className="backLink">
           <IoArrowBack />
         </Link>
+        <img src="/images/recipelogo.png" className="logo"></img>
         <h1 className="title">Welcome Back</h1>
         <p className="sub">Please Sign In to get Started</p>
         <form className="loginForm">
