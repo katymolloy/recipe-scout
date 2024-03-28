@@ -16,6 +16,7 @@ export default function Widget({ food, userLoggedIn, currentUser }) {
 
     useEffect(() => {
         getRecipes(db, food, setRecipes);
+        // console.log(recipes)
     }, [])
 
 
@@ -25,7 +26,7 @@ export default function Widget({ food, userLoggedIn, currentUser }) {
             {recipes.map((recipe, index) => (
 
                 <div key={index} className="widgetCard">
-                    {userLoggedIn ? <div onClick={() => saveRecipe(db, recipe.recipe.uri, currentUser, setSavedRecipes, savedRecipes)}> <FaHeart /></div> : ''}
+                   {userLoggedIn ? <div onClick={() => saveRecipe(db, recipe.recipe, currentUser, setSavedRecipes, savedRecipes)}> <FaHeart /></div> : ''}
                     <img src={recipe.recipe.image} alt={recipe.recipe.label}></img>
                     <h2>{recipe.recipe.label}</h2>
                     <div className="recipeInfo">

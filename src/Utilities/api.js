@@ -10,11 +10,14 @@ const instance = axios.create({
     }
 })
 
+// katy credentials
+// key : c5651d467486b3320642ff5762e7442c
+// id : adae4dea
 
 export const getSavedRecipes = (uri) => {
     instance.get('/api/recipes/v2/by-uri?' + uri)
         .then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             return response.data;
         }).catch(error => {
             console.log('Error retrieving recipes: ', error)

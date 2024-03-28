@@ -3,6 +3,7 @@ import './cookbook.scss'
 import { useEffect, useState } from "react"
 import { getSavedRecipes } from "../../Utilities/api";
 import { getFirestoreInstance, getUserData } from "../../firebase";
+import RecipeCard from "../../Components/RecipeCard";
 import { IoEllipseSharp } from "react-icons/io5";
 
 export default function Cookbook({ isLoggedIn, currentUser }) {
@@ -15,13 +16,12 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
         if (isLoggedIn === true) {
             getUserData(db, currentUser, setName, setSavedRecipes, savedRecipes);
             console.log(savedRecipes)
-            getSavedRecipes(savedRecipes[0])
         } else {
             return;
         }
     }, [currentUser])
 
-    
+
 
     return (
         <>
@@ -29,6 +29,13 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
                 <div>
                     <div className="header"> <h1>My Cookbook</h1> <Link to={'/'}>Home</Link></div>
                     <div>Welcome back {name}!</div>
+                    <div className="recipeCardContainer">
+
+                        {savedRecipes.map((recipe, index) => (
+                            <RecipeCard recipe={recipe} index={index} />
+                        ))}
+
+                    </div>
                 </div>
 
                 :

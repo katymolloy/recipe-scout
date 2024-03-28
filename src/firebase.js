@@ -71,17 +71,18 @@ export const getRecipes = async (db, food, setRecipes) => {
 }
 
 
-export const saveRecipe = async (db, uri, currentUser, setSavedRecipes, savedRecipes) => {
+export const saveRecipe = async (db, recipe, currentUser, setSavedRecipes, savedRecipes) => {
     const docRef = doc(db, 'users', currentUser);
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
         setSavedRecipes(docSnap.data().recipes)
         if (savedRecipes.length > 0) {
             savedRecipes.forEach((recipe) => {
-                if (recipe !== uri) {
+                if (recipe !== recipe.uri) {
                     setDoc(docRef, {
-                        recipes: arrayUnion(uri)
+                        recipes: arrayUnion(recipe)
                     }, { merge: true })
+                    console.log('recipe saved')
                     return;
                 } else {
                     console.log('Recipe already saved')
@@ -90,7 +91,7 @@ export const saveRecipe = async (db, uri, currentUser, setSavedRecipes, savedRec
             })
         } else {
             setDoc(docRef, {
-                recipes: arrayUnion(uri)
+                recipes: arrayUnion(recipe)
             }, { merge: true })
             return;
         }
