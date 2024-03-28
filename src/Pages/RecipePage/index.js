@@ -6,21 +6,36 @@ import { viewRecipe } from "../../Utilities/api";
 
 export default function RecipePage() {
     const { uri } = useParams();
+    const [recipeId, setRecipeId] = useState(uri)
     const [recipe, setRecipe] = useState([])
 
     useEffect(() => {
-        viewRecipe(uri)
-            .then(data => {
-                setRecipe(data)
-            }).catch(error => {
-                console.log('Error retrieving recipe data: ', error)
-            })
-    }, [])
+        if (uri !== undefined) {
+            viewRecipe(uri)
+                .then(data => {
+                    setRecipe(data.hits)
+                }).catch(error => {
+                    console.log('Error retrieving recipe data: ', error)
+                })
+        }
+        console.log(recipe)
+
+    }, [recipeId])
 
 
     return (
         <div>
             <Header />
+            {recipe ?
+                <div className="titleCard">
+
+                    <h1>{recipe.label}</h1>
+                    {recipe.image}
+                </div>
+                :
+                <h1>Loading ... </h1>
+            }
+
             <Footer />
 
         </div>
