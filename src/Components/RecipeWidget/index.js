@@ -18,10 +18,6 @@ export default function Widget({ food, userLoggedIn, currentUser }) {
         getRecipes(db, food, setRecipes);
     }, [])
 
-    const saveRecipeHandler = (uri) => {
-        saveRecipe(db, uri, currentUser, setSavedRecipes, savedRecipes)
-    }
-    // have to first check for duplicated
 
 
     return (
@@ -29,7 +25,7 @@ export default function Widget({ food, userLoggedIn, currentUser }) {
             {recipes.map((recipe, index) => (
 
                 <div key={index} className="widgetCard">
-                    {userLoggedIn ? <div onClick={() => saveRecipeHandler(recipe.recipe.uri)}> <FaHeart /></div> : ''}
+                    {userLoggedIn ? <div onClick={() => saveRecipe(db, recipe.recipe.uri, currentUser, setSavedRecipes, savedRecipes)}> <FaHeart /></div> : ''}
                     <img src={recipe.recipe.image} alt={recipe.recipe.label}></img>
                     <h2>{recipe.recipe.label}</h2>
                     <div className="recipeInfo">
