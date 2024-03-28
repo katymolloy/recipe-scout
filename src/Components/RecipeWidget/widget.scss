@@ -1,4 +1,13 @@
 .widgetContainer{
     display: flex;
     gap: 1em;
+    width: 80%;
+    overflow: scroll;
+
+    .recipeInfo{
+        display: flex;
+        gap: 10px;
+        color: rgba(0,0, 0, 0.5);
+      
+    }
 }

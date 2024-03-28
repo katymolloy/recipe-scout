@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import './cookbook.scss'
 import { useEffect, useState } from "react"
-import { getSavedRecipes } from "../../Utilities/api";
+
 import { getFirestoreInstance, getUserData } from "../../firebase";
 import RecipeCard from "../../Components/RecipeCard";
 import { IoEllipseSharp } from "react-icons/io5";
