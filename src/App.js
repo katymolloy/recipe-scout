@@ -4,6 +4,7 @@ import Landing from './Pages/RecipeLanding';
 import Cookbook from './Pages/Cookbook';
 import Register from './Pages/Register';
 import Login from './Pages/Login';
+import NotFound from './Pages/NotFound';
 import { useState } from 'react';
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
           <Route path='/cookbook' element={<Cookbook isLoggedIn={authenticated} currentUser={userId} />} />
           <Route path='/login' element={<Login onLogin={setLoggedIn}  />} />
           <Route path='/register' element={<Register onRegister={setLoggedIn} />} />
+          <Route path='*' element={<NotFound />} />
+
         </Routes>
       </Router>
     </div>

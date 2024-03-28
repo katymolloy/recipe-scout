@@ -28,9 +28,10 @@ export default function Landing({ isAuthenticated, currentUser }) {
             <h2>Fuel the Gains</h2>
             <Widget food={'chicken'} userLoggedIn={isAuthenticated} currentUser={currentUser} />
 
-            <CTA />
+
             <h2>Delicious Desserts</h2>
             <Widget food={'dessert'} userLoggedIn={isAuthenticated} currentUser={currentUser} />
+            <CTA />
             <h2>Fresh Salad Ideas</h2>
             <Widget food={'salad'} userLoggedIn={isAuthenticated} currentUser={currentUser} />
             <Footer />
