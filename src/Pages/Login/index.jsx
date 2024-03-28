@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./login.scss";
 import { useNavigate, Link } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInUser } from "../../firebase";
 
 export default function LoginPage({ onLogin }) {
   const navigate = useNavigate();
@@ -12,26 +12,9 @@ export default function LoginPage({ onLogin }) {
 
   const loginHandler = (e) => {
     e.preventDefault();
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user.uid;
-        onLogin(true, user);
 
-        navigate("/cookbook");
-        // ...
-      })
-      .catch((error) => {
-        let errArray = []
-        if (error.code === 'auth/invalid-email') {
-          errArray.push(<>
-            No user found, would you like to{' '}
-            <Link to="/register">register instead?</Link>
-          </>)
-        }
-        SetErrorMsg(errArray)
-      });
+    signInUser(email, password, onLogin, SetErrorMsg);
+    navigate("/cookbook");
   };
 
   return (
