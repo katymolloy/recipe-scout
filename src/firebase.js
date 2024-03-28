@@ -36,16 +36,13 @@ export const getFirestoreInstance = () => {
  * @param {*} setSavedRecipes 
  * @param {*} savedRecipes 
  */
-export const getUserData = async (db, currentUser, setName, setSavedRecipes, savedRecipes) => {
+export const getUserData = async (db, currentUser, setName, setSavedRecipes) => {
     const docRef = doc(db, 'users', currentUser)
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-        console.log(docSnap.data())
         setName(docSnap.data().first)
         setSavedRecipes(docSnap.data().recipes)
-
         return;
-
     } else {
         console.log('No data for current user');
         return;
@@ -77,12 +74,12 @@ export const saveRecipe = async (db, recipe, currentUser, setSavedRecipes, saved
     if (docSnap.exists()) {
         setSavedRecipes(docSnap.data().recipes)
         if (savedRecipes.length > 0) {
-            savedRecipes.forEach((recipe) => {
-                if (recipe !== recipe.uri) {
+            savedRecipes.forEach((savedRecipe) => {
+                if (savedRecipe.uri !== recipe.uri) {
                     setDoc(docRef, {
                         recipes: arrayUnion(recipe)
                     }, { merge: true })
-                    console.log('recipe saved')
+                    console.log('Recipe saved')
                     return;
                 } else {
                     console.log('Recipe already saved')

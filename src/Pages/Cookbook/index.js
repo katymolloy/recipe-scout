@@ -15,7 +15,6 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
     useEffect(() => {
         if (isLoggedIn === true) {
             getUserData(db, currentUser, setName, setSavedRecipes, savedRecipes);
-            console.log(savedRecipes)
         } else {
             return;
         }
@@ -24,7 +23,7 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
 
 
     return (
-        <>
+        <div className="cookbook">
             {isLoggedIn ?
                 <div>
                     <div className="header"> <h1>My Cookbook</h1> <Link to={'/'}>Home</Link></div>
@@ -51,6 +50,6 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
                         <Link to={'/'}>No thanks, I'm just looking. Take me back to the explore page!</Link>
                     </div>
                 </div>}
-        </>
+        </div>
     )
 }

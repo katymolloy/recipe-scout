@@ -1,5 +1,11 @@
-.pleaseRegister
-{
+.cookbook {
+  .pleaseRegister {
     display: flex;
     flex-direction: column;
+  }
+  .recipeCardContainer{
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+  }
 }
