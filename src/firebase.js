@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { doc, getDoc, arrayUnion, setDoc } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import 'firebase/firestore';
 
 // Your web app's Firebase configuration
@@ -43,11 +43,12 @@ export const getUserData = async (db, currentUser, setName, setSavedRecipes, sav
         console.log(docSnap.data())
         setName(docSnap.data().first)
         setSavedRecipes(docSnap.data().recipes)
-        if (savedRecipes.length > 0) {
-            // getSavedRecipes();
-        }
+
+        return;
+
     } else {
-        console.log('No data for current user')
+        console.log('No data for current user');
+        return;
     }
 }
 
@@ -61,10 +62,11 @@ export const getRecipes = async (db, food, setRecipes) => {
     const docRef = doc(db, 'recipes', docName)
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
-        console.log('Widget data retrieved')
         setRecipes(docSnap.data().recipes)
+        return;
     } else {
-        console.log('Error retrieving widget data from db')
+        console.log('Error retrieving widget data from db');
+        return;
     }
 }
 
@@ -80,17 +82,21 @@ export const saveRecipe = async (db, uri, currentUser, setSavedRecipes, savedRec
                     setDoc(docRef, {
                         recipes: arrayUnion(uri)
                     }, { merge: true })
+                    return;
                 } else {
                     console.log('Recipe already saved')
+                    return;
                 }
             })
         } else {
             setDoc(docRef, {
                 recipes: arrayUnion(uri)
             }, { merge: true })
+            return;
         }
     } else {
         console.log('Error retrieving user recipes from database')
+        return;
     }
 }
 
@@ -139,25 +145,25 @@ export const newUser = (db, email, password, firstName, lastName, onRegister, Se
 }
 
 
-export const signInUser = (email, password, onLogin, SetErrorMsg) =>{
+export const signInUser = (email, password, onLogin, SetErrorMsg) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user.uid;
-        onLogin(true, user);
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user.uid;
+            onLogin(true, user);
 
-      
-        // ...
-      })
-      .catch((error) => {
-        let errArray = []
-        if (error.code === 'auth/invalid-email') {
-          errArray.push(<>
-            No user found, would you like to{' '}
-            <Link to="/register">register instead?</Link>
-          </>)
-        }
-        SetErrorMsg(errArray)
-      });
+
+            // ...
+        })
+        .catch((error) => {
+            let errArray = []
+            if (error.code === 'auth/invalid-email') {
+                errArray.push(<>
+                    No user found, would you like to{' '}
+                    <Link to="/register">register instead?</Link>
+                </>)
+            }
+            SetErrorMsg(errArray)
+        });
 }
