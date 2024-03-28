@@ -7,7 +7,8 @@ header {
     align-items: center;
     color: #fff;
     transition: .4s;
-    height: 100px;
+    height: 80px;
+    padding-top: 20px;
 
     span {
         display: flex;
@@ -34,13 +35,16 @@ header {
             list-style-type: none;
             display: flex;
             gap: 1em;
+            margin: 0;
 
             li {
                 a {
                     color: #fff;
                     text-decoration: none;
-                    padding-bottom: 4px;
+                    padding: 4px 0;
                     transition: .3s;
+                    font-weight: bold;
+                    font-size: 1.2rem;
 
                     &:hover {
                         border-bottom: 2px solid #fff;
@@ -54,19 +58,28 @@ header {
 
 
     .login-reg {
-        display: flex;
-        gap: 1em;
         margin-right: 100px;
 
-        a {
-            color: #fff;
-            text-decoration: none;
-            padding-bottom: 4px;
-            transition: .3s;
+        ul {
+            list-style-type: none;
+            display: flex;
+            gap: 1em;
+            margin: 0;
 
-            &:hover {
-                border-bottom: 2px solid #fff;
-                padding-bottom: 2px;
+            li {
+                a {
+                    color: #fff;
+                    text-decoration: none;
+                    padding: 4px 0;
+                    transition: .3s;
+                    font-weight: bold;
+                    font-size: 1.2rem;
+
+                    &:hover {
+                        border-bottom: 2px solid #fff;
+                        padding-bottom: 2px;
+                    }
+                }
             }
         }
     }
@@ -78,5 +91,5 @@ header {
     background-repeat: no-repeat;
     /* Do not repeat the image */
     background-size: cover;
-    height: 70px;
+    padding-top: 0;
 }

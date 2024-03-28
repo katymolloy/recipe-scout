@@ -20,8 +20,10 @@ export default function Landing({ isAuthenticated, currentUser }) {
         <>
             <Header />
             <div className="hero">
-                <h1>Explore Over 1 Million Unique Recipes</h1>
-                <input type="text"></input><button type="button" onClick={searchHandler}>Search</button>
+                <h1>Explore Over 1 Million+ Unique Recipes</h1>
+                <span>
+                    <input type="text"></input><button type="button" onClick={searchHandler}>Search</button>
+                </span>
             </div>
             <h2>Fuel the Gains</h2>
             <Widget food={'chicken'} userLoggedIn={isAuthenticated} currentUser={currentUser} />

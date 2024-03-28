@@ -33,8 +33,10 @@ export default function Header() {
                 </ul>
             </nav>
             <div className='login-reg'>
-                <Link to='/login'>Login</Link>
-                <Link to='/register'>Sign Up</Link>
+                <ul>
+                    <li><Link to='/login'>Login</Link></li>
+                    <li><Link to='/register'>Sign Up</Link></li>
+                </ul>
             </div>
         </header>
     );
