@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .hero {
     padding: 210px 0 210px 0;
     width: 100%;
@@ -10,5 +12,46 @@
     h1 {
         color: #fff;
         font-size: 4rem;
+    }
+
+    form.search-bar {
+
+        display: flex;
+        align-items: center;
+        //width: 100%;
+        //max-width: 10rem;
+        background-color: white;
+        border-radius: 60px;
+        margin-right: 3rem;
+
+        input[type = 'text'] {
+
+            background: transparent;
+            flex: 1;
+            border: 0;
+            outline: none;
+            padding: 1rem 5rem;
+            font-size: 0.9rem;
+            color: black;
+
+        }
+
+        button {
+
+            background-color: $green-color;
+            padding: 1.1rem 3rem;
+            border: none;
+            border-radius: 60px;
+            color: white;
+
+        }
+
+        svg {
+
+            color: gray;
+            font-size: 1.5rem;
+
+        }
+
     }
 }
