@@ -7,7 +7,7 @@ export default function Header() {
 
     useEffect(() => {
         const handleScroll = () => {
-            const isScrolled = window.scrollY > 10;
+            const isScrolled = window.scrollY > 30;
             setScroll(isScrolled);
         };
 
@@ -28,14 +28,14 @@ export default function Header() {
             </span>
             <nav>
                 <ul>
-                    <li><Link to='/'>Recipes</Link></li>
-                    <li><Link to='/cookbook'>My Cookbook</Link></li>
+                    <li><Link to='/' className='link'>Recipes</Link></li>
+                    <li><Link to='/cookbook' className='link'>My Cookbook</Link></li>
                 </ul>
             </nav>
             <div className='login-reg'>
                 <ul>
-                    <li><Link to='/login'>Login</Link></li>
-                    <li><Link to='/register'>Sign Up</Link></li>
+                    <li><Link to='/login' className='link'>Login</Link></li>
+                    <li><Link to='/register' className='cta'>Sign Up</Link></li>
                 </ul>
             </div>
         </header>

@@ -67,7 +67,7 @@ header {
             margin: 0;
 
             li {
-                a {
+                a.link {
                     color: #fff;
                     text-decoration: none;
                     padding: 4px 0;
@@ -78,6 +78,21 @@ header {
                     &:hover {
                         border-bottom: 2px solid #fff;
                         padding-bottom: 2px;
+                    }
+                }
+
+                a.cta {
+                    background-color: #fff;
+                    color: #09b561;
+                    padding: 8px 24px;
+                    text-decoration: none;
+                    font-weight: bold;
+                    font-size: 1.2rem;
+                    transition: .3s;
+                    border-radius: 50px;
+
+                    &:hover {
+                        background-color: #eaeaea;
                     }
                 }
             }

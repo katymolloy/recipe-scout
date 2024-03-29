@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import './cookbook.scss'
 import { useEffect, useState } from "react"
+import Header from "../../Components/Header";
 
 import { getFirestoreInstance, getUserData } from "../../firebase";
 import RecipeCard from "../../Components/RecipeCard";
@@ -18,39 +19,38 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
         } else {
             return;
         }
-    }, [currentUser])
+    }, [currentUser]);
 
 
 
     return (
-        <div className="cookbook">
-            {isLoggedIn ?
-        
-                <div>
-                    <div className="header"> <h1>My Cookbook</h1> <Link to={'/'}>Home</Link></div>
-                    <div>Welcome back {name}!</div>
-                    <div className="recipeCardContainer">
+        <>
+            <Header />
+            <div className="cookbook">
 
-                        {savedRecipes.map((recipe, index) => (
-                            <RecipeCard recipe={recipe} index={index} />
-                        ))}
+                {isLoggedIn ?
 
-                    </div>
-                </div>
+                    <div className="hero">
+                        <div className="header"> <h1>My Cookbook</h1> <Link to={'/'}>Home</Link></div>
+                        <div>Welcome back {name}!</div>
+                        <div className="recipeCardContainer">
 
-                :
-                <div>
-                    <h3>Not yet a Recipe Scout user? Sign up to access all benefits of membership!</h3>
-                    <div>
-                        <ul>
-                            <li>Save recipes for later use</li>
-                        </ul>
+                            {savedRecipes.map((recipe, index) => (
+                                <RecipeCard recipe={recipe} index={index} />
+                            ))}
+
+                        </div>
                     </div>
-                    <div className="pleaseRegister">
-                        <Link to={'/register'}>Count me in!</Link>
-                        <Link to={'/'}>No thanks, I'm just looking. Take me back to the explore page!</Link>
-                    </div>
-                </div>}
-        </div>
+
+                    :
+                    <div className="hero register">
+                        <h3>Not yet a Recipe Scout user? <br></br>Sign up to Save Your Favourite Recipes</h3>
+                        <div className="pleaseRegister">
+                            <Link to={'/register'}>Create An Account</Link>
+                            <Link to={'/'}>Back To The Explore Page</Link>
+                        </div>
+                    </div>}
+            </div>
+        </>
     )
 }

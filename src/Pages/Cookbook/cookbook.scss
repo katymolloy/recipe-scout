@@ -1,9 +1,37 @@
 .cookbook {
+  width: 100%;
+
+  .hero {
+    padding-top: 200px;
+    background-color: #09b561;
+    background-image: url(../../../public/images/blob-scene-haikei.png);
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: cover;
+  }
+
+  h3 {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5rem;
+  }
+
   .pleaseRegister {
     display: flex;
-    flex-direction: column;
+
+    a {
+      background-color: #fff;
+      padding: 8px 24px;
+      border-radius: 50px;
+      color: #09b561;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-decoration: none;
+      margin: 10px;
+    }
   }
-  .recipeCardContainer{
+
+  .recipeCardContainer {
     display: flex;
     gap: 1em;
     flex-wrap: wrap;
