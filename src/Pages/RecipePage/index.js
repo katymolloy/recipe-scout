@@ -25,7 +25,7 @@ export default function RecipePage() {
 
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
             {recipe ?
                 <div className="titleCard">
 
@@ -36,7 +36,7 @@ export default function RecipePage() {
                 <h1>Loading ... </h1>
             }
 
-            <Footer />
+            {/* <Footer /> */}
 
         </div>
     )
