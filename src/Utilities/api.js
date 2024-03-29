@@ -37,3 +37,18 @@ export const viewRecipe = (uri) => {
         })
 }
 
+
+export const getSearchResults = (search) => {
+    // const encodedURI = encodeURIComponent(uri)
+    return instance.get('/api/recipes/v2', {
+        params: {
+            type: 'public',
+            q: search
+        }
+    })
+        .then(response => {
+            return response.data;
+        }).catch(error => {
+            console.log('Error retrieving recipes: ', error)
+        })
+}

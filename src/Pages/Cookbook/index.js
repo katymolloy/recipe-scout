@@ -25,6 +25,7 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
     return (
         <div className="cookbook">
             {isLoggedIn ?
+        
                 <div>
                     <div className="header"> <h1>My Cookbook</h1> <Link to={'/'}>Home</Link></div>
                     <div>Welcome back {name}!</div>

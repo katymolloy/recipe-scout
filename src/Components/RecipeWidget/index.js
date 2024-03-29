@@ -43,7 +43,7 @@ export default function Widget({ food, userLoggedIn, currentUser }) {
                 <div key={index} className="widgetCard">
                     {userLoggedIn ? <div onClick={() => saveRecipe(db, recipe.recipe, currentUser, setSavedRecipes, savedRecipes)}> <FaHeart /></div> : ''}
                     <img src={recipe.recipe.image} alt={recipe.recipe.label}></img>
-             
+
                     <Link to={`/recipe/${encodeURIComponent(recipe.recipe.uri)}`}> <h2>{recipe.recipe.label}</h2></Link>
                     <div className="recipeInfo">
                         <div><FaThumbsUp />
@@ -60,7 +60,9 @@ export default function Widget({ food, userLoggedIn, currentUser }) {
                 </div>
             ))}
             <div className="expandCTA">
-                <div>More recipes here!<FaArrowRight /></div>
+                <Link to={`/search/${food}`} >
+                    <div>More recipes here!<FaArrowRight /></div>
+                </Link>
 
             </div>
         </div>
