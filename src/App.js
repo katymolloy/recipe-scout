@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Landing isAuthenticated={authenticated} currentUser={userId}/>} />
           <Route path='/recipe/:uri' element={<RecipePage />} />
-          <Route path='/search/:searchItem' element={<RecipeResult />} />
+          <Route path='/search/:searchItem' element={<RecipeResult isLoggedIn={authenticated} currentUser={userId}/>} />
           <Route path='/cookbook' element={<Cookbook isLoggedIn={authenticated} currentUser={userId} />} />
           <Route path='/login' element={<Login onLogin={setLoggedIn}  />} />
           <Route path='/register' element={<Register onRegister={setLoggedIn} />} />
