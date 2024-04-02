@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import './cookbook.scss'
 import { useEffect, useState } from "react"
 import Header from "../../Components/Header";
+import Footer from "../../Components/Footer";
 
 import { getFirestoreInstance, getUserData } from "../../firebase";
 import RecipeCard from "../../Components/RecipeCard";
@@ -51,6 +52,7 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
                         </div>
                     </div>}
             </div>
+            <Footer />
         </>
     )
 }

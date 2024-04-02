@@ -20,12 +20,12 @@ export default function Header() {
 
     return (
         <header className={scroll ? 'scroll' : ''}>
-            <span>
+            <Link to={'/'} className='logolink'>
                 <div className='iconbg'>
                     <img src="/images/recipelogo.png" className="logo" alt="Recipe Scout Logo" />
                 </div>
                 <h1>Recipe Scout</h1>
-            </span>
+            </Link>
             <nav>
                 <ul>
                     <li><Link to='/' className='link'>Recipes</Link></li>

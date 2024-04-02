@@ -21,16 +21,18 @@ export default function RecipeResult({ isLoggedIn, currentUser }) {
             })
     }, [searchItem])
     return (
-        <div className="recipeResultContainer">
-            {/* <Header /> */}
-            <h1>{searchItem}</h1>
-            <div className="cardContainer">
-                {recipes.map((recipe, index) => (
-                    <RecipeCard recipe={recipe.recipe} index={index} isLoggedIn={isLoggedIn} currentUser={currentUser} />
-                ))}
+        <>
+            <Header />
+            <div className="recipeResultContainer">
+                {/* <Header /> */}
+                <h1>{searchItem}</h1>
+                <div className="cardContainer">
+                    {recipes.map((recipe, index) => (
+                        <RecipeCard recipe={recipe.recipe} index={index} isLoggedIn={isLoggedIn} currentUser={currentUser} />
+                    ))}
+                </div>
+                {/* <Footer /> */}
             </div>
-            {/* <Footer /> */}
-        </div>
-
+        </>
     )
 }

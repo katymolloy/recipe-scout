@@ -10,10 +10,12 @@ header {
     height: 80px;
     padding-top: 20px;
 
-    span {
+    .logolink {
         display: flex;
         align-items: center;
         margin-left: 100px;
+        color: #fff;
+        text-decoration: none;
 
         .iconbg {
             margin-right: 10px;
