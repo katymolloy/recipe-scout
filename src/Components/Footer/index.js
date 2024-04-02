@@ -5,13 +5,20 @@ export default function Footer() {
     return (
         <footer className="scoutFooter">
             <div className="footerText">
-                <div>Recipe Scout</div>
-                <div>Powered by Edamam API</div>
+                <span>
+                    <img src="/images/recipelogo.png" className="logo" alt="Recipe Scout Logo" />
+                    <div>Recipe Scout</div>
+                </span>
+                <span className="gap">
+                    <img src="https://www.edamam.com/assets/img/small-logo.png"></img>
+                    <div>Powered by Edamam API</div>
+                </span>
             </div>
             <div className="footerLink">
-                <div><Link to={'/cookbook'}>My Cookbook</Link></div>
-                <div><Link to={'/login'}>Login</Link></div>
-                <div><Link to={'/register'}>Register</Link></div>
+                <Link to={'/'}>Recipes</Link>
+                <Link to={'/cookbook'}>My Cookbook</Link>
+                <Link to={'/login'}>Login</Link>
+                <Link to={'/register'}>Sign Up</Link>
             </div>
         </footer>
     )

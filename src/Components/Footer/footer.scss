@@ -1,11 +1,51 @@
-.scoutFooter{
+.scoutFooter {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 3em;
+    margin: 100px 0;
 
-    .footerLink, .footerText{
+    .footerLink,
+    .footerText {
         display: flex;
-        gap: 1em;
+        align-items: center;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #888;
     }
+
+    .footerText {
+        margin-left: 100px;
+
+        span {
+            display: flex;
+            align-items: center;
+
+            &.gap {
+                margin-left: 30px;
+            }
+
+            img {
+                width: 24px;
+                margin-right: 3px;
+            }
+        }
+    }
+
+    .footerLink {
+        margin-right: 100px;
+
+        a {
+            margin-left: 20px;
+            color: #888;
+            text-decoration: none;
+            transition: .3s;
+
+            &:hover {
+                color: #bbb;
+            }
+        }
+    }
+
+
 
 }
