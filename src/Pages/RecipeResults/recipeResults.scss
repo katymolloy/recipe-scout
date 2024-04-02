@@ -1,7 +1,26 @@
-.recipeResultContainer{
+.recipeResultContainer {
 
-    .cardContainer{
+    .cardContainer {
         display: flex;
         flex-wrap: wrap;
+    }
+
+    .itemHero {
+        width: 100%;
+        padding-top: 120px;
+        padding-bottom: 30px;
+        background-color: #09b561;
+        background-image: url(../../../public/images/blob-scene-haikei.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        h1 {
+            color: #fff;
+            text-transform: capitalize;
+            font-size: 3rem;
+        }
     }
 }

@@ -30,10 +30,11 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
             <div className="cookbook">
 
                 {isLoggedIn ?
-
-                    <div className="hero">
-                        <div className="header"> <h1>My Cookbook</h1> <Link to={'/'}>Home</Link></div>
-                        <div>Welcome back {name}!</div>
+                    <>
+                        <div className="hero">
+                            <h1>My Cookbook</h1>
+                            <div>Welcome back, {name}!</div>
+                        </div>
                         <div className="recipeCardContainer">
 
                             {savedRecipes.map((recipe, index) => (
@@ -41,7 +42,7 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
                             ))}
 
                         </div>
-                    </div>
+                    </>
 
                     :
                     <div className="hero register">

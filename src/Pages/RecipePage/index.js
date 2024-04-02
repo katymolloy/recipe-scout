@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { viewRecipe } from "../../Utilities/api";
 
+import "./RecipePage.scss";
+
 export default function RecipePage() {
     const { uri } = useParams();
     const [recipeId, setRecipeId] = useState(uri)
@@ -24,20 +26,19 @@ export default function RecipePage() {
 
 
     return (
-        <div>
-            {/* <Header /> */}
-            {recipe ?
-                <div className="titleCard">
-
-                    <h1>{recipe.label}</h1>
-                    {recipe.image}
-                </div>
-                :
-                <h1>Loading ... </h1>
-            }
-
-            {/* <Footer /> */}
-
-        </div>
+        <>
+            <Header />
+            <div className="recipePage">
+                {recipe ?
+                    <div className="titleCard">
+                        <h1>{recipe.label}</h1>
+                        {recipe.image}
+                    </div>
+                    :
+                    <h1>Loading ... </h1>
+                }
+            </div>
+            <Footer />
+        </>
     )
 }
