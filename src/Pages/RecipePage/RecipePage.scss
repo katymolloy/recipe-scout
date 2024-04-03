@@ -1,1 +1,16 @@
 @import '../../styles/variables.scss';
+
+.recipePage {
+
+    width: 100%;
+
+    .topSection {
+        padding-top: 120px;
+        padding-bottom: 30px;
+        background-color: #09b561;
+        background-image: url(../../../public/images/blob-scene-haikei.png);
+        background-repeat: no-repeat;
+        /* Do not repeat the image */
+        background-size: cover;
+    }
+}
