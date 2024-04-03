@@ -26,7 +26,7 @@ export default function RecipePage() {
                     setHealthLabels(first.recipe.healthLabels)
                     setDietLabels(first.recipe.dietLabels)
                     setCals(first.recipe.calories.toFixed(0))
-                   
+
                 }).catch(error => {
                     console.log('Error retrieving recipe data: ', error)
                 })
@@ -41,11 +41,13 @@ export default function RecipePage() {
             <div className="recipePage">
                 {recipe ?
                     <div className="titleCard">
-                        <h1>{recipe.label}</h1>
+                        <div className="topSection">
+                            <h1>{recipe.label}</h1>
+                        </div>
                         <div className="quickInfo">
                             <div><FaFire />{cals} Calories</div>
                             <div>     {dietLabels.map((label, index) => {
-                                return <p key={index}>{ label }</p>
+                                return <p key={index}>{label}</p>
                             })}</div>
                         </div>
                         <img src={recipe.image} alt={recipe.label}></img>
