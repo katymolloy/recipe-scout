@@ -17,11 +17,8 @@ export default function RecipePage() {
 
     useEffect(() => {
         if (uri !== undefined) {
-
             viewRecipe(uri)
                 .then(data => {
-
-
                     const first = data.hits[0]
                     console.log(first.recipe)
                     setRecipe(first.recipe)
