@@ -10,8 +10,6 @@ export default function RecipeCard({ recipe, index, isLoggedIn, currentUser }) {
     const db = getFirestoreInstance();
     const [savedRecipes, setSavedRecipes] = useState([])
 
-
-
     return (
         <div key={index}>
             {isLoggedIn ? <div onClick={() => saveRecipe(db, recipe.uri, currentUser, setSavedRecipes, savedRecipes)}> <FaHeart /></div> : ''}

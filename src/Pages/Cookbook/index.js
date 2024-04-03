@@ -19,26 +19,24 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
     useEffect(() => {
         if (isLoggedIn === true) {
             getUserData(db, currentUser, setName, setSavedRecipes, savedRecipes);
-          
-            let promises = savedRecipes.map((recipe) => viewRecipe(recipe));
-            Promise.all(promises)
-                .then((data) => {
-                    console.log(data)
-                    let recipeData = data.map((data) => data.hits[0].recipe)
-                    setRecipes(recipeData)
-                }).catch((error) => {
-                    console.log('Error retrieving user recipes: ', error)
-                })
-            
+
+
         } else {
             return;
         }
     }, [currentUser]);
 
 
-    // const getUserRecipes = () => {
-      
-    // }
+    useEffect(() => {
+        let promises = savedRecipes.map((recipe) => viewRecipe(recipe));
+        Promise.all(promises)
+            .then((data) => {
+                let recipeData = data.map((data) => data.hits[0].recipe)
+                setRecipes(recipeData)
+            }).catch((error) => {
+                console.log('Error retrieving user recipes: ', error)
+            })
+    }, [savedRecipes])
 
 
 
@@ -54,17 +52,16 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
                             <h1>My Cookbook</h1>
                             <div>Welcome back, {name}!</div>
                         </div>
-                        {recipes.length > 0 ?
-                            <div className="recipeCardContainer">
 
-                                {
-                                    recipes.map((recipe, index) => (
-                                        <RecipeCard recipe={recipe} index={index} />
-                                    ))
-                                }
-                            </div>
-                            : <h2>Loading ...</h2>
-                        }
+                        <div className="recipeCardContainer">
+
+                            {
+                                recipes.map((recipe, index) => (
+                                    <RecipeCard recipe={recipe} index={index} />
+                                ))
+                            }
+                        </div>
+
                     </>
 
                     :
