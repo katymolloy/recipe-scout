@@ -13,13 +13,58 @@ export default function Register({ onRegister }) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
-    const [errorMsg, SetErrorMsg] = useState([]);
+    const [errorMsg, setErrorMsg] = useState([]);
 
     const registerHandler = (e) => {
         e.preventDefault();
 
-        newUser(db, email, password, firstName, lastName, onRegister, SetErrorMsg);
-        navigate('/cookbook')
+        // Validating the inputs
+        const validate = [];
+
+        if (firstName < 1) {
+            validate.push('Your first name should be more than 1 character long');
+        } else if (firstName === '') {
+            validate.push('You must write your first name');
+        }
+
+        if (lastName < 2) {
+            validate.push('Your last name should be more than 2 characters long');
+        } else if (lastName === '') {
+            validate.push('You must write your last name');
+        }
+
+        if (email < 10) {
+            validate.push('Your email must have at least 10 characters');
+        } else if (email === '') {
+            validate.push('You must write your email');
+        }
+
+        if (password < 5) {
+            validate.push('Your password must be more than 5 characters long');
+        } else if (password === '') {
+            validate.push('Your password is missing');
+        }
+
+        setErrorMsg(validate);
+
+        if (validate.length > 0) {
+
+            // Invalid data
+            console.log('Validate:', validate);
+            setErrorMsg(validate);
+
+        } else {
+
+            // Clear out the inputs
+            setEmail('');
+            setFirstName('');
+            setLastName('');
+            setPassword('');
+
+            newUser(db, email, password, firstName, lastName, onRegister, SetErrorMsg);
+            navigate('/cookbook')
+
+        }
     };
 
     return (
@@ -31,8 +76,10 @@ export default function Register({ onRegister }) {
                 <h1 className="title">Create An Account</h1>
                 <p className="sub">Lets get you Started</p>
                 <form className="registerPage">
+
                     {errorMsg.length > 0 && (
-                        <div>
+                        <div className = 'form-validate'>
+                            Invalid Data:
                             <ul>
                                 {errorMsg.map((error, index) => (
                                     <li key={index}>{error}</li>
@@ -75,6 +122,7 @@ export default function Register({ onRegister }) {
                     <button type="submit" onClick={registerHandler}>
                         Create Account
                     </button>
+
                 </form>
             </div>
         </div>

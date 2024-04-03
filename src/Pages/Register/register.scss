@@ -12,4 +12,28 @@
     ul{
         list-style-type: none;
     }
+
+    .form-validate {
+        color: $danger-color;
+        border: solid 1px $danger-color;
+        border-left-width: 7px;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        font-weight: bold;
+        font-size: 0.8rem;
+
+        ul {
+            padding: 0;
+            margin: 0;
+            font-size: 1rem;
+            font-weight: normal;
+
+            li {
+                list-style: circle;
+                list-style-position: inside;
+                padding: 0 0 0 10px;
+                margin: 5px 0 0;
+            }
+        }
+    }
 }
