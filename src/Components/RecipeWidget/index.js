@@ -19,23 +19,6 @@ export default function Widget({ food, userLoggedIn, currentUser }) {
 
     }, [])
 
-
-    // const formatData = (recipes) => {
-    //     let newData = [...recipes]
-    //         newData.forEach((recipe) => {
-    //         let title = recipe.recipe.label;
-    //         let captalize = title.split(" ");
-    //         let fixedTitle = []
-
-    //         for (let i = 0; i < captalize.length; i++) {
-    //             let fixedWord = captalize[i].charAt(0).toUpperCase() + captalize[i].slice(1);
-    //             fixedTitle.push(fixedWord)
-    //         }
-    //        let newTitle =  fixedTitle.join(" ")
-    //         recipe.recipe.label === newTitle
-    //     })
-    // }
-
     return (
         <div className="widgetContainer">
             {recipes.map((recipe, index) => (

@@ -39,7 +39,6 @@ export const viewRecipe = (uri) => {
 
 
 export const getSearchResults = (search) => {
-    // const encodedURI = encodeURIComponent(uri)
     return instance.get('/api/recipes/v2', {
         params: {
             type: 'public',
