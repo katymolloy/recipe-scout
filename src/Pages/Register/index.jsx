@@ -78,7 +78,7 @@ export default function Register({ onRegister }) {
                 <form className="registerPage">
 
                     {errorMsg.length > 0 && (
-                        <div className = 'form-validate'>
+                        <div className = 'register-validate'>
                             Invalid Data:
                             <ul>
                                 {errorMsg.map((error, index) => (
