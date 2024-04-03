@@ -16,7 +16,10 @@ export default function Landing({ isAuthenticated, currentUser }) {
 
   const searchHandler = (e) => {
     e.preventDefault();
-
+    if (query.includes(" ") || query.includes(",")) {
+        let searchArr = query.split(' ')
+      console.log("contains multiple items", searchArr);
+    }
     navigate(`/search/${query}`);
   };
 

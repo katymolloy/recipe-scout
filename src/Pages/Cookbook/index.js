@@ -7,20 +7,39 @@ import Footer from "../../Components/Footer";
 import { getFirestoreInstance, getUserData } from "../../firebase";
 import RecipeCard from "../../Components/RecipeCard";
 import { IoEllipseSharp } from "react-icons/io5";
+import { viewRecipe } from "../../Utilities/api";
 
 export default function Cookbook({ isLoggedIn, currentUser }) {
     const [name, setName] = useState('');
-    const [savedRecipes, setSavedRecipes] = useState([])
+    const [savedRecipes, setSavedRecipes] = useState([]);
+    const [recipes, setRecipes] = useState([])
 
     const db = getFirestoreInstance();
 
     useEffect(() => {
         if (isLoggedIn === true) {
             getUserData(db, currentUser, setName, setSavedRecipes, savedRecipes);
+          
+            let promises = savedRecipes.map((recipe) => viewRecipe(recipe));
+            Promise.all(promises)
+                .then((data) => {
+                    console.log(data)
+                    let recipeData = data.map((data) => data.hits[0].recipe)
+                    setRecipes(recipeData)
+                }).catch((error) => {
+                    console.log('Error retrieving user recipes: ', error)
+                })
+            
         } else {
             return;
         }
     }, [currentUser]);
+
+
+    // const getUserRecipes = () => {
+      
+    // }
+
 
 
 
@@ -35,13 +54,17 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
                             <h1>My Cookbook</h1>
                             <div>Welcome back, {name}!</div>
                         </div>
-                        <div className="recipeCardContainer">
+                        {recipes.length > 0 ?
+                            <div className="recipeCardContainer">
 
-                            {savedRecipes.map((recipe, index) => (
-                                <RecipeCard recipe={recipe} index={index} />
-                            ))}
-
-                        </div>
+                                {
+                                    recipes.map((recipe, index) => (
+                                        <RecipeCard recipe={recipe} index={index} />
+                                    ))
+                                }
+                            </div>
+                            : <h2>Loading ...</h2>
+                        }
                     </>
 
                     :

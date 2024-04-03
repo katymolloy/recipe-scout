@@ -77,7 +77,7 @@ export const saveRecipe = async (db, recipe, currentUser, setSavedRecipes, saved
             savedRecipes.forEach((savedRecipe) => {
                 if (savedRecipe.uri !== recipe.uri) {
                     setDoc(docRef, {
-                        recipes: arrayUnion(recipe)
+                        recipes: arrayUnion(recipe.uri)
                     }, { merge: true })
                     console.log('Recipe saved')
                     return;
