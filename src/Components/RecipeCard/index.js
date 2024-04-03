@@ -14,7 +14,7 @@ export default function RecipeCard({ recipe, index, isLoggedIn, currentUser }) {
 
     return (
         <div key={index}>
-            {isLoggedIn ? <div onClick={() => saveRecipe(db, recipe, currentUser, setSavedRecipes, savedRecipes)}> <FaHeart /></div> : ''}
+            {isLoggedIn ? <div onClick={() => saveRecipe(db, recipe.uri, currentUser, setSavedRecipes, savedRecipes)}> <FaHeart /></div> : ''}
             <img src={recipe.image} alt={recipe.label}></img>
             <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`}> <h2>{recipe.label}</h2></Link>
             <div className="recipeInfo">

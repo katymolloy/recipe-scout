@@ -15,7 +15,6 @@ export default function RecipeResult({ isLoggedIn, currentUser }) {
         getSearchResults(searchItem)
             .then(data => {
                 setRecipes(data.hits)
-                console.log(data.hits)
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
             })
