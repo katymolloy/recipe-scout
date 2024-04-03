@@ -61,7 +61,7 @@ export default function Register({ onRegister }) {
             setLastName('');
             setPassword('');
 
-            newUser(db, email, password, firstName, lastName, onRegister, SetErrorMsg);
+            newUser(db, email, password, firstName, lastName, onRegister, setErrorMsg);
             navigate('/cookbook')
 
         }
