@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import './widget.scss'
+import RecipeCard from "../RecipeCard";
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { FaFire } from "react-icons/fa6";
@@ -10,44 +11,30 @@ import { getFirestoreInstance, getRecipes, saveRecipe } from "../../firebase";
 
 export default function Widget({ food, userLoggedIn, currentUser }) {
     const db = getFirestoreInstance();
-    const [recipes, setRecipes] = useState([])
-    const [savedRecipes, setSavedRecipes] = useState([])
-
+    const [recipes, setRecipes] = useState([]);
+    const [savedRecipes, setSavedRecipes] = useState([]);
 
     useEffect(() => {
         getRecipes(db, food, setRecipes);
-
-    }, [])
+    }, []);
 
     return (
         <div className="widgetContainer">
+            {/* Map recipes using the RecipeCard component */}
             {recipes.map((recipe, index) => (
-
-                <div key={index} className="widgetCard">
-                    {userLoggedIn ? <div onClick={() => saveRecipe(db, recipe.recipe, currentUser, setSavedRecipes, savedRecipes)}> <FaHeart /></div> : ''}
-                    <img src={recipe.recipe.image} alt={recipe.recipe.label}></img>
-
-                    <Link to={`/recipe/${encodeURIComponent(recipe.recipe.uri)}`}> <h2>{recipe.recipe.label}</h2></Link>
-                    <div className="recipeInfo">
-                        <div><FaThumbsUp />
-
-                            <div>{recipe.recipe.dietLabels[0]} </div>
-                            <div>  {recipe.recipe.dietLabels[1]}</div>
-                            <div>  {recipe.recipe.dietLabels[2]}</div>
-
-
-                        </div>
-                        <div><GiMeal />{recipe.recipe.mealType}</div>
-                        <div><FaFire />{recipe.recipe.calories.toFixed(0)} Calories</div>
-                    </div>
-                </div>
+                <RecipeCard
+                    key={index}
+                    recipe={recipe.recipe}
+                    index={index}
+                    isLoggedIn={userLoggedIn}
+                    currentUser={currentUser}
+                />
             ))}
             <div className="expandCTA">
-                <Link to={`/search/${food}`} >
+                <Link to={`/search/${food}`}>
                     <div>More recipes here!<FaArrowRight /></div>
                 </Link>
-
             </div>
         </div>
-    )
+    );
 }

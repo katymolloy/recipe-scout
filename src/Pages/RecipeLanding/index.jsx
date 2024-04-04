@@ -9,20 +9,28 @@ import { getSearchResults } from "../../Utilities/api";
 import "./landing.scss";
 import { useNavigate } from "react-router-dom";
 
+<<<<<<< HEAD
 export default function Landing({ isLoggedIn, currentUser, changeLogin }) {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
   const [query, setQuery] = useState("");
+=======
+export default function Landing({ isAuthenticated, currentUser }) {
+    const navigate = useNavigate();
+    const [recipes, setRecipes] = useState([]);
+    const [query, setQuery] = useState("");
+>>>>>>> f2e6f69765093eb284e78f496d55e49607f7a36c
 
-  const searchHandler = (e) => {
-    e.preventDefault();
-    if (query.includes(" ") || query.includes(",")) {
-        let searchArr = query.split(' ')
-      console.log("contains multiple items", searchArr);
-    }
-    navigate(`/search/${query}`);
-  };
+    const searchHandler = (e) => {
+        e.preventDefault();
+        if (query.includes(" ") || query.includes(",")) {
+            let searchArr = query.split(' ')
+            console.log("contains multiple items", searchArr);
+        }
+        navigate(`/search/${query}`);
+    };
 
+<<<<<<< HEAD
   return (
     <>
       <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
@@ -70,4 +78,53 @@ export default function Landing({ isLoggedIn, currentUser, changeLogin }) {
       <Footer />
     </>
   );
+=======
+    return (
+        <>
+            <Header />
+            <div className="hero">
+                <h1>
+                    Explore Over <strong>1 Million+</strong> <br></br>Unique Recipes
+                </h1>
+                <span>
+                    <form action="" className="search-bar">
+                        <IoSearchOutline />
+                        <input
+                            type="text"
+                            placeholder="Search Recipes . . ."
+                            maxLength="100"
+                            onChange={(e) => setQuery(e.target.value)}
+                        />
+                        <button type="submit" onClick={searchHandler}>
+                            Search
+                        </button>
+                    </form>
+                </span>
+            </div>
+            <div className="container">
+                <h2>Fuel the Gains</h2>
+                <Widget
+                    food={"chicken"}
+                    userLoggedIn={isAuthenticated}
+                    currentUser={currentUser}
+                />
+
+                <h2>Delicious Desserts</h2>
+                <Widget
+                    food={"dessert"}
+                    userLoggedIn={isAuthenticated}
+                    currentUser={currentUser}
+                />
+                <CTA />
+                <h2>Fresh Salad Ideas</h2>
+                <Widget
+                    food={"salad"}
+                    userLoggedIn={isAuthenticated}
+                    currentUser={currentUser}
+                />
+            </div>
+            <Footer />
+        </>
+    );
+>>>>>>> f2e6f69765093eb284e78f496d55e49607f7a36c
 }

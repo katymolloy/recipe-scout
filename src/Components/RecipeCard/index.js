@@ -1,24 +1,51 @@
-import { FaFire } from "react-icons/fa6";
+import { FaHeart, FaFire } from "react-icons/fa";
 import { GiMeal } from "react-icons/gi";
 import { Link } from "react-router-dom";
-import { saveRecipe, getFirestoreInstance, getUserData } from "../../firebase";
-import { FaHeart } from "react-icons/fa";
+import { saveRecipe, getFirestoreInstance } from "../../firebase";
 import { useEffect, useState } from "react";
 
+import './RecipeCard.scss';
 
 export default function RecipeCard({ recipe, index, isLoggedIn, currentUser }) {
     const db = getFirestoreInstance();
-    const [savedRecipes, setSavedRecipes] = useState([])
+    const [savedRecipes, setSavedRecipes] = useState([]);
+
+    const handleSaveRecipe = () => {
+        saveRecipe(db, recipe.uri, currentUser, setSavedRecipes, savedRecipes);
+    };
+
+    const truncateLabel = (label) => {
+        label = label.trim(); // Remove leading and trailing spaces
+        if (label.length > 26) {
+            return label.substring(0, 30) + '...';
+        }
+        return label;
+    };
 
     return (
-        <div key={index}>
-            {isLoggedIn ? <div onClick={() => saveRecipe(db, recipe.uri, currentUser, setSavedRecipes, savedRecipes)}> <FaHeart /></div> : ''}
+        <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index} className="recipeCard">
             <img src={recipe.image} alt={recipe.label}></img>
-            <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`}> <h2>{recipe.label}</h2></Link>
-            <div className="recipeInfo">
-                <div><GiMeal />{recipe.mealType}</div>
-                <div><FaFire />{recipe.calories.toFixed(0)} Calories</div>
+            <div className="recipeHeading">
+                <h2>{truncateLabel(recipe.label)}</h2>
+                {isLoggedIn && (
+                    <div onClick={handleSaveRecipe}>
+                        <FaHeart />
+                    </div>
+                )}
             </div>
-        </div>
-    )
+            <div className="recipeInfo">
+                <div>
+                    <GiMeal />
+                    {recipe.mealType}
+                </div>
+                <div>
+                    <FaFire />
+                    {recipe.calories.toFixed(0)} Calories
+                </div>
+                <div>
+                    {recipe.yield} Servings
+                </div>
+            </div>
+        </Link >
+    );
 }
