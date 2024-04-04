@@ -3,16 +3,21 @@ import { GiMeal } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { saveRecipe, getFirestoreInstance } from "../../firebase";
 import { useEffect, useState } from "react";
+import { FaHeartBroken } from "react-icons/fa";
 
 import './RecipeCard.scss';
 
-export default function RecipeCard({ recipe, index, isLoggedIn, currentUser }) {
+export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isCookbook }) {
     const db = getFirestoreInstance();
     const [savedRecipes, setSavedRecipes] = useState([]);
 
     const handleSaveRecipe = () => {
         saveRecipe(db, recipe.uri, currentUser, setSavedRecipes, savedRecipes);
     };
+
+    const handleRemoveRecipe = () => {
+        console.log('here')
+    }
 
     const truncateLabel = (label) => {
         label = label.trim(); // Remove leading and trailing spaces
@@ -27,9 +32,14 @@ export default function RecipeCard({ recipe, index, isLoggedIn, currentUser }) {
             <img src={recipe.image} alt={recipe.label}></img>
             <div className="recipeHeading">
                 <h2>{truncateLabel(recipe.label)}</h2>
-                {isLoggedIn && (
+                {isLoggedIn && !isCookbook && (
                     <div onClick={handleSaveRecipe}>
                         <FaHeart />
+                    </div>
+                )}
+                {isLoggedIn && isCookbook && (
+                    <div onClick={handleRemoveRecipe}>
+                        <FaHeartBroken />
                     </div>
                 )}
             </div>

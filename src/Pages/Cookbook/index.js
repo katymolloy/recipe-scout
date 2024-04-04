@@ -13,7 +13,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
     const [name, setName] = useState('');
     const [savedRecipes, setSavedRecipes] = useState([]);
     const [recipes, setRecipes] = useState([])
-
+    const [isCookbook, setIsCookbook] = useState(true)
     const db = getFirestoreInstance();
 
     useEffect(() => {
@@ -30,7 +30,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
             console.log('Function exited')
             return;
         }
-  
+
         let promises = savedRecipes.map((recipe) => viewRecipe(recipe));
         Promise.all(promises)
             .then((data) => {
@@ -61,7 +61,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
 
                             {
                                 recipes.map((recipe, index) => (
-                                    <RecipeCard recipe={recipe} index={index} />
+                                    <RecipeCard recipe={recipe} index={index} isCookbook={isCookbook} />
                                 ))
                             }
                         </div>
