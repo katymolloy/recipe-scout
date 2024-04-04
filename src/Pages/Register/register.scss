@@ -16,7 +16,7 @@
     .register-validate {
         color: red;
         border: solid 1px red;
-        border-left-width: 7px;
+        border-left-width: 8px;
         padding: 1rem;
         margin-bottom: 2rem;
         font-weight: bold;
@@ -27,6 +27,7 @@
             margin: 0;
             font-size: 1rem;
             font-weight: normal;
+            justify-content: flex-start;
 
             li {
                 list-style: circle;
