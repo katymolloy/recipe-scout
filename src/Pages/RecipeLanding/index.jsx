@@ -9,7 +9,7 @@ import { getSearchResults } from "../../Utilities/api";
 import "./landing.scss";
 import { useNavigate } from "react-router-dom";
 
-export default function Landing({ isAuthenticated, currentUser }) {
+export default function Landing({ isLoggedIn, currentUser, changeLogin }) {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
   const [query, setQuery] = useState("");
@@ -25,7 +25,7 @@ export default function Landing({ isAuthenticated, currentUser }) {
 
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
       <div className="hero">
         <h1>
           Explore Over <strong>1 Million+</strong> <br></br>Unique Recipes
@@ -49,21 +49,21 @@ export default function Landing({ isAuthenticated, currentUser }) {
         <h2>Fuel the Gains</h2>
         <Widget
           food={"chicken"}
-          userLoggedIn={isAuthenticated}
+          userLoggedIn={isLoggedIn}
           currentUser={currentUser}
         />
 
         <h2>Delicious Desserts</h2>
         <Widget
           food={"dessert"}
-          userLoggedIn={isAuthenticated}
+          userLoggedIn={isLoggedIn}
           currentUser={currentUser}
         />
         <CTA />
         <h2>Fresh Salad Ideas</h2>
         <Widget
           food={"salad"}
-          userLoggedIn={isAuthenticated}
+          userLoggedIn={isLoggedIn}
           currentUser={currentUser}
         />
       </div>

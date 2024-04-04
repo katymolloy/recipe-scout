@@ -9,7 +9,7 @@ import RecipeCard from "../../Components/RecipeCard";
 import { IoEllipseSharp } from "react-icons/io5";
 import { viewRecipe } from "../../Utilities/api";
 
-export default function Cookbook({ isLoggedIn, currentUser }) {
+export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
     const [name, setName] = useState('');
     const [savedRecipes, setSavedRecipes] = useState([]);
     const [recipes, setRecipes] = useState([])
@@ -19,8 +19,6 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
     useEffect(() => {
         if (isLoggedIn === true) {
             getUserData(db, currentUser, setName, setSavedRecipes, savedRecipes);
-
-
         } else {
             return;
         }
@@ -28,6 +26,11 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
 
 
     useEffect(() => {
+        if (savedRecipes.length === 0) {
+            console.log('Function exited')
+            return;
+        }
+  
         let promises = savedRecipes.map((recipe) => viewRecipe(recipe));
         Promise.all(promises)
             .then((data) => {
@@ -36,6 +39,7 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
             }).catch((error) => {
                 console.log('Error retrieving user recipes: ', error)
             })
+
     }, [savedRecipes])
 
 
@@ -43,7 +47,7 @@ export default function Cookbook({ isLoggedIn, currentUser }) {
 
     return (
         <>
-            <Header />
+            <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
             <div className="cookbook">
 
                 {isLoggedIn ?

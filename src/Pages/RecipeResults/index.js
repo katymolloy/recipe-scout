@@ -7,7 +7,7 @@ import RecipeCard from "../../Components/RecipeCard";
 
 import './recipeResults.scss'
 
-export default function RecipeResult({ isLoggedIn, currentUser }) {
+export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
     const { searchItem } = useParams();
     const [recipes, setRecipes] = useState([])
 
@@ -19,9 +19,11 @@ export default function RecipeResult({ isLoggedIn, currentUser }) {
                 console.log('Error retrieving recipe data: ', error)
             })
     }, [searchItem])
+
+
     return (
         <>
-            <Header />
+           <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
             <div className="recipeResultContainer">
                 <div className="itemHero">
                     <h1>{searchItem} Recipes</h1>
