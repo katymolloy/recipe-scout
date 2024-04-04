@@ -12,7 +12,8 @@ import { useState } from 'react';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false)
-  const [userId, setUserId] = useState('')
+  const [userId, setUserId] = useState('');
+  const [apiCallsPerMin, setApiCallsPerMin] = useState(0)
 
   const setLoggedIn = (state, user) => {
     setAuthenticated(state);

@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { doc, getDoc, arrayUnion, setDoc } from 'firebase/firestore';
+import { doc, getDoc, arrayUnion, setDoc, getFirestore, updateDoc } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import 'firebase/firestore';
@@ -22,9 +21,6 @@ const app = initializeApp(firebaseConfig);
 export const getFirestoreInstance = () => {
     return getFirestore(app);
 };
-
-
-
 
 
 // All Firestore functions below
@@ -98,7 +94,24 @@ export const saveRecipe = async (db, uri, currentUser, setSavedRecipes, savedRec
     }
 }
 
-// 
+
+
+export const removeRecipe = async (db, currentUser, uri, setSavedRecipes) => {
+    const docRef = doc(db, 'users', currentUser);
+    const docSnap = await getDoc(docRef)
+    if (docSnap.exists()) {
+        let updatedRecipes = docSnap.data().recipes.filter(recipe => recipe !== uri)
+        await updateDoc(docRef, {
+            recipes: updatedRecipes
+        });
+        setSavedRecipes(docSnap.data().recipes)
+    } else {
+        console.log('Error retrieving user recipes from database')
+        return;
+    }
+}
+
+
 
 export const writeToDatabase = async (db, user, email, firstName, lastName) => {
     await setDoc(doc(db, 'users', user), {

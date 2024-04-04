@@ -30,7 +30,6 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
             console.log('Function exited')
             return;
         }
-
         let promises = savedRecipes.map((recipe) => viewRecipe(recipe));
         Promise.all(promises)
             .then((data) => {
@@ -39,10 +38,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
             }).catch((error) => {
                 console.log('Error retrieving user recipes: ', error)
             })
-
     }, [savedRecipes])
-
-
 
 
     return (
@@ -61,7 +57,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
 
                             {
                                 recipes.map((recipe, index) => (
-                                    <RecipeCard recipe={recipe} index={index} isCookbook={isCookbook} />
+                                    <RecipeCard recipe={recipe} index={index} isLoggedIn={isLoggedIn} currentUser={currentUser} isCookbook={isCookbook} savedRecipes={savedRecipes} />
                                 ))
                             }
                         </div>
