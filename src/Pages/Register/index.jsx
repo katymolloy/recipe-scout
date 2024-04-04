@@ -73,12 +73,13 @@ export default function Register({ onRegister }) {
                 <Link to={"/"} className="backLink">
                     <IoArrowBack />
                 </Link>
+                <img src="/images/recipelogo.png" className="logo"></img>
                 <h1 className="title">Create An Account</h1>
                 <p className="sub">Lets get you Started</p>
                 <form className="registerPage">
 
                     {errorMsg.length > 0 && (
-                        <div className = 'register-validate'>
+                        <div className='register-validate'>
                             Invalid Data:
                             <ul>
                                 {errorMsg.map((error, index) => (
