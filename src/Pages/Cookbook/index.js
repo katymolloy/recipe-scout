@@ -71,6 +71,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
                     :
                     <div className="hero register">
                         <h3>Not yet a Recipe Scout user? <br></br>Sign up to Save Your Favourite Recipes</h3>
+                        <Link to={'/login'}>Already a member? Sign in here!</Link>
                         <div className="pleaseRegister">
                             <Link to={'/register'}>Create An Account</Link>
                             <Link to={'/'}>Back To The Explore Page</Link>
