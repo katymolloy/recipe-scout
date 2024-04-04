@@ -4,6 +4,10 @@
 
     width: 100%;
 
+    .titleCard, h1 {
+        margin: 0 10rem;
+    }
+
     .topSection {
         padding-top: 120px;
         padding-bottom: 30px;
@@ -13,4 +17,27 @@
         /* Do not repeat the image */
         background-size: cover;
     }
+
+    h1 {
+        font-size: 3rem;
+        color: white;
+        width: 40%;
+
+        svg {
+            padding-left: 1rem;
+            font-size: 2rem;
+        }
+    }
+
+    .medium-heading {
+        text-transform: uppercase;
+        font-weight: bold;
+        text-decoration: underline;
+        font-size: 2.5rem;
+    }
+
+    img {
+        border-radius: 13px;
+    }
+
 }

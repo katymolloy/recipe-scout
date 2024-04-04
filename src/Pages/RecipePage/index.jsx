@@ -4,10 +4,11 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { viewRecipe } from "../../Utilities/api";
 import { FaFire } from "react-icons/fa6";
+import { FaRegClock } from "react-icons/fa";
 
 import "./RecipePage.scss";
 
-export default function RecipePage({isLoggedIn, changeLogin}) {
+export default function RecipePage({ isLoggedIn, changeLogin }) {
 
     const { uri } = useParams();
     const [ingredients, setIngredients] = useState([])
@@ -42,27 +43,37 @@ export default function RecipePage({isLoggedIn, changeLogin}) {
             <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
             <div className="recipePage">
 
+                <div className="topSection">
+                    <h1>
+                        {recipe.label}{' '}
+                        {recipe.totalTime > 0 && (
+                            <>
+                                <FaRegClock /> {recipe.totalTime} min
+                            </>
+                        )}
+                    </h1>
+                </div>
+
                 {recipe ?
+
                     <div className="titleCard">
-
-                        <div className="topSection">
-                            <h1>{recipe.label}</h1>
-                        </div>
-
-                        <div className="quickInfo">
-                            <div><FaFire />{cals} Calories</div>
-                            <div>     {dietLabels.map((label, index) => {
-                                return <p key={index}>{label}</p>
-                            })}</div>
-                        </div>
-
-                        <img src={recipe.image} alt={recipe.label}></img>
+                        
+                        <div className = 'medium-heading'>Ingredients</div>
 
                         <ul>
                             {ingredients.map((ingredient, index) => {
                                 return <li key={index}>{ingredient}</li>
                             })}
                         </ul>
+
+                        <div className="quickInfo">
+                            <div><FaFire />{cals} cals</div>
+                            <div>     {dietLabels.map((label, index) => {
+                                return <p key={index}>{label}</p>
+                            })}</div>
+                        </div>
+
+                        <img src={recipe.image} alt={recipe.label}></img>
 
                         <ul>
                             {healthLabels.map((label, index) => {
@@ -85,5 +96,5 @@ export default function RecipePage({isLoggedIn, changeLogin}) {
             <Footer />
         </>
     )
-    
+
 }
