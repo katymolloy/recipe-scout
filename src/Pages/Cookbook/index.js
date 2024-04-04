@@ -54,7 +54,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
                     <>
                         <div className="hero">
                             <h1>My Cookbook</h1>
-                            <div>Welcome back, {name}!</div>
+                            <div>Welcome back, {name}! Here are your saved recipes.</div>
                         </div>
 
                         <div className="recipeCardContainer">
