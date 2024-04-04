@@ -24,10 +24,10 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path='/' element={<Landing isAuthenticated={authenticated} currentUser={userId}/>} />
-          <Route path='/recipe/:uri' element={<RecipePage />} />
-          <Route path='/search/:searchItem' element={<RecipeResult isLoggedIn={authenticated} currentUser={userId}/>} />
-          <Route path='/cookbook' element={<Cookbook isLoggedIn={authenticated} currentUser={userId} />} />
+          <Route path='/' element={<Landing isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId}/>} />
+          <Route path='/recipe/:uri' element={<RecipePage isLoggedIn={authenticated} changeLogin={setLoggedIn} />} />
+          <Route path='/search/:searchItem' element={<RecipeResult isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId}/>} />
+          <Route path='/cookbook' element={<Cookbook isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId} />} />
           <Route path='/login' element={<Login onLogin={setLoggedIn}  />} />
           <Route path='/register' element={<Register onRegister={setLoggedIn} />} />
           <Route path='*' element={<NotFound />} />

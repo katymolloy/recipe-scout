@@ -31,6 +31,7 @@ export const viewRecipe = (uri) => {
         }
     })
         .then(response => {
+            console.log('API called')
             return response.data;
         }).catch(error => {
             console.log('Error retrieving recipes: ', error)

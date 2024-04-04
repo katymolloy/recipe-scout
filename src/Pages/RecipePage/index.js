@@ -7,7 +7,7 @@ import { FaFire } from "react-icons/fa6";
 
 import "./RecipePage.scss";
 
-export default function RecipePage() {
+export default function RecipePage({isLoggedIn, changeLogin}) {
     const { uri } = useParams();
     const [ingredients, setIngredients] = useState([])
     const [healthLabels, setHealthLabels] = useState([])
@@ -31,13 +31,12 @@ export default function RecipePage() {
                     console.log('Error retrieving recipe data: ', error)
                 })
         }
-
     }, [])
 
 
     return (
         <>
-            <Header />
+            <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
             <div className="recipePage">
                 {recipe ?
                     <div className="titleCard">

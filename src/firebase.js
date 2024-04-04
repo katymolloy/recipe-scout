@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { doc, getDoc, arrayUnion, setDoc } from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import 'firebase/firestore';
 
@@ -150,9 +150,6 @@ export const signInUser = (email, password, onLogin, SetErrorMsg) => {
             // Signed in
             const user = userCredential.user.uid;
             onLogin(true, user);
-
-
-            // ...
         })
         .catch((error) => {
             let errArray = []
@@ -164,4 +161,15 @@ export const signInUser = (email, password, onLogin, SetErrorMsg) => {
             }
             SetErrorMsg(errArray)
         });
+}
+
+export const signOutUser = () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        console.log('User signed out')
+        return true
+    }).catch((error) => {
+        console.log(`Error signing user out: ${error}`);
+        return false;
+    })
 }
