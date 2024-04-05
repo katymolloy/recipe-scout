@@ -4,7 +4,6 @@ import Widget from "../../Components/RecipeWidget";
 import CTA from "../../Components/RegisterCTA";
 import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
-import { getSearchResults } from "../../Utilities/api";
 
 import "./landing.scss";
 import { useNavigate } from "react-router-dom";
@@ -16,15 +15,14 @@ export default function Landing({
   addApiCall,
 }) {
   const navigate = useNavigate();
-  const [recipes, setRecipes] = useState([]);
   const [query, setQuery] = useState("");
 
   const searchHandler = (e) => {
     e.preventDefault();
-    if (query.includes(" ") || query.includes(",")) {
-      let searchArr = query.split(" ");
-      console.log("contains multiple items", searchArr);
-    }
+    // if (query.includes(" ") || query.includes(",")) {
+    //   let searchArr = query.split(" ");
+    //   console.log("contains multiple items", searchArr);
+    // }
     navigate(`/search/${query}`);
   };
 

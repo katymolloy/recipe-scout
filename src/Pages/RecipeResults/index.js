@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import { useEffect, useState } from "react";
@@ -27,6 +27,7 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, add
            <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
             <div className="recipeResultContainer">
                 <div className="itemHero">
+                <Link to={'/'}>Back</Link>
                     <h1>{searchItem} Recipes</h1>
                 </div>
                 <div className="cardContainer">

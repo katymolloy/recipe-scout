@@ -28,8 +28,22 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
         if (savedRecipes.length === 0) {
             return;
         }
+        let currCount = addApiCall(savedRecipes.length)
+        if (currCount === true) {
+            getRecipes();
+            return;
+        } else {
+            clearTimeout(apiTimeout)
+            addApiCall(1)
+            let apiTimeout = setTimeout(getRecipes, 20000);
+        }
+
+    }, [name])
+
+
+
+    const getRecipes = () => {
         let promises = savedRecipes.map((recipe) => viewRecipe(recipe));
-        addApiCall(promises.length)
         Promise.all(promises)
             .then((data) => {
                 let recipeData = data.map((data) => data.hits[0].recipe)
@@ -39,8 +53,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
                 console.log('Error retrieving user recipes: ', error);
                 return;
             })
-    }, [name])
-
+    }
 
     // function to update recipe state; will remove deleted recipes
     const updateRecipes = (newRecipes) => {
@@ -64,15 +77,13 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
         <>
             <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
             <div className="cookbook">
-
                 {isLoggedIn ?
                     <>
                         <div className="hero">
                             <h1>My Cookbook</h1>
                             <div>Welcome back, {name}!</div>
                         </div>
-
-                        {recipes.length !== 0 ?
+                        {savedRecipes.length !== 0 ?
                             <div className="recipeCardContainer">
                                 {
                                     recipes.map((recipe, index) => (
