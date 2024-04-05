@@ -45,7 +45,7 @@ export default function Header({ isLoggedIn, changeLogin }) {
 
                 {isLoggedIn ?
                     <ul>
-                        <li className='link' onClick={signOutHandler}><div>Sign Out</div></li>
+                        <li><Link className='link' onClick={signOutHandler}>Sign Out</Link></li>
                     </ul>
                     :
                     <ul>

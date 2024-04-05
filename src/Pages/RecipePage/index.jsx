@@ -8,7 +8,7 @@ import { FaRegClock } from "react-icons/fa";
 
 import "./RecipePage.scss";
 
-export default function RecipePage({ isLoggedIn, changeLogin }) {
+export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
 
     const { uri } = useParams();
     const [ingredients, setIngredients] = useState([])
@@ -24,7 +24,7 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
             viewRecipe(uri)
                 .then(data => {
                     const first = data.hits[0]
-                    console.log(first.recipe)
+                    addApiCall(1)
                     setRecipe(first.recipe)
                     setIngredients(first.recipe.ingredientLines)
                     setHealthLabels(first.recipe.healthLabels)

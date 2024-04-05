@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { doc, getDoc, arrayUnion, setDoc } from 'firebase/firestore';
+import { doc, getDoc, arrayUnion, setDoc, getFirestore, updateDoc } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import 'firebase/firestore';
@@ -22,9 +21,6 @@ const app = initializeApp(firebaseConfig);
 export const getFirestoreInstance = () => {
     return getFirestore(app);
 };
-
-
-
 
 
 // All Firestore functions below
@@ -68,11 +64,11 @@ export const getRecipes = async (db, food, setRecipes) => {
 }
 
 
-export const saveRecipe = async (db, uri, currentUser, setSavedRecipes, savedRecipes) => {
+export const saveRecipe = async (db, uri, currentUser) => {
     const docRef = doc(db, 'users', currentUser);
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
-        setSavedRecipes(docSnap.data().recipes)
+        let savedRecipes = docSnap.data().recipes;
         if (savedRecipes.length > 0) {
             savedRecipes.forEach((savedRecipe) => {
                 if (savedRecipe !== uri) {
@@ -98,7 +94,24 @@ export const saveRecipe = async (db, uri, currentUser, setSavedRecipes, savedRec
     }
 }
 
-// 
+
+
+export const removeRecipe = async (db, currentUser, uri) => {
+    const docRef = doc(db, 'users', currentUser);
+    const docSnap = await getDoc(docRef)
+    if (docSnap.exists()) {
+        let updatedRecipes = docSnap.data().recipes.filter(recipe => recipe !== uri)
+        await updateDoc(docRef, {
+            recipes: updatedRecipes
+        });
+        return updatedRecipes;
+    } else {
+        console.log('Error retrieving user recipes from database')
+        return;
+    }
+}
+
+
 
 export const writeToDatabase = async (db, user, email, firstName, lastName) => {
     await setDoc(doc(db, 'users', user), {

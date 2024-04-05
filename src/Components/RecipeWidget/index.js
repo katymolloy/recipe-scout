@@ -2,25 +2,35 @@ import { useEffect, useState } from "react"
 import './widget.scss'
 import RecipeCard from "../RecipeCard";
 import { Link } from "react-router-dom";
-import { FaHeart } from "react-icons/fa";
-import { FaFire } from "react-icons/fa6";
-import { GiMeal } from "react-icons/gi";
 import { FaArrowRight } from "react-icons/fa";
-import { FaThumbsUp } from "react-icons/fa6";
-import { getFirestoreInstance, getRecipes, saveRecipe } from "../../firebase";
+import { getSearchResults } from "../../Utilities/api";
 
-export default function Widget({ food, userLoggedIn, currentUser }) {
-    const db = getFirestoreInstance();
+export default function Widget({ food, userLoggedIn, currentUser, addApiCall }) {
     const [recipes, setRecipes] = useState([]);
-    const [savedRecipes, setSavedRecipes] = useState([]);
 
     useEffect(() => {
-        getRecipes(db, food, setRecipes);
-    }, []);
+        let currCount = addApiCall(1)
+        if (currCount === true) {
+            getWidgetData()
+        } else {
+            clearTimeout(apiTimeout)
+            addApiCall(1)
+            let apiTimeout = setTimeout(getWidgetData, 20000);
+        }
+    }, [food]);
+
+
+    const getWidgetData = () => {
+        getSearchResults(food)
+            .then((data) => {
+                let widgetData = data.hits.slice(0, 8)
+                setRecipes(widgetData);
+            })
+    }
+
 
     return (
         <div className="widgetContainer">
-            {/* Map recipes using the RecipeCard component */}
             {recipes.map((recipe, index) => (
                 <RecipeCard
                     key={index}

@@ -1,23 +1,23 @@
 import { FaHeart, FaFire } from "react-icons/fa";
 import { GiMeal } from "react-icons/gi";
 import { Link } from "react-router-dom";
-import { saveRecipe, getFirestoreInstance } from "../../firebase";
-import { useEffect, useState } from "react";
+import { saveRecipe, getFirestoreInstance, removeRecipe } from "../../firebase";
 import { FaHeartBroken } from "react-icons/fa";
 
 import './RecipeCard.scss';
 
-export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isCookbook }) {
+export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isCookbook, updateRecipes }) {
     const db = getFirestoreInstance();
-    const [savedRecipes, setSavedRecipes] = useState([]);
 
     const handleSaveRecipe = () => {
-        saveRecipe(db, recipe.uri, currentUser, setSavedRecipes, savedRecipes);
+        saveRecipe(db, recipe.uri, currentUser);
     };
 
     const handleRemoveRecipe = () => {
-        console.log('here')
+       let updatedRecipes =  removeRecipe(db, currentUser, recipe.uri);
+        updateRecipes(updatedRecipes);
     }
+
 
     const truncateLabel = (label) => {
         label = label.trim(); // Remove leading and trailing spaces
@@ -28,10 +28,13 @@ export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isC
     };
 
     return (
-        <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index} className="recipeCard">
-            <img src={recipe.image} alt={recipe.label}></img>
+        <div>
+            <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index} className="recipeCard">
+                <img src={recipe.image} alt={recipe.label}></img>
+            </Link >
             <div className="recipeHeading">
                 <h2>{truncateLabel(recipe.label)}</h2>
+
                 {isLoggedIn && !isCookbook && (
                     <div onClick={handleSaveRecipe}>
                         <FaHeart />
@@ -56,6 +59,7 @@ export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isC
                     {recipe.yield} Servings
                 </div>
             </div>
-        </Link >
+
+        </div >
     );
 }
