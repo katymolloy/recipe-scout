@@ -2,25 +2,19 @@ import { FaHeart, FaFire } from "react-icons/fa";
 import { GiMeal } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { saveRecipe, getFirestoreInstance, removeRecipe } from "../../firebase";
-import { useState } from "react";
 import { FaHeartBroken } from "react-icons/fa";
 
 import './RecipeCard.scss';
 
 export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isCookbook, updateRecipes }) {
     const db = getFirestoreInstance();
-    // const [savedRecipes, setSavedRecipes] = useState([]);
 
     const handleSaveRecipe = () => {
-        saveRecipe(db, recipe.uri, currentUser
-            // , setSavedRecipes, savedRecipes
-        );
+        saveRecipe(db, recipe.uri, currentUser);
     };
 
     const handleRemoveRecipe = () => {
-       let updatedRecipes =  removeRecipe(db, currentUser, recipe.uri
-            // , setSavedRecipes
-        );
+       let updatedRecipes =  removeRecipe(db, currentUser, recipe.uri);
         updateRecipes(updatedRecipes);
     }
 

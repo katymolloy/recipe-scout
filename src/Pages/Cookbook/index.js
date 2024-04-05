@@ -44,8 +44,8 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
     }, [name])
 
 
+    // function to update recipe state; will remove deleted recipes
     const updateRecipes = (newRecipes) => {
-
         newRecipes.then((newRecipes) => {
             let newArray = []
             for (let i = 0; i < recipes.length; i++) {
@@ -58,10 +58,6 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
         }).catch((error) => {
             console.log('Error updating user recipes: ', error)
         })
-
-
-
-
     }
 
 
@@ -74,17 +70,26 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
                     <>
                         <div className="hero">
                             <h1>My Cookbook</h1>
-                            <div>Welcome back, {name}! Here are your saved recipes.</div>
+                            <div>Welcome back, {name}!</div>
                         </div>
 
-                        <div className="recipeCardContainer">
 
-                            {
-                                recipes.map((recipe, index) => (
-                                    <RecipeCard recipe={recipe} index={index} isLoggedIn={isLoggedIn} currentUser={currentUser} isCookbook={isCookbook} updateRecipes={updateRecipes} />
-                                ))
-                            }
-                        </div>
+                        {recipes.length !== 0 ?
+                            <div className="recipeCardContainer">
+                                {
+                                    recipes.map((recipe, index) => (
+                                        <RecipeCard recipe={recipe} index={index} isLoggedIn={isLoggedIn} currentUser={currentUser} isCookbook={isCookbook} updateRecipes={updateRecipes} />
+                                    ))
+                                }
+                            </div>
+                            :
+                            <div>
+                                <p>It doesn't look like you have any saved recipes yet!</p>
+                                <Link to={'/'}>Check out the explore page for fresh ideas</Link>
+                            </div>
+                        }
+
+
 
                     </>
 
