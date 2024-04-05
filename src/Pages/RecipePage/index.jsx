@@ -14,6 +14,7 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
     const [ingredients, setIngredients] = useState([])
     const [healthLabels, setHealthLabels] = useState([])
     const [dietLabels, setDietLabels] = useState([])
+    const [totalNutrients, setTotalNutrients] = useState([])
     const [recipe, setRecipe] = useState([])
     const [cals, setCals] = useState('')
 
@@ -28,6 +29,7 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
                     setIngredients(first.recipe.ingredientLines)
                     setHealthLabels(first.recipe.healthLabels)
                     setDietLabels(first.recipe.dietLabels)
+                    setTotalNutrients(first.recipe.totalNutrients);
                     setCals(first.recipe.calories.toFixed(0))
 
                 }).catch(error => {
@@ -57,8 +59,8 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
                 {recipe ?
 
                     <div className="titleCard">
-                        
-                        <div className = 'medium-heading'>Ingredients</div>
+
+                        <div className='medium-heading'>Ingredients</div>
 
                         <ul>
                             {ingredients.map((ingredient, index) => {
@@ -67,10 +69,30 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
                         </ul>
 
                         <div className="quickInfo">
-                            <div><FaFire />{cals} cals</div>
-                            <div>     {dietLabels.map((label, index) => {
-                                return <p key={index}>{label}</p>
-                            })}</div>
+
+                            <div className='small-heading'>Nutrition Data</div>
+
+                            <div className='yield'>Per {recipe.yield} Serving Size</div>
+
+                            <div className='recipe-information'>
+                                <div>
+                                    <ul>
+                                        {/* <li className = 'carbs'>{recipe.totalNutrients.CHOCDF.label}</li>
+                                        <li className = 'protein'>{recipe.totalNutrients.PROCNT.label}</li>
+                                        <li className = 'fats'>{recipe.totalNutrients.FAT.label}</li> */}
+                                        <li className='carbs'>Carb</li>
+                                        <li className='protein'>Protein</li>
+                                        <li className='fats'>Fat</li>
+                                    </ul>
+                                </div>
+                                <div className='calory-section'><FaFire />{cals} cals</div>
+                            </div>
+
+                            {/* <div>
+                                {dietLabels.map((label, index) => {
+                                    return <p key={index}>{label}</p>
+                                })}
+                            </div> */}
                         </div>
 
                         <img src={recipe.image} alt={recipe.label}></img>

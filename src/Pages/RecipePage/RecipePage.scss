@@ -4,7 +4,8 @@
 
     width: 100%;
 
-    .titleCard, h1 {
+    .titleCard,
+    h1 {
         margin: 0 10rem;
     }
 
@@ -30,14 +31,17 @@
     }
 
     .medium-heading {
+        margin-top: 1rem;
         text-transform: uppercase;
         font-weight: bold;
         text-decoration: underline;
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     ul {
         list-style: none;
+        padding: 0;
+        font-weight: bold;
     }
 
     li::before {
@@ -48,6 +52,58 @@
 
     img {
         border-radius: 13px;
+    }
+
+
+    .quickInfo {
+
+        border-radius: 13px;
+        background-color: white;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        width: 50%;
+        box-sizing: border-box;
+        box-shadow: 0 1px 5px rgb(0 0 0 / 0.2);
+        text-decoration: none;
+
+        .small-heading {
+            text-transform: uppercase;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 1.6rem;
+        }
+
+        .yield {
+            font-size: 0.9rem;
+            color: rgb(181, 181, 181);
+            font-weight: bold;
+        }
+
+        .carbs, .protein {
+            border-bottom: 2px solid rgb(181, 181, 181, 0.2);
+        }
+
+        li.carbs::before {
+            content: "•";
+            font-size: 1.5rem;
+            padding-right: 8px;
+            color: red;
+        }
+
+        li.protein::before {
+            content: "•";
+            font-size: 1.5rem;
+            padding-right: 8px;
+            color: chartreuse;
+        }
+
+        li.fats::before {
+            content: "•";
+            font-size: 1.5rem;
+            padding-right: 8px;
+            color: rgb(0, 94, 255);
+        }
+
     }
 
 }
