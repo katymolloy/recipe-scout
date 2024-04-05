@@ -7,17 +7,21 @@ import { FaHeartBroken } from "react-icons/fa";
 
 import './RecipeCard.scss';
 
-export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isCookbook }) {
+export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isCookbook, updateRecipes }) {
     const db = getFirestoreInstance();
-    const [savedRecipes, setSavedRecipes] = useState([]);
+    // const [savedRecipes, setSavedRecipes] = useState([]);
 
     const handleSaveRecipe = () => {
-        saveRecipe(db, recipe.uri, currentUser, setSavedRecipes, savedRecipes);
+        saveRecipe(db, recipe.uri, currentUser
+            // , setSavedRecipes, savedRecipes
+        );
     };
 
     const handleRemoveRecipe = () => {
-        removeRecipe(db, currentUser, recipe.uri, setSavedRecipes);
-
+       let updatedRecipes =  removeRecipe(db, currentUser, recipe.uri
+            // , setSavedRecipes
+        );
+        updateRecipes(updatedRecipes);
     }
 
 

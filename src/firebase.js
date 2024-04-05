@@ -64,11 +64,11 @@ export const getRecipes = async (db, food, setRecipes) => {
 }
 
 
-export const saveRecipe = async (db, uri, currentUser, setSavedRecipes, savedRecipes) => {
+export const saveRecipe = async (db, uri, currentUser) => {
     const docRef = doc(db, 'users', currentUser);
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
-        setSavedRecipes(docSnap.data().recipes)
+        let savedRecipes = docSnap.data().recipes;
         if (savedRecipes.length > 0) {
             savedRecipes.forEach((savedRecipe) => {
                 if (savedRecipe !== uri) {
@@ -96,7 +96,7 @@ export const saveRecipe = async (db, uri, currentUser, setSavedRecipes, savedRec
 
 
 
-export const removeRecipe = async (db, currentUser, uri, setSavedRecipes) => {
+export const removeRecipe = async (db, currentUser, uri) => {
     const docRef = doc(db, 'users', currentUser);
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
@@ -104,7 +104,7 @@ export const removeRecipe = async (db, currentUser, uri, setSavedRecipes) => {
         await updateDoc(docRef, {
             recipes: updatedRecipes
         });
-        setSavedRecipes(docSnap.data().recipes)
+        return updatedRecipes;
     } else {
         console.log('Error retrieving user recipes from database')
         return;

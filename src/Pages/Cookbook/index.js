@@ -26,10 +26,12 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
 
 
     useEffect(() => {
+        // if no recipes to grab, function is exited
         if (savedRecipes.length === 0) {
-            console.log('Function exited')
             return;
         }
+
+
         let promises = savedRecipes.map((recipe) => viewRecipe(recipe));
         Promise.all(promises)
             .then((data) => {
@@ -38,7 +40,29 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
             }).catch((error) => {
                 console.log('Error retrieving user recipes: ', error)
             })
-    }, [savedRecipes])
+
+    }, [name])
+
+
+    const updateRecipes = (newRecipes) => {
+
+        newRecipes.then((newRecipes) => {
+            let newArray = []
+            for (let i = 0; i < recipes.length; i++) {
+                if (newRecipes.includes(recipes[i].uri) === true) {
+                    newArray.push(recipes[i])
+                }
+            }
+            setRecipes(newArray)
+            return;
+        }).catch((error) => {
+            console.log('Error updating user recipes: ', error)
+        })
+
+
+
+
+    }
 
 
     return (
@@ -57,7 +81,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
 
                             {
                                 recipes.map((recipe, index) => (
-                                    <RecipeCard recipe={recipe} index={index} isLoggedIn={isLoggedIn} currentUser={currentUser} isCookbook={isCookbook} savedRecipes={savedRecipes} />
+                                    <RecipeCard recipe={recipe} index={index} isLoggedIn={isLoggedIn} currentUser={currentUser} isCookbook={isCookbook} updateRecipes={updateRecipes} />
                                 ))
                             }
                         </div>
