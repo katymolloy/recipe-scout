@@ -7,13 +7,14 @@ import RecipeCard from "../../Components/RecipeCard";
 
 import './recipeResults.scss'
 
-export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
+export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, addApiCall }) {
     const { searchItem } = useParams();
     const [recipes, setRecipes] = useState([])
 
     useEffect(() => {
         getSearchResults(searchItem)
             .then(data => {
+                addApiCall(1)
                 setRecipes(data.hits)
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)

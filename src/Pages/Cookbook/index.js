@@ -3,13 +3,11 @@ import './cookbook.scss'
 import { useEffect, useState } from "react"
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
-
 import { getFirestoreInstance, getUserData } from "../../firebase";
 import RecipeCard from "../../Components/RecipeCard";
-import { IoEllipseSharp } from "react-icons/io5";
 import { viewRecipe } from "../../Utilities/api";
 
-export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
+export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiCall }) {
     const [name, setName] = useState('');
     const [savedRecipes, setSavedRecipes] = useState([]);
     const [recipes, setRecipes] = useState([])
@@ -30,17 +28,17 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
         if (savedRecipes.length === 0) {
             return;
         }
-
-
         let promises = savedRecipes.map((recipe) => viewRecipe(recipe));
+        addApiCall(promises.length)
         Promise.all(promises)
             .then((data) => {
                 let recipeData = data.map((data) => data.hits[0].recipe)
-                setRecipes(recipeData)
+                setRecipes(recipeData);
+                return;
             }).catch((error) => {
-                console.log('Error retrieving user recipes: ', error)
+                console.log('Error retrieving user recipes: ', error);
+                return;
             })
-
     }, [name])
 
 
@@ -56,7 +54,8 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
             setRecipes(newArray)
             return;
         }).catch((error) => {
-            console.log('Error updating user recipes: ', error)
+            console.log('Error updating user recipes: ', error);
+            return;
         })
     }
 
@@ -73,7 +72,6 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
                             <div>Welcome back, {name}!</div>
                         </div>
 
-
                         {recipes.length !== 0 ?
                             <div className="recipeCardContainer">
                                 {
@@ -83,16 +81,12 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin }) {
                                 }
                             </div>
                             :
-                            <div>
-                                <p>It doesn't look like you have any saved recipes yet!</p>
-                                <Link to={'/'}>Check out the explore page for fresh ideas</Link>
+                            <div className="noRecipeCta">
+                                <p>It doesn't look like you have any saved recipes yet</p>
+                                <Link to={'/'}>Check out the explore page for fresh ideas!</Link>
                             </div>
                         }
-
-
-
                     </>
-
                     :
                     <div className="hero register">
                         <h3>Not yet a Recipe Scout user? <br></br>Sign up to Save Your Favourite Recipes</h3>

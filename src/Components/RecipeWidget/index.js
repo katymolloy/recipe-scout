@@ -2,20 +2,23 @@ import { useEffect, useState } from "react"
 import './widget.scss'
 import RecipeCard from "../RecipeCard";
 import { Link } from "react-router-dom";
-import { FaHeart } from "react-icons/fa";
-import { FaFire } from "react-icons/fa6";
-import { GiMeal } from "react-icons/gi";
 import { FaArrowRight } from "react-icons/fa";
-import { FaThumbsUp } from "react-icons/fa6";
-import { getFirestoreInstance, getRecipes, saveRecipe } from "../../firebase";
+import { getFirestoreInstance, getRecipes } from "../../firebase";
+import { getSearchResults } from "../../Utilities/api";
 
-export default function Widget({ food, userLoggedIn, currentUser }) {
+export default function Widget({ food, userLoggedIn, currentUser, addApiCall }) {
     const db = getFirestoreInstance();
     const [recipes, setRecipes] = useState([]);
-    const [savedRecipes, setSavedRecipes] = useState([]);
+
 
     useEffect(() => {
-        getRecipes(db, food, setRecipes);
+        // getRecipes(db, food, setRecipes);
+        getSearchResults(food)
+            .then((data) => {
+            addApiCall(1)
+                let widgetData = data.hits.slice(0, 8)
+                setRecipes(widgetData);
+            })
     }, []);
 
     return (
