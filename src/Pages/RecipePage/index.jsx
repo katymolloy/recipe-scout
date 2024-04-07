@@ -25,6 +25,7 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                 .then(data => {
                     const first = data.hits[0]
                     addApiCall(1)
+                    console.log(first.recipe)
                     setRecipe(first.recipe)
                     setIngredients(first.recipe.ingredientLines)
                     setHealthLabels(first.recipe.healthLabels)
@@ -102,6 +103,39 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                                 return <li key={index}>{label}</li>
                             })}
                         </ul>
+
+
+                        <div className = 'recipe-steps'>
+
+                            {/* Replace all the stuff below with the database logic */}
+                            <div className = 'recipe-steps-heading'>
+                                <div className = 'medium-heading'>Recipe Steps</div>
+                                <div className = 'step-counter'>5 steps</div>
+                            </div>
+
+                            <h2>Step 1</h2>
+
+                            <div className = 'steps-description'>
+                                Heat the olive oil in a skillet over medium heat. Add the ground beef. Season with 1/4 tsp of salt
+                                and cook for about 8-10 minutes, stirring occassionally. Drain the meat and set it aside.
+                            </div>
+
+                            <h2>Step 2</h2>
+
+                            <div className = 'steps-description'>
+                                Heat the olive oil in a skillet over medium heat. Add the ground beef. Season with 1/4 tsp of salt
+                                and cook for about 8-10 minutes, stirring occassionally. Drain the meat and set it aside.
+                            </div>
+
+                            <h2>Step 3</h2>
+
+                            <div className = 'steps-description'>
+                                Heat the olive oil in a skillet over medium heat. Add the ground beef. Season with 1/4 tsp of salt
+                                and cook for about 8-10 minutes, stirring occassionally. Drain the meat and set it aside.
+                            </div>
+
+                        </div>
+
 
                         <div className="recipeLink">
                             <a href={recipe.url}> Grab the recipe here!</a>
