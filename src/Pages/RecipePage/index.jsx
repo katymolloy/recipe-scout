@@ -49,7 +49,9 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                 <div className="topSection">
                     <h1>
                         {recipe.label}{' '}
-                        {recipe.totalTime > 0 && (
+                    </h1>
+                    <h1>
+                    {recipe.totalTime > 0 && (
                             <>
                                 <FaRegClock /> {recipe.totalTime} min
                             </>
@@ -69,34 +71,50 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                             })}
                         </ul>
 
-                        <div className="quickInfo">
 
-                            <div className='small-heading'>Nutrition Data</div>
+                        <div className='top-section'>
 
-                            <div className='yield'>Per {recipe.yield} Serving Size</div>
+                            <div className="quickInfo">
 
-                            <div className='recipe-information'>
-                                <div>
-                                    <ul>
-                                        {/* <li className = 'carbs'>{recipe.totalNutrients.CHOCDF.label}</li>
-                                        <li className = 'protein'>{recipe.totalNutrients.PROCNT.label}</li>
-                                        <li className = 'fats'>{recipe.totalNutrients.FAT.label}</li> */}
-                                        <li className='carbs'>Carb</li>
-                                        <li className='protein'>Protein</li>
-                                        <li className='fats'>Fat</li>
-                                    </ul>
+                                <div className='small-heading'>Nutrition Data</div>
+
+                                <div className='yield'>Per {recipe.yield} Serving Size</div>
+
+                                <div className='recipe-information'>
+                                    <div>
+                                        <ul>
+                                            {/* <li className = 'carbs'>{recipe.totalNutrients.CHOCDF.label}</li>
+            <li className = 'protein'>{recipe.totalNutrients.PROCNT.label}</li>
+            <li className = 'fats'>{recipe.totalNutrients.FAT.label}</li> */}
+                                            <li className='carbs'>Carb</li>
+                                            <div>9.5 g</div>
+                                        </ul>
+                                        <ul>
+                                            <li className='protein'>Protein</li>
+                                            <div>25 g</div>
+                                        </ul>
+                                        <ul>
+                                            <li className='fats'>Fat</li>
+                                            <div>49.5 g</div>
+                                        </ul>
+                                    </div>
+                                    <div className='calory-section'><FaFire />{cals} cals</div>
                                 </div>
-                                <div className='calory-section'><FaFire />{cals} cals</div>
+
+                                {/* <div>
+                                    {dietLabels.map((label, index) => {
+                                        return <p key={index}>{label}</p>
+                                    })}
+                                </div> */}
                             </div>
 
-                            {/* <div>
-                                {dietLabels.map((label, index) => {
-                                    return <p key={index}>{label}</p>
-                                })}
-                            </div> */}
+
+                            <div className='image-container'>
+                                <img src={recipe.image} alt={recipe.label}></img>
+                            </div>
+
                         </div>
 
-                        <img src={recipe.image} alt={recipe.label}></img>
 
                         <ul>
                             {healthLabels.map((label, index) => {
@@ -105,31 +123,31 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                         </ul>
 
 
-                        <div className = 'recipe-steps'>
+                        <div className='recipe-steps'>
 
                             {/* Replace all the stuff below with the database logic */}
-                            <div className = 'recipe-steps-heading'>
-                                <div className = 'medium-heading'>Recipe Steps</div>
-                                <div className = 'step-counter'>5 steps</div>
+                            <div className='recipe-steps-heading'>
+                                <div className='medium-heading'>Recipe Steps</div>
+                                <div className='step-counter'>5 steps</div>
                             </div>
 
                             <h2>Step 1</h2>
 
-                            <div className = 'steps-description'>
+                            <div className='steps-description'>
                                 Heat the olive oil in a skillet over medium heat. Add the ground beef. Season with 1/4 tsp of salt
                                 and cook for about 8-10 minutes, stirring occassionally. Drain the meat and set it aside.
                             </div>
 
                             <h2>Step 2</h2>
 
-                            <div className = 'steps-description'>
+                            <div className='steps-description'>
                                 Heat the olive oil in a skillet over medium heat. Add the ground beef. Season with 1/4 tsp of salt
                                 and cook for about 8-10 minutes, stirring occassionally. Drain the meat and set it aside.
                             </div>
 
                             <h2>Step 3</h2>
 
-                            <div className = 'steps-description'>
+                            <div className='steps-description'>
                                 Heat the olive oil in a skillet over medium heat. Add the ground beef. Season with 1/4 tsp of salt
                                 and cook for about 8-10 minutes, stirring occassionally. Drain the meat and set it aside.
                             </div>

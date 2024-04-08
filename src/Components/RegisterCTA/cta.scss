@@ -1,9 +1,40 @@
 .signUpCTA {
-  background-color: lightblue;
+
+  width: 86%;
+
+  background-color: #09b561;
+  background-image: url(../../../public/images/blob-scene-haikei.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 15px;
+  color: #fff;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
   display: flex;
+  justify-content: space-between;
+
+
+  .description {
+
+    .heading {
+      font-size: 2rem;
+    }
+
+  }
+
 
   .CTAbutton {
+
     background-color: red;
-    border-radius: 7px;
+    border-radius: 10px;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
   }
+
 }
