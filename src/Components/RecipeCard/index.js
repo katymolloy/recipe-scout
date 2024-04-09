@@ -18,23 +18,14 @@ export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isC
         updateRecipes(updatedRecipes);
     }
 
-
-    const truncateLabel = (label) => {
-        label = label.trim();
-        if (label.length > 30) {
-            return label.substring(0, 25) + '...';
-        }
-        return label;
-    };
-
     return (
         <div className="recipeCard">
             <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index}>
-                <img src={recipe.image} alt={recipe.label}></img>
+                <img src={recipe.image} alt={recipe.label} loading="lazy"></img>
             </Link >
             <div className="recipeHeading">
                 <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index}>
-                    <h2>{truncateLabel(recipe.label)}</h2>
+                    <h2>{recipe.label}</h2>
                 </Link >
                 {isLoggedIn && !isCookbook && (
                     <div onClick={handleSaveRecipe}>

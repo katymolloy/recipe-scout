@@ -16,7 +16,7 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, add
     const [resultCount, setResultCount] = useState(0);
 
     useEffect(() => {
-        getSearchResults(searchItem, pagination, 30)
+        getSearchResults(searchItem, pagination, 28)
             .then(data => {
                 addApiCall(1)
                 console.log(data)
@@ -30,14 +30,14 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, add
 
 
     const increasePageNum = () => {
-        let newPage = pagination + 30;
+        let newPage = pagination + 28;
         setPagination(newPage)
     }
 
     const decreasePageNum = () => {
         console.log('back')
-        if (pagination > 30) {
-            let newPage = pagination - 30;
+        if (pagination > 28) {
+            let newPage = pagination - 28;
             console.log(newPage)
             setPagination(newPage)
         } else {
@@ -63,7 +63,6 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, add
                     <ul>
                         <li onClick={decreasePageNum}><IoMdArrowRoundBack />Back</li>
                         <li onClick={increasePageNum}>Next<IoMdArrowRoundForward /></li>
-
                     </ul>
                 </div>
             </div>
