@@ -29,11 +29,11 @@ export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isC
 
     return (
         <div className="recipeCard">
-            <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index} className="hover">
+            <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index}>
                 <img src={recipe.image} alt={recipe.label}></img>
             </Link >
             <div className="recipeHeading">
-                <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index} className="hover">
+                <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index}>
                     <h2>{truncateLabel(recipe.label)}</h2>
                 </Link >
                 {isLoggedIn && !isCookbook && (

@@ -57,7 +57,7 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                     setUnitProtein(first.recipe.totalNutrients.PROCNT.unit)
                     setUnitFat(first.recipe.totalNutrients.FAT.unit)
 
-                    setDairy(first.recipe.healthLabels.)
+                    //setDairy(first.recipe.healthLabels.)
 
                 }).catch(error => {
                     console.log('Error retrieving recipe data: ', error)
@@ -170,7 +170,7 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                                 <div className='step-counter'>5 steps</div>
                             </div>
 
-                            
+
 
                             <h2>Step 1</h2>
 
