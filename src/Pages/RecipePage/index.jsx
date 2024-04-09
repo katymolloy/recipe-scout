@@ -16,6 +16,8 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
     const [dietLabels, setDietLabels] = useState([])
     const [totalNutrients, setTotalNutrients] = useState([])
     const [recipe, setRecipe] = useState([])
+
+    /* Nutrients */
     const [carbs, setCarbs] = useState('')
     const [protein, setProtein] = useState('')
     const [fat, setFat] = useState('')
@@ -23,6 +25,11 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
     const [unitProtein, setUnitProtein] = useState('')
     const [unitFat, setUnitFat] = useState('')
 
+    /* Health Labels */
+    const [fixedHealthLabels, setFixedHealthLabel] = useState(['Gluten-Free', 'Egg-Free', 'Peanut-Free', 'Pork-Free', 'Alcohol-Free', 'Sugar-Conscious']);
+    const [hasSameLabels, setHasSameLabels] = useState(false);
+
+    /* Calories */
     const [cals, setCals] = useState('')
 
     useEffect(() => {
@@ -34,11 +41,15 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                     addApiCall(1)
                     console.log(first.recipe)
                     setRecipe(first.recipe)
+
                     setIngredients(first.recipe.ingredientLines)
                     setHealthLabels(first.recipe.healthLabels)
                     setDietLabels(first.recipe.dietLabels)
+
                     setTotalNutrients(first.recipe.totalNutrients)
+
                     setCals(first.recipe.calories.toFixed(0))
+
                     setCarbs(first.recipe.totalNutrients.CHOCDF.quantity.toFixed(0))
                     setProtein(first.recipe.totalNutrients.PROCNT.quantity.toFixed(0))
                     setFat(first.recipe.totalNutrients.FAT.quantity.toFixed(0))
@@ -46,6 +57,7 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                     setUnitProtein(first.recipe.totalNutrients.PROCNT.unit)
                     setUnitFat(first.recipe.totalNutrients.FAT.unit)
 
+                    setDairy(first.recipe.healthLabels.)
 
                 }).catch(error => {
                     console.log('Error retrieving recipe data: ', error)
@@ -53,6 +65,20 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
 
         }
     }, [])
+
+
+    /* useEffect for the health labels */
+    useEffect(() => {
+
+        // Checks to see if any of the healthLabels relate to the fixedHealthLabels array
+        const hasSameHealthLabels = fixedHealthLabels.some(label => healthLabels.includes(label));
+
+        if (hasSameHealthLabels) {
+            hasSameLabels = true;
+        }
+
+    }, [healthLabels, fixedHealthLabels])
+
 
     return (
         <>
@@ -140,9 +166,11 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
 
                             {/* Replace all the stuff below with the database logic */}
                             <div className='recipe-steps-heading'>
-                                <div className='medium-heading'>Recipe Steps</div>
+                                <div className='medium-heading'>Health Labels</div>
                                 <div className='step-counter'>5 steps</div>
                             </div>
+
+                            
 
                             <h2>Step 1</h2>
 
