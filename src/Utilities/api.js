@@ -35,11 +35,12 @@ export const viewRecipe = (uri) => {
 }
 
 
-export const getSearchResults = (search) => {
-    return instance.get('/api/recipes/v2', {
+export const getSearchResults = (search, pagination, add) => {
+    return instance.get('/search', {
         params: {
-            type: 'public',
-            q: search
+            q: search,
+            from: pagination,
+            to: (pagination + add)
         }
     })
         .then(response => {

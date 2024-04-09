@@ -21,9 +21,10 @@ export default function Widget({ food, userLoggedIn, currentUser, addApiCall }) 
 
 
     const getWidgetData = () => {
-        getSearchResults(food)
+        let pagination = 8
+        getSearchResults(food, pagination, 8)
             .then((data) => {
-                let widgetData = data.hits.slice(0, 8)
+                let widgetData = data.hits
                 setRecipes(widgetData);
             })
     }
