@@ -2,6 +2,10 @@
 ul{
     display: flex;
     gap: 10px;
+align-items: center;
+justify-content: center;
+
+
 }
 
 li{
@@ -20,6 +24,7 @@ li:hover{
     .cardContainer {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
     }
 
     .itemHero {

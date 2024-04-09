@@ -4,6 +4,8 @@ import Footer from "../../Components/Footer";
 import { useEffect, useState } from "react";
 import { getSearchResults } from "../../Utilities/api";
 import RecipeCard from "../../Components/RecipeCard";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoMdArrowRoundForward } from "react-icons/io";
 
 import './recipeResults.scss'
 
@@ -28,9 +30,20 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, add
 
 
     const increasePageNum = () => {
-        let newPage = pagination + 20;
+        let newPage = pagination + 30;
         setPagination(newPage)
-        console.log(pagination)
+    }
+
+    const decreasePageNum = () => {
+        console.log('back')
+        if (pagination > 30) {
+            let newPage = pagination - 30;
+            console.log(newPage)
+            setPagination(newPage)
+        } else {
+            return;
+        }
+
     }
 
     return (
@@ -48,9 +61,9 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, add
                 </div>
                 <div className="paginationContainer">
                     <ul>
-                        <li onClick={increasePageNum}>1</li>
-                        <li onClick={increasePageNum}>2</li>
-                        <li onClick={increasePageNum}>3</li>
+                        <li onClick={decreasePageNum}><IoMdArrowRoundBack />Back</li>
+                        <li onClick={increasePageNum}>Next<IoMdArrowRoundForward /></li>
+
                     </ul>
                 </div>
             </div>
