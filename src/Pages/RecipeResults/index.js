@@ -12,20 +12,18 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, add
     const [recipes, setRecipes] = useState([])
     const [pagination, setPagination] = useState(1);
     const [resultCount, setResultCount] = useState(0);
-    // const [pageNum, setPageNum] = useState([])
 
     useEffect(() => {
-        // getRecipes();
         getSearchResults(searchItem, pagination, 30)
-        .then(data => {
-            addApiCall(1)
-            console.log(data)
-            setRecipes(data.hits)
-            setResultCount(data.count)
-            // setPageNum((resultCount / 30))
-        }).catch(error => {
-            console.log('Error retrieving recipe data: ', error)
-        })
+            .then(data => {
+                addApiCall(1)
+                console.log(data)
+                setRecipes(data.hits)
+                setResultCount(data.count)
+
+            }).catch(error => {
+                console.log('Error retrieving recipe data: ', error)
+            })
     }, [searchItem, pagination])
 
 
@@ -50,7 +48,9 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, add
                 </div>
                 <div className="paginationContainer">
                     <ul>
-                <li onClick={increasePageNum}>click me</li>
+                        <li onClick={increasePageNum}>1</li>
+                        <li onClick={increasePageNum}>2</li>
+                        <li onClick={increasePageNum}>3</li>
                     </ul>
                 </div>
             </div>

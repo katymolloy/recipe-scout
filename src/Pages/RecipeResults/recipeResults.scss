@@ -1,4 +1,21 @@
 .recipeResultContainer {
+ul{
+    display: flex;
+    gap: 10px;
+}
+
+li{
+    list-style-type: none;
+
+}
+
+li:active{
+    text-decoration: underline;
+}
+
+li:hover{
+    cursor: pointer;
+}
 
     .cardContainer {
         display: flex;
