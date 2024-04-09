@@ -7,8 +7,22 @@
 
     .expandCTA {
         a {
-            color: #000;
+            margin: 20px 0;
+            display: flex;
+            align-self: center;
+            color: #09b561;
             text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: .3s;
+
+            svg {
+                font-size: 1.25rem;
+            }
+
+            &:hover {
+                color: #066c3b;
+            }
         }
     }
 }

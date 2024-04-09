@@ -1,40 +1,47 @@
 .signUpCTA {
 
-  width: 86%;
+  width: 90.5%;
 
   background-color: #09b561;
   background-image: url(../../../public/images/blob-scene-haikei.png);
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 15px;
+  border-radius: 10px;
   color: #fff;
-  margin-top: 1.5rem;
-  padding: 1.5rem;
   display: flex;
   justify-content: space-between;
-
+  align-items: center;
+  padding: 30px 60px;
+  margin: 20px 0;
 
   .description {
+    font-weight: 600;
 
     .heading {
       font-size: 2rem;
+      padding-bottom: 5px;
     }
 
   }
 
-
   .CTAbutton {
+    margin: 0;
+    padding: 12px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F94642;
+    border-radius: 50px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: .3s;
 
-    background-color: red;
-    border-radius: 10px;
-
-    a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.2rem;
+    &:hover {
+      background-color: #ee413e;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
     }
-
   }
 
 }

@@ -74,7 +74,7 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
         const hasSameHealthLabels = fixedHealthLabels.some(label => healthLabels.includes(label));
 
         if (hasSameHealthLabels) {
-            hasSameLabels = true;
+            setHasSameLabels(true);
         }
 
     }, [healthLabels, fixedHealthLabels])

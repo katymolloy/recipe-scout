@@ -43,7 +43,8 @@ export default function Widget({ food, userLoggedIn, currentUser, addApiCall }) 
             ))}
             <div className="expandCTA">
                 <Link to={`/search/${food}`}>
-                    <div>More recipes here!<FaArrowRight /></div>
+                    <div>More Recipes <FaArrowRight /></div>
+
                 </Link>
             </div>
         </div>
