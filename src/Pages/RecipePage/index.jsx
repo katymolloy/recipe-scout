@@ -64,7 +64,7 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                         {recipe.label}{' '}
                     </h1>
                     <h1>
-                    {recipe.totalTime > 0 && (
+                        {recipe.totalTime > 0 && (
                             <>
                                 <FaRegClock /> {recipe.totalTime} min
                             </>
