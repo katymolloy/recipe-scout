@@ -14,27 +14,28 @@ export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isC
     };
 
     const handleRemoveRecipe = () => {
-       let updatedRecipes =  removeRecipe(db, currentUser, recipe.uri);
+        let updatedRecipes = removeRecipe(db, currentUser, recipe.uri);
         updateRecipes(updatedRecipes);
     }
 
 
     const truncateLabel = (label) => {
-        label = label.trim(); // Remove leading and trailing spaces
-        if (label.length > 26) {
-            return label.substring(0, 30) + '...';
+        label = label.trim();
+        if (label.length > 30) {
+            return label.substring(0, 25) + '...';
         }
         return label;
     };
 
     return (
-        <div>
-            <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index} className="recipeCard">
+        <div className="recipeCard">
+            <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index} className="hover">
                 <img src={recipe.image} alt={recipe.label}></img>
             </Link >
             <div className="recipeHeading">
-                <h2>{truncateLabel(recipe.label)}</h2>
-
+                <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index} className="hover">
+                    <h2>{truncateLabel(recipe.label)}</h2>
+                </Link >
                 {isLoggedIn && !isCookbook && (
                     <div onClick={handleSaveRecipe}>
                         <FaHeart />
@@ -49,7 +50,7 @@ export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isC
             <div className="recipeInfo">
                 <div>
                     <GiMeal />
-                    {recipe.mealType}
+                    {recipe.mealType[0]}
                 </div>
                 <div>
                     <FaFire />
