@@ -49,7 +49,7 @@ export default function Landing({
         </span>
       </div>
       <div className="container">
-        <h2>Fuel the Gains</h2>
+        <h2>Fuel The Gains</h2>
         <Widget
           food={"chicken"}
           userLoggedIn={isLoggedIn}
