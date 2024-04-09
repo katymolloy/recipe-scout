@@ -22,7 +22,6 @@
     h1 {
         font-size: 3rem;
         color: white;
-        width: 40%;
 
         svg {
             font-size: 2rem;
@@ -40,7 +39,6 @@
     ol {
         padding-left: 25px;
         font-weight: bold;
-        width: 50%;
     }
 
     li {
@@ -57,23 +55,21 @@
     }
 
     .top-section {
-
         width: 100%;
         display: flex;
-        justify-content: flex-end;
 
         .quickInfo {
-
             border-radius: 13px;
             background-color: white;
             padding: 1rem;
             margin-bottom: 2rem;
-            width: 50%;
             box-sizing: border-box;
             box-shadow: 0 1px 5px rgb(0 0 0 / 0.2);
             text-decoration: none;
             margin-top: 2rem;
             margin-bottom: 2rem;
+            width: 100%;
+
 
             .small-heading {
                 text-transform: uppercase;
@@ -93,52 +89,61 @@
             //     border-bottom: 2px solid rgb(181, 181, 181, 0.2);
             // }
 
-            ul {
-                list-style: none;
-                padding: 0;
-                font-weight: bold;
-                width: 50%;
+            .recipe-information {
 
                 display: flex;
-                align-items: center;
-                justify-content: space-between;
-                border-bottom: 2px solid rgb(181, 181, 181, 0.2);
 
-                div {
-                    padding: 0;
-                    margin: 0;
+                .chart {
+                    width: 40%;
+                }
+
+                .breakdown {
+                    width: 60%;
+
+                    ul {
+                        list-style: none;
+                        padding: 0;
+                        font-weight: bold;
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        border-bottom: 2px solid rgb(181, 181, 181, 0.2);
+
+                        div {
+                            padding: 0;
+                            margin: 0;
+                        }
+                    }
+
+                    li.carbs::before {
+                        content: "•";
+                        font-size: 1.5rem;
+                        padding-right: 8px;
+                        color: #F94642;
+                    }
+
+                    li.protein::before {
+                        content: "•";
+                        font-size: 1.5rem;
+                        padding-right: 8px;
+                        color: #3177BB;
+                    }
+
+                    li.fats::before {
+                        content: "•";
+                        font-size: 1.5rem;
+                        padding-right: 8px;
+                        color: #FDA120;
+                    }
                 }
             }
-
-            li.carbs::before {
-                content: "•";
-                font-size: 1.5rem;
-                padding-right: 8px;
-                color: red;
-            }
-
-            li.protein::before {
-                content: "•";
-                font-size: 1.5rem;
-                padding-right: 8px;
-                color: chartreuse;
-            }
-
-            li.fats::before {
-                content: "•";
-                font-size: 1.5rem;
-                padding-right: 8px;
-                color: rgb(0, 94, 255);
-            }
-
         }
 
         .image-container {
-            width: 50%;
             justify-content: flex-end;
 
             img {
-                position: absolute;
                 bottom: 0px;
                 margin-left: 2rem;
             }

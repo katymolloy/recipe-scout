@@ -1,10 +1,11 @@
 import Header from "../../Components/Header"
 import Footer from "../../Components/Footer"
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { viewRecipe } from "../../Utilities/api";
 import { FaFire } from "react-icons/fa6";
 import { FaRegClock } from "react-icons/fa";
+import Chart from 'chart.js/auto';
 
 import "./RecipePage.scss";
 
@@ -31,6 +32,8 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
 
     /* Calories */
     const [cals, setCals] = useState('')
+
+    const doughnutChartRef = useRef(null);
 
     useEffect(() => {
         if (uri !== undefined) {
@@ -66,7 +69,49 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
         }
     }, [])
 
+    useEffect(() => {
+        if (totalNutrients.length === 0) return;
 
+        const ctx = doughnutChartRef.current.getContext('2d');
+
+        const data = {
+            labels: ['Carbs', 'Protein', 'Fat'],
+            datasets: [{
+                data: [carbs, protein, fat],
+                backgroundColor: ['#F94642', '#3177BB', '#FDA120'],
+                hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+            }]
+        };
+
+        const options = {
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed !== null) {
+                                label += context.parsed + 'g';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: data,
+            options: options
+        });
+    }, [carbs, protein, fat, totalNutrients]);
     /* useEffect for the health labels */
     useEffect(() => {
 
@@ -101,16 +146,15 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                 {recipe ?
 
                     <div className="titleCard">
-
                         <div className='medium-heading'>Ingredients</div>
-
                         <ol>
                             {ingredients.map((ingredient, index) => {
                                 return <li key={index}>{ingredient}</li>
                             })}
                         </ol>
-
-
+                        <div className='image-container'>
+                            <img src={recipe.image} alt={recipe.label}></img>
+                        </div>
                         <div className='top-section'>
 
                             <div className="quickInfo">
@@ -120,11 +164,8 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                                 <div className='yield'>Per {recipe.yield} Serving Size</div>
 
                                 <div className='recipe-information'>
-                                    <div>
+                                    <div className="breakdown">
                                         <ul>
-                                            {/* <li className = 'carbs'>{recipe.totalNutrients.CHOCDF.label}</li>
-            <li className = 'protein'>{recipe.totalNutrients.PROCNT.label}</li>
-            <li className = 'fats'>{recipe.totalNutrients.FAT.label}</li> */}
                                             <li className='carbs'>Carbs</li>
                                             <div>{carbs} {unitCarb}</div>
                                         </ul>
@@ -137,6 +178,9 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                                             <div>{fat} {unitFat}</div>
                                         </ul>
                                     </div>
+                                    <div className="chart">
+                                        <canvas ref={doughnutChartRef}></canvas>
+                                    </div>
                                     <div className='calory-section'><FaFire />{cals} cals</div>
                                 </div>
 
@@ -145,11 +189,6 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                                         return <p key={index}>{label}</p>
                                     })}
                                 </div> */}
-                            </div>
-
-
-                            <div className='image-container'>
-                                <img src={recipe.image} alt={recipe.label}></img>
                             </div>
 
                         </div>

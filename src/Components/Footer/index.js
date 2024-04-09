@@ -10,7 +10,7 @@ export default function Footer() {
                     <div>Recipe Scout</div>
                 </span>
                 <span className="gap">
-                    <img src="https://www.edamam.com/assets/img/small-logo.png"></img>
+                    <img src="https://www.edamam.com/assets/img/small-logo.png" alt="Edmam API Logo"></img>
                     <div>Powered by Edamam API</div>
                 </span>
             </div>
