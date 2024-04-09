@@ -16,6 +16,13 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
     const [dietLabels, setDietLabels] = useState([])
     const [totalNutrients, setTotalNutrients] = useState([])
     const [recipe, setRecipe] = useState([])
+    const [carbs, setCarbs] = useState('')
+    const [protein, setProtein] = useState('')
+    const [fat, setFat] = useState('')
+    const [unitCarb, setUnitCarb] = useState('')
+    const [unitProtein, setUnitProtein] = useState('')
+    const [unitFat, setUnitFat] = useState('')
+
     const [cals, setCals] = useState('')
 
     useEffect(() => {
@@ -30,8 +37,15 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                     setIngredients(first.recipe.ingredientLines)
                     setHealthLabels(first.recipe.healthLabels)
                     setDietLabels(first.recipe.dietLabels)
-                    setTotalNutrients(first.recipe.totalNutrients);
+                    setTotalNutrients(first.recipe.totalNutrients)
                     setCals(first.recipe.calories.toFixed(0))
+                    setCarbs(first.recipe.totalNutrients.CHOCDF.quantity.toFixed(0))
+                    setProtein(first.recipe.totalNutrients.PROCNT.quantity.toFixed(0))
+                    setFat(first.recipe.totalNutrients.FAT.quantity.toFixed(0))
+                    setUnitCarb(first.recipe.totalNutrients.CHOCDE.unit)
+                    setUnitProtein(first.recipe.totalNutrients.PROCNT.unit)
+                    setUnitFat(first.recipe.totalNutrients.FAT.unit)
+
 
                 }).catch(error => {
                     console.log('Error retrieving recipe data: ', error)
@@ -39,7 +53,6 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
 
         }
     }, [])
-
 
     return (
         <>
@@ -65,11 +78,11 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
 
                         <div className='medium-heading'>Ingredients</div>
 
-                        <ul>
+                        <ol>
                             {ingredients.map((ingredient, index) => {
                                 return <li key={index}>{ingredient}</li>
                             })}
-                        </ul>
+                        </ol>
 
 
                         <div className='top-section'>
@@ -86,16 +99,16 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                                             {/* <li className = 'carbs'>{recipe.totalNutrients.CHOCDF.label}</li>
             <li className = 'protein'>{recipe.totalNutrients.PROCNT.label}</li>
             <li className = 'fats'>{recipe.totalNutrients.FAT.label}</li> */}
-                                            <li className='carbs'>Carb</li>
-                                            <div>9.5 g</div>
+                                            <li className='carbs'>Carbs</li>
+                                            <div>{carbs} {unitCarb}</div>
                                         </ul>
                                         <ul>
                                             <li className='protein'>Protein</li>
-                                            <div>25 g</div>
+                                            <div>{protein} {unitProtein}</div>
                                         </ul>
                                         <ul>
                                             <li className='fats'>Fat</li>
-                                            <div>49.5 g</div>
+                                            <div>{fat} {unitFat}</div>
                                         </ul>
                                     </div>
                                     <div className='calory-section'><FaFire />{cals} cals</div>
