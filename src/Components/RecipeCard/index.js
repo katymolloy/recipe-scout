@@ -48,7 +48,7 @@ export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isC
                     {recipe.calories.toFixed(0)} Calories
                 </div>
                 <div>
-                    {recipe.yield} Servings
+                    {recipe.yield.toFixed(0)} Servings
                 </div>
             </div>
 
