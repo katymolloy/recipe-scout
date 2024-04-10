@@ -27,8 +27,9 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
     const [unitFat, setUnitFat] = useState('')
 
     /* Health Labels */
-    const [fixedHealthLabels, setFixedHealthLabel] = useState(['Gluten-Free', 'Egg-Free', 'Peanut-Free', 'Pork-Free', 'Alcohol-Free', 'Sugar-Conscious']);
+    const [fixedHealthLabels, setFixedHealthLabel] = useState(['Gluten-Free', 'Egg-Free', 'Peanut-Free', 'Pork-Free', 'Alcohol-Free', 'Sugar-Conscious', 'Vegan', 'Vegetarian', 'Pescatarian']);
     const [hasSameLabels, setHasSameLabels] = useState(false);
+    const hasSameHealthLabels = healthLabels.filter(label => fixedHealthLabels.includes(label));
 
     /* Calories */
     const [cals, setCals] = useState('')
@@ -69,6 +70,8 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
         }
     }, [])
 
+
+    /* Nutrient Chart */
     useEffect(() => {
         if (totalNutrients.length === 0) return;
 
@@ -112,11 +115,13 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
             options: options
         });
     }, [carbs, protein, fat, totalNutrients]);
+
+
     /* useEffect for the health labels */
     useEffect(() => {
 
         // Checks to see if any of the healthLabels relate to the fixedHealthLabels array
-        const hasSameHealthLabels = fixedHealthLabels.some(label => healthLabels.includes(label));
+        //const hasSameHealthLabels = fixedHealthLabels.some(label => healthLabels.includes(label));
 
         if (hasSameHealthLabels) {
             setHasSameLabels(true);
@@ -195,7 +200,7 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
 
 
                         <ul>
-                            {healthLabels.map((label, index) => {
+                            {hasSameHealthLabels.map((label, index) => {
                                 return <li key={index}>{label}</li>
                             })}
                         </ul>
@@ -206,31 +211,21 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                             {/* Replace all the stuff below with the database logic */}
                             <div className='recipe-steps-heading'>
                                 <div className='medium-heading'>Health Labels</div>
-                                <div className='step-counter'>5 steps</div>
                             </div>
 
+                            {hasSameLabels && (
 
+                                <div className = 'label-container'>
+                                    {hasSameHealthLabels.map((label, index) => {
 
-                            <h2>Step 1</h2>
+                                        <div className = 'label-card'>
+                                            
+                                        </div>
 
-                            <div className='steps-description'>
-                                Heat the olive oil in a skillet over medium heat. Add the ground beef. Season with 1/4 tsp of salt
-                                and cook for about 8-10 minutes, stirring occassionally. Drain the meat and set it aside.
-                            </div>
+                                    })}
+                                </div>
 
-                            <h2>Step 2</h2>
-
-                            <div className='steps-description'>
-                                Heat the olive oil in a skillet over medium heat. Add the ground beef. Season with 1/4 tsp of salt
-                                and cook for about 8-10 minutes, stirring occassionally. Drain the meat and set it aside.
-                            </div>
-
-                            <h2>Step 3</h2>
-
-                            <div className='steps-description'>
-                                Heat the olive oil in a skillet over medium heat. Add the ground beef. Season with 1/4 tsp of salt
-                                and cook for about 8-10 minutes, stirring occassionally. Drain the meat and set it aside.
-                            </div>
+                            )}
 
                         </div>
 

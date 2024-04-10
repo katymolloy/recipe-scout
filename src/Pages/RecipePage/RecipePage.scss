@@ -181,4 +181,23 @@
 
     }
 
+
+
+    /* Health Labels */
+
+    .label-container {
+
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .label-card {
+
+            width: calc(25% - 20px);
+            
+
+        }
+
+    }
+
 }
