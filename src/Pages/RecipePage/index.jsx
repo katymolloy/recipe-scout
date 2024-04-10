@@ -36,6 +36,9 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
     /* Calories */
     const [cals, setCals] = useState('')
 
+    /* Appropriate Icons */
+    const labelIcons = [];
+
     const doughnutChartRef = useRef(null);
 
     useEffect(() => {
@@ -188,7 +191,7 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                                     <div className="chart">
                                         <canvas ref={doughnutChartRef}></canvas>
                                     </div>
-                                    <div className='calory-section'><FaFire />{cals} cals</div>
+                                    <div className='calory-section'><FaFire />{cals / recipe.yield} cals</div>
                                 </div>
 
                                 {/* <div>
