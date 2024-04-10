@@ -5,6 +5,8 @@ import { useEffect, useState, useRef } from "react";
 import { viewRecipe } from "../../Utilities/api";
 import { FaFire } from "react-icons/fa6";
 import { FaRegClock } from "react-icons/fa";
+import { MdOutlineHealthAndSafety } from "react-icons/md";
+import { CiGlobe } from "react-icons/ci";
 import Chart from 'chart.js/auto';
 
 import "./RecipePage.scss";
@@ -199,28 +201,26 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                         </div>
 
 
-                        <ul>
-                            {hasSameHealthLabels.map((label, index) => {
-                                return <li key={index}>{label}</li>
-                            })}
-                        </ul>
-
-
-                        <div className='recipe-steps'>
+                        <div className='health-labels'>
 
                             {/* Replace all the stuff below with the database logic */}
-                            <div className='recipe-steps-heading'>
-                                <div className='medium-heading'>Health Labels</div>
-                            </div>
+                            <div className='medium-heading label-heading'>Health Labels</div>
 
                             {hasSameLabels && (
 
-                                <div className = 'label-container'>
+                                <div className='label-container'>
                                     {hasSameHealthLabels.map((label, index) => {
 
-                                        <div className = 'label-card'>
-                                            
-                                        </div>
+                                        return (
+                                            <div className='label-card'>
+
+                                                <MdOutlineHealthAndSafety />
+
+                                                <h2 key={index}>{label}</h2>
+                                                {console.log(label)}
+
+                                            </div>
+                                        );
 
                                     })}
                                 </div>
@@ -230,8 +230,8 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                         </div>
 
 
-                        <div className="recipeLink">
-                            <a href={recipe.url}> Grab the recipe here!</a>
+                        <div className = 'recipe-link'>
+                            <a href={recipe.url}> Grab the recipe here! <CiGlobe /></a>
                         </div>
 
                     </div>

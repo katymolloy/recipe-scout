@@ -32,7 +32,7 @@
         margin-top: 1rem;
         text-transform: uppercase;
         font-weight: bold;
-        text-decoration: underline;
+        //text-decoration: underline;
         font-size: 2rem;
     }
 
@@ -152,50 +152,72 @@
     }
 
 
-    .recipe-steps {
+
+    /* Health Labels */
+    .health-labels {
 
         width: 100%;
 
-        .recipe-steps-heading {
-            display: flex;
-            justify-content: space-between;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-
-            .step-counter {
-                margin-top: 1rem;
-                font-weight: bold;
-                color: rgb(181, 181, 181);
-                font-size: 2rem;
-            }
+        .label-heading {
+            margin: 20px 0;
         }
 
-        .steps-description {
+        .label-container {
 
-            font-size: 1rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 3px solid rgb(181, 181, 181, 0.5);
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            .label-card {
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 10px 5px;
+                border-radius: 10px;
+                box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+
+                width: calc(25% - 20px);
+
+                svg {
+                    display: block;
+                    font-size: 2rem;
+                }
+
+                h2 {
+                    color: black;
+                }
+
+
+            }
 
         }
 
     }
 
 
+    /* Grab the Recipe */
+    .recipe-link {
 
-    /* Health Labels */
+        margin-top: 20px;
 
-    .label-container {
+        a {
+            color: #09b561;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: .3s;
 
-        width: 100%;
-        display: flex;
-        flex-direction: column;
+            svg {
+                font-size: 1.5rem;
+                padding: 0;
+                margin: 0;
+            }
 
-        .label-card {
-
-            width: calc(25% - 20px);
-            
-
+            &:hover {
+                color: #066c3b;
+            }
         }
 
     }
