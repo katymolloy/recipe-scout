@@ -51,7 +51,7 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, add
             <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
             <div className="recipeResultContainer">
                 <div className="itemHero">
-                    <Link to={'/'}>Back</Link>
+                    <Link to={'/'}><IoMdArrowRoundBack /></Link>
                     <h1>{searchItem} Recipes</h1>
                 </div>
                 <div className="cardContainer">

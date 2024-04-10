@@ -18,7 +18,16 @@
         align-items: center;
         justify-content: center;
 
+        svg {
+
+            padding-top: 10px;
+            margin: 0;
+            font-size: 2rem;
+            color: #fff;
+        }
+
         h1 {
+            margin-left: 10px;
             color: #fff;
             text-transform: capitalize;
             font-size: 3rem;
