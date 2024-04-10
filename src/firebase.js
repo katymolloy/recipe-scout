@@ -25,12 +25,12 @@ export const getFirestoreInstance = () => {
 
 // All Firestore functions below
 /**
- * 
- * @param {*} db 
- * @param {*} currentUser 
- * @param {*} setName 
- * @param {*} setSavedRecipes 
- * @param {*} savedRecipes 
+ * returns all user data, including their saved recipes
+ * @param {function} db 
+ * @param {string} currentUser 
+ * @param {string} setName 
+ * @param {array} setSavedRecipes 
+ * @param {array} savedRecipes 
  */
 export const getUserData = async (db, currentUser, setName, setSavedRecipes) => {
     const docRef = doc(db, 'users', currentUser)
@@ -45,25 +45,15 @@ export const getUserData = async (db, currentUser, setName, setSavedRecipes) => 
     }
 }
 
+
+
+
 /**
- * 
- * 
+ * saves recipe URI to users collection in database
+ * @param {function} db 
+ * @param {string} uri 
+ * @param {string} currentUser  
  */
-
-export const getRecipes = async (db, food, setRecipes) => {
-    let docName = food + 'Widget'
-    const docRef = doc(db, 'recipes', docName)
-    const docSnap = await getDoc(docRef)
-    if (docSnap.exists()) {
-        setRecipes(docSnap.data().recipes)
-        return;
-    } else {
-        console.log('Error retrieving widget data from db');
-        return;
-    }
-}
-
-
 export const saveRecipe = async (db, uri, currentUser) => {
     const docRef = doc(db, 'users', currentUser);
     const docSnap = await getDoc(docRef)
@@ -95,7 +85,13 @@ export const saveRecipe = async (db, uri, currentUser) => {
 }
 
 
-
+/**
+ * removes a recipe from user's collection 
+ * @param {function} db 
+ * @param {string} currentUser 
+ * @param {string} uri 
+ * @returns updated recipes
+ */
 export const removeRecipe = async (db, currentUser, uri) => {
     const docRef = doc(db, 'users', currentUser);
     const docSnap = await getDoc(docRef)
@@ -112,7 +108,14 @@ export const removeRecipe = async (db, currentUser, uri) => {
 }
 
 
-
+/**
+ * 
+ * @param {function} db 
+ * @param {string} user 
+ * @param {string} email 
+ * @param {string} firstName 
+ * @param {string} lastName 
+ */
 export const writeToDatabase = async (db, user, email, firstName, lastName) => {
     await setDoc(doc(db, 'users', user), {
         email: email,
@@ -127,10 +130,17 @@ export const writeToDatabase = async (db, user, email, firstName, lastName) => {
 }
 
 
-
-
-
-// All Firebase Login/Register/Logout functions below
+//////////////////////// All Firebase Login/Register/Logout functions below
+/**
+ * function used to create a user account in firebase; writes to db as well as creates auth
+ * @param {function} db 
+ * @param {string} email 
+ * @param {string} password 
+ * @param {string} firstName 
+ * @param {string} lastName 
+ * @param {function} onRegister 
+ * @param {array} SetErrorMsg 
+ */
 export const newUser = (db, email, password, firstName, lastName, onRegister, SetErrorMsg) => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
@@ -156,6 +166,13 @@ export const newUser = (db, email, password, firstName, lastName, onRegister, Se
 }
 
 
+/**
+ * function used to sign in users
+ * @param {string} email 
+ * @param {string} password 
+ * @param {function} onLogin 
+ * @param {array} SetErrorMsg 
+ */
 export const signInUser = (email, password, onLogin, SetErrorMsg) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)

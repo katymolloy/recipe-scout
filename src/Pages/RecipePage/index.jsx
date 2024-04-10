@@ -174,15 +174,15 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                                     <div className="breakdown">
                                         <ul>
                                             <li className='carbs'>Carbs</li>
-                                            <div>{carbs} {unitCarb}</div>
+                                            <div>{carbs} grams</div>
                                         </ul>
                                         <ul>
                                             <li className='protein'>Protein</li>
-                                            <div>{protein} {unitProtein}</div>
+                                            <div>{protein} grams</div>
                                         </ul>
                                         <ul>
                                             <li className='fats'>Fat</li>
-                                            <div>{fat} {unitFat}</div>
+                                            <div>{fat} grams</div>
                                         </ul>
                                     </div>
                                     <div className="chart">
@@ -204,7 +204,7 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                         <div className='health-labels'>
 
                             {/* Replace all the stuff below with the database logic */}
-                            <div className='medium-heading label-heading'>Health Labels</div>
+                            <div className='medium-heading label-heading'>Diets</div>
 
                             {hasSameLabels && (
 
@@ -216,7 +216,7 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
 
                                                 <MdOutlineHealthAndSafety />
 
-                                                <h2 key={index}>{label}</h2>
+                                                <h2 key={index} className="dietLabel">{label}</h2>
                                                 {console.log(label)}
 
                                             </div>
