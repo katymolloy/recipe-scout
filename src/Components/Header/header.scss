@@ -2,42 +2,42 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: #fff;
     transition: .4s;
-    height: 80px;
-    padding-top: 20px;
+    height: 70px;
     z-index: 999;
 
     .logolink {
+        margin-left: 50px;
         display: flex;
         align-items: center;
-        margin-left: 100px;
         color: #fff;
         text-decoration: none;
 
-        .iconbg {
+        .logo {
+            width: 28px;
+            height: 100%;
             margin-right: 10px;
-            background-color: #fff;
-            padding: 5px 9px;
-            border-radius: 50px;
-            border: none;
         }
 
-        .logo {
-            width: 25px;
-            height: 100%;
-
+        .appName {
+            font-size: 2rem;
+            font-weight: bold;
         }
     }
 
     nav {
+        margin-right: 50px;
+        display: flex;
+        align-items: center;
+
         ul {
             list-style-type: none;
             display: flex;
-            gap: 1em;
             margin: 0;
 
             li {
@@ -45,6 +45,7 @@ header {
                     color: #fff;
                     text-decoration: none;
                     padding: 4px 0;
+                    margin: 0 10px;
                     transition: .3s;
                     font-weight: bold;
                     font-size: 1.2rem;
@@ -52,54 +53,61 @@ header {
                     &:hover {
                         border-bottom: 2px solid #fff;
                         padding-bottom: 2px;
+                    }
+                }
+
+                .cta {
+                    background-color: #fff;
+                    color: #09b561;
+                    padding: 5px 20px;
+                    transition: .3s;
+                    border-radius: 20px;
+
+                    &:hover {
+                        padding-bottom: 5px;
+                        border: none;
+                        background-color: #eee;
                     }
                 }
             }
         }
     }
 
+}
+
+.hamburger {
+    display: none;
+
+    .burger {
+        display: none;
+    }
+}
 
 
-    .login-reg {
-        margin-right: 100px;
 
-        ul {
-            list-style-type: none;
+@media (max-width: 1000px) {
+
+    header {
+        .hamburger {
             display: flex;
-            gap: 1em;
-            margin: 0;
 
-            li {
-                a.link {
-                    color: #fff;
-                    text-decoration: none;
-                    padding: 4px 0;
-                    transition: .3s;
-                    font-weight: bold;
-                    font-size: 1.2rem;
+            .burger {
+                display: flex;
+            }
+        }
 
-                    &:hover {
-                        border-bottom: 2px solid #fff;
-                        padding-bottom: 2px;
-                    }
-                }
-
-                a.cta {
-                    background-color: #fff;
-                    color: #09b561;
-                    padding: 8px 24px;
-                    text-decoration: none;
-                    font-weight: bold;
-                    font-size: 1.2rem;
-                    transition: .3s;
-                    border-radius: 50px;
-
-                    &:hover {
-                        background-color: #eaeaea;
+        nav {
+            ul {
+                li {
+                    .cta {
+                        background-color: transparent;
+                        color: #fff;
+                        padding: 0;
                     }
                 }
             }
         }
+
     }
 }
 
@@ -107,7 +115,6 @@ header {
     background-color: #09b561;
     background-image: url(../../../public/images/blob-scene-haikei.png);
     background-repeat: no-repeat;
-    /* Do not repeat the image */
     background-size: cover;
-    padding-top: 0;
+    padding: 0px;
 }
