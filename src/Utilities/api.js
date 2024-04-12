@@ -38,13 +38,26 @@ export const viewRecipe = (uri) => {
 }
 
 
+/**
+ * gets next page of recipes when filtering by diet
+ * @param {string} link 
+ * @returns recipe data for next page of results
+ */
+export const getNextPage = (link) => {
+    return axios.get(link)
+    .then(response =>{
+        return response.data;
+    }).catch(error =>{
+        console.log('Error retrieving next page of recipes: ', error)
+    })
+}
 
-export const getRecipeByDiet = (diet, pagination, add) => {
+
+
+export const getRecipeByDiet = (diet) => {
     return instance.get('/api/recipes/v2', {
         params: {
             health: diet,
-            from: pagination,
-            to: (pagination + add),
             type: 'public',
         }
     })
