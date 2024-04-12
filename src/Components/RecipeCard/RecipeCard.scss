@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .recipeCard {
 
     margin: 10px 5px;
@@ -88,4 +90,50 @@
         }
 
     }
+}
+
+
+@media (max-width: 1000px) {
+
+    .recipeCard {
+
+        .recipeInfo {
+            display: block;
+            //justify-content: space-between;
+            padding: 10px;
+            color: #888;
+    
+            div {
+                display: block;
+                // align-items: center;
+                // justify-content: center;
+                text-transform: capitalize;
+    
+                svg {
+                    // margin-right: 3px;
+                }
+            }
+    
+        }
+
+    }
+
+}
+
+
+@media(max-width: 700px) {
+
+    // .recipeCard {
+    //     width: 20%;
+    // }
+
+}
+
+
+@media (max-width: 400px) {
+
+    .recipeCard {
+        width: 100%;
+    }
+
 }
