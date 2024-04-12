@@ -15,36 +15,40 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
     const [nextPage, setNextPage] = useState([])
     const [limit, setLimit] = useState(false)
 
+    // initially uses getRecipeByDiet function and provides the diet to search for
     useEffect(() => {
         getRecipeByDiet(searchItem)
             .then(data => {
                 setRecipes(data.hits)
+                // the next page link is stored in an array for pagination
                 let pageArray = [data._links.next.href]
                 setNextPage(pageArray);
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
             })
+        // will update when the search item is changed
     }, [searchItem])
 
     useEffect(() => {
         console.log(nextPage)
     }, [nextPage])
 
+
+    // function to execute when user clicks next
     const nextPageHandler = () => {
+        // first data is retrieved from endpoint
         getNextPage(nextPage)
             .then(data => {
-                console.log(data)
+                // if the data is undefined, the 'next' button is blocked out
                 if (data === undefined) {
                     setLimit(true);
                     return;
                 } else {
+                    // if data is not defined, the recipes are set and the next page is stored in state
                     setRecipes(data.hits)
                     let pageArray = [...nextPage, data._links.next.href]
                     setNextPage(pageArray);
                 }
-
-
-
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
             })
@@ -52,13 +56,16 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
 
 
     const backPageHandler = () => {
+        // to go back, the state is copied, and the item at the last index is removed
         let lastPage = [...nextPage]
-        lastPage.splice(lastPage.length -1, 1);
+        lastPage.splice(lastPage.length - 1, 1);
+        // state is then updated
         setNextPage(lastPage)
-    
+        // api is then called based on the new last item in array
         getNextPage(nextPage[nextPage.length - 1])
             .then(data => {
                 setRecipes(data.hits)
+                // the next page is added to state
                 let pageArray = [...nextPage, data._links.next.href]
                 setNextPage(pageArray);
             }).catch(error => {
