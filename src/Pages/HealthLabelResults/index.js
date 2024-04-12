@@ -19,14 +19,16 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
         getRecipeByDiet(searchItem)
             .then(data => {
                 setRecipes(data.hits)
-                let pageArray = []
-                pageArray.push(data._links.next.href)
-                setNextPage(pageArray[0]);
+                let pageArray = [data._links.next.href]
+                setNextPage(pageArray);
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
             })
     }, [searchItem])
 
+    useEffect(() => {
+        console.log(nextPage)
+    }, [nextPage])
 
     const nextPageHandler = () => {
         getNextPage(nextPage)
@@ -35,14 +37,13 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
                 if (data === undefined) {
                     setLimit(true);
                     return;
-                }else{
+                } else {
                     setRecipes(data.hits)
-                    let pageArray = [...nextPage]
-                    pageArray.push(data._links.next.href)
+                    let pageArray = [...nextPage, data._links.next.href]
                     setNextPage(pageArray);
                 }
 
-               
+
 
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
@@ -51,13 +52,14 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
 
 
     const backPageHandler = () => {
-        let previousPage = nextPage.splice(nextPage.length - 1, 1)
-        setNextPage(previousPage)
+        let lastPage = [...nextPage]
+        lastPage.splice(lastPage.length -1, 1);
+        setNextPage(lastPage)
+    
         getNextPage(nextPage[nextPage.length - 1])
             .then(data => {
                 setRecipes(data.hits)
-                let pageArray = [...nextPage]
-                pageArray.push(data._links.next.href)
+                let pageArray = [...nextPage, data._links.next.href]
                 setNextPage(pageArray);
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
