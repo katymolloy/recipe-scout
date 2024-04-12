@@ -86,11 +86,50 @@
 
 @media(max-width: 800px) {
 
+    .hero {
+        .search-bar {
+    
+            input {
+                padding: 15px 20px 15px 10px;
+                width: 400px;
+            }
+
+        }
+    }
+
+
     .container {
 
         h2 {
             text-align: center;
         }
+
+    }
+
+}
+
+
+@media(max-width: 700px) {
+
+    .hero {
+        .search-bar {
+    
+            input {
+                padding: 15px 10px 15px 1px;
+                width: 300px;
+            }
+
+        }
+    }
+
+}
+
+
+@media(max-width: 580px) {
+
+    .hero {
+
+        /* Set the button on a new line, reduce the padding and the width */
 
     }
 
