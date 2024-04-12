@@ -48,6 +48,7 @@ export const getNextPage = (link) => {
     .then(response =>{
         return response.data;
     }).catch(error =>{
+      
         console.log('Error retrieving next page of recipes: ', error)
     })
 }

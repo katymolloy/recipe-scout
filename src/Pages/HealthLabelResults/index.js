@@ -12,7 +12,9 @@ import './recipeResults.scss'
 export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin }) {
     const { searchItem } = useParams();
     const [recipes, setRecipes] = useState([])
-    const [nextPage, setNextPage] = useState([])
+    const [paginationLink, setPaginationLink] = useState([])
+    // const [nextPage, setNextPage] = useState('')
+    // const [lastPage, setLastPage] = useState('')
     const [limit, setLimit] = useState(false)
 
     // initially uses getRecipeByDiet function and provides the diet to search for
@@ -20,24 +22,22 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
         getRecipeByDiet(searchItem)
             .then(data => {
                 setRecipes(data.hits)
-                // the next page link is stored in an array for pagination
-                let pageArray = [data._links.next.href]
-                setNextPage(pageArray);
+                // the next page link is stored in an array for pagination\
+                let nextPage = [data._links.next.href]
+                setPaginationLink(nextPage)
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
             })
         // will update when the search item is changed
     }, [searchItem])
 
-    useEffect(() => {
-        console.log('Last page: ', nextPage[nextPage.length -1])
-    }, [nextPage])
+
 
 
     // function to execute when user clicks next
     const nextPageHandler = () => {
         // first data is retrieved from endpoint
-        getNextPage(nextPage)
+        getNextPage(paginationLink[paginationLink.length - 1])
             .then(data => {
                 // if the data is undefined, the 'next' button is blocked out
                 if (data === undefined) {
@@ -46,32 +46,31 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
                 } else {
                     // if data is not defined, the recipes are set and the next page is stored in state
                     setRecipes(data.hits)
-                    let pageArray = [...nextPage, data._links.next.href]
-                    setNextPage(pageArray);
+                    let updatedPagination = [...paginationLink, data._links.next.href]
+                    setPaginationLink(updatedPagination)
+                    console.log('From next, updated pagination', paginationLink)
                 }
             }).catch(error => {
+                setLimit(true)
                 console.log('Error retrieving recipe data: ', error)
             })
     }
 
-
     const backPageHandler = () => {
-        // to go back, the state is copied, and the item at the last index is removed
-        let lastPage = [...nextPage]
-        lastPage.splice(lastPage.length - 1, 1);
-        // state is then updated
-        setNextPage(lastPage)
-        
-        // api is then called based on the new last item in array
-        getNextPage(nextPage[nextPage.length - 1])
+        let updatedPagination = [...paginationLink]
+        let newPagination = updatedPagination.slice(0, -1); // Removes the last link
+        setPaginationLink(newPagination);
+        console.log('From back, updated pagination', newPagination)
+
+        let link = newPagination[newPagination.length - 1];
+        getNextPage(link)
             .then(data => {
-                setRecipes(data.hits)
-                // the next page is added to state
-                let pageArray = [...nextPage, data._links.next.href]
-                setNextPage(pageArray);
+                setRecipes(data.hits);
+                let newPagination = [...paginationLink, data._links.next.href];
+                setPaginationLink(newPagination)
             }).catch(error => {
-                console.log('Error retrieving recipe data: ', error)
-            })
+                console.log('Error retrieving recipe data: ', error);
+            });
     }
 
     return (
