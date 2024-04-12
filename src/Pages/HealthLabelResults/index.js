@@ -13,6 +13,7 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
     const { searchItem } = useParams();
     const [recipes, setRecipes] = useState([])
     const [nextPage, setNextPage] = useState([])
+    const [limit, setLimit] = useState(false)
 
     useEffect(() => {
         getRecipeByDiet(searchItem)
@@ -30,11 +31,19 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
     const nextPageHandler = () => {
         getNextPage(nextPage)
             .then(data => {
-                setRecipes(data.hits)
-                let pageArray = [... nextPage]
-                pageArray.push(data._links.next.href)
-                setNextPage(pageArray);
-                console.log(nextPage)
+                console.log(data)
+                if (data === undefined) {
+                    setLimit(true);
+                    return;
+                }else{
+                    setRecipes(data.hits)
+                    let pageArray = [...nextPage]
+                    pageArray.push(data._links.next.href)
+                    setNextPage(pageArray);
+                }
+
+               
+
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
             })
@@ -47,7 +56,7 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
         getNextPage(nextPage[nextPage.length - 1])
             .then(data => {
                 setRecipes(data.hits)
-                let pageArray = [... nextPage]
+                let pageArray = [...nextPage]
                 pageArray.push(data._links.next.href)
                 setNextPage(pageArray);
             }).catch(error => {
@@ -71,7 +80,11 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
                 <div className="paginationContainer">
                     <ul>
                         <li onClick={backPageHandler}><IoMdArrowRoundBack />Back</li>
-                        <li onClick={nextPageHandler}>Next<IoMdArrowRoundForward /></li>
+                        {limit === true ?
+                            <li className="notActive">Next<IoMdArrowRoundForward /></li>
+                            :
+                            <li onClick={nextPageHandler}>Next<IoMdArrowRoundForward /></li>
+                        }
                     </ul>
                 </div>
             </div>
