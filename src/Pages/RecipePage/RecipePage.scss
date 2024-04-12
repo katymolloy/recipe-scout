@@ -182,16 +182,29 @@
 
                 h2 {
                     color: rgba(0, 0, 0, 0.5);
+                    transition: .3s;
+                    // &:hover {
+                    //     color: #222222
+                    // }
+                    &:hover {
+                        border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+                        padding-bottom: 2px;
+                    }
                 }
 
 
                 a {
-                    color: #09b561;
-                    transition: .3s;
+                    text-decoration: none;
+                    // transition: .3s;
+                    // &:hover {
+                    //     color: #222222
+                    // }
+                    // padding: 0;
 
-                    &:hover {
-                        color: #066c3b;
-                    }
+                    // &:hover {
+                    //     border-bottom: 2px solid #000000;
+                    //     padding-bottom: 2px;
+                    // }
                 }
                 /*
                 h2 {
