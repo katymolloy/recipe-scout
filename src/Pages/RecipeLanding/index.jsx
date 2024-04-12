@@ -12,17 +12,12 @@ export default function Landing({
   isLoggedIn,
   currentUser,
   changeLogin,
-  addApiCall,
 }) {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
 
   const searchHandler = (e) => {
     e.preventDefault();
-    // if (query.includes(" ") || query.includes(",")) {
-    //   let searchArr = query.split(" ");
-    //   console.log("contains multiple items", searchArr);
-    // }
     navigate(`/search/${query}`);
   };
 
@@ -54,7 +49,6 @@ export default function Landing({
           food={"chicken"}
           userLoggedIn={isLoggedIn}
           currentUser={currentUser}
-          addApiCall={addApiCall}
         />
 
         <h2>Delicious Desserts</h2>
@@ -62,7 +56,6 @@ export default function Landing({
           food={"dessert"}
           userLoggedIn={isLoggedIn}
           currentUser={currentUser}
-          addApiCall={addApiCall}
         />
         <CTA />
         <h2>Fresh Salad Ideas</h2>
@@ -70,7 +63,6 @@ export default function Landing({
           food={"salad"}
           userLoggedIn={isLoggedIn}
           currentUser={currentUser}
-          addApiCall={addApiCall}
         />
       </div>
       <Footer />

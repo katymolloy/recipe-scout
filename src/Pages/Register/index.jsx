@@ -75,7 +75,7 @@ export default function Register({ onRegister }) {
                 </Link>
                 <img src="/images/recipelogo.png" className="logo" alt="Recipe Scout Logo"></img>
                 <h1 className="title">Create An Account</h1>
-                <p className="sub">Lets get you Started</p>
+                <p className="sub">Lets Get You Started</p>
                 <form className="registerPage">
 
                     {errorMsg.length > 0 && (

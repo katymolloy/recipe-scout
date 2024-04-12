@@ -14,6 +14,7 @@ export default function LoginPage({ onLogin }) {
     e.preventDefault();
 
     signInUser(email, password, onLogin, SetErrorMsg);
+    // once user is successfully logged in, they're redirected to the cookbook page
     navigate("/cookbook");
   };
 
@@ -23,7 +24,11 @@ export default function LoginPage({ onLogin }) {
         <Link to={"/"} className="backLink">
           <IoArrowBack />
         </Link>
-        <img src="/images/recipelogo.png" className="logo" alt="Recipe Scout Logo"></img>
+        <img
+          src="/images/recipelogo.png"
+          className="logo"
+          alt="Recipe Scout Logo"
+        ></img>
         <h1 className="title">Welcome Back</h1>
         <p className="sub">Please Sign In to get Started</p>
         <form className="loginForm">
@@ -55,6 +60,7 @@ export default function LoginPage({ onLogin }) {
             Login
           </button>
 
+          {/* cta added if users do not have an account */}
           <p className="sub">
             Don't have an account? <Link to={"/register"}>Sign up here!</Link>
           </p>

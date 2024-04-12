@@ -13,43 +13,23 @@ import { useEffect, useState } from 'react';
 function App() {
   const [authenticated, setAuthenticated] = useState(false)
   const [userId, setUserId] = useState('');
-  const [apiCalls, setApiCalls] = useState(0)
 
-  useEffect(() => {
-    console.log(apiCalls)
-    const intervalId = setInterval(() => {
-      console.log('api call reset')
-        setApiCalls(0); // Reset API call count to 0 every minute
-    }, 60000); 
-    return () => clearInterval(intervalId);
-}, []);
 
+  // function to manage if the user is logged in, as well as store their uid
   const setLoggedIn = (state, user) => {
     setAuthenticated(state);
     setUserId(user)
   }
-
-  const increaseCallNum = (num) => {
-    if (apiCalls >= 10) {
-      setApiCalls(0)
-      return false;
-    } if (apiCalls < 10) {
-      setApiCalls(prevCount => prevCount + num);
-      return true;
-    }
-  }
-
-
 
 
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path='/' element={<Landing isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId} addApiCall={increaseCallNum} />} />
-          <Route path='/recipe/:uri' element={<RecipePage isLoggedIn={authenticated} changeLogin={setLoggedIn} addApiCall={increaseCallNum} />} />
-          <Route path='/search/:searchItem' element={<RecipeResult isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId} addApiCall={increaseCallNum} />} />
-          <Route path='/cookbook' element={<Cookbook isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId} addApiCall={increaseCallNum} />} />
+          <Route path='/' element={<Landing isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId}  />} />
+          <Route path='/recipe/:uri' element={<RecipePage isLoggedIn={authenticated} changeLogin={setLoggedIn}  />} />
+          <Route path='/search/:searchItem' element={<RecipeResult isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId}  />} />
+          <Route path='/cookbook' element={<Cookbook isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId}  />} />
           <Route path='/login' element={<Login onLogin={setLoggedIn} />} />
           <Route path='/register' element={<Register onRegister={setLoggedIn} />} />
           <Route path='*' element={<NotFound />} />

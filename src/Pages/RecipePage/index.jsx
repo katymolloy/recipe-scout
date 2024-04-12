@@ -11,7 +11,7 @@ import Chart from 'chart.js/auto';
 
 import "./RecipePage.scss";
 
-export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
+export default function RecipePage({ isLoggedIn, changeLogin }) {
 
     const { uri } = useParams();
     const [ingredients, setIngredients] = useState([])
@@ -47,8 +47,6 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
             viewRecipe(uri)
                 .then(data => {
                     const first = data.hits[0]
-                    addApiCall(1)
-                    console.log(first.recipe)
                     setRecipe(first.recipe)
 
                     setIngredients(first.recipe.ingredientLines)
@@ -65,8 +63,6 @@ export default function RecipePage({ isLoggedIn, changeLogin, addApiCall }) {
                     setUnitCarb(first.recipe.totalNutrients.CHOCDE.unit)
                     setUnitProtein(first.recipe.totalNutrients.PROCNT.unit)
                     setUnitFat(first.recipe.totalNutrients.FAT.unit)
-
-                    //setDairy(first.recipe.healthLabels.)
 
                 }).catch(error => {
                     console.log('Error retrieving recipe data: ', error)

@@ -14,6 +14,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
     const [isCookbook, setIsCookbook] = useState(true)
     const db = getFirestoreInstance();
 
+   
     useEffect(() => {
         if (isLoggedIn === true) {
             getUserData(db, currentUser, setName, setSavedRecipes, savedRecipes);
@@ -28,32 +29,18 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
         if (savedRecipes.length === 0) {
             return;
         }
-        let currCount = addApiCall(savedRecipes.length)
-        if (currCount === true) {
-            getRecipes();
-            return;
-        } else {
-            clearTimeout(apiTimeout)
-            addApiCall(1)
-            let apiTimeout = setTimeout(getRecipes, 20000);
-        }
 
-    }, [name])
-
-
-
-    const getRecipes = () => {
         let promises = savedRecipes.map((recipe) => viewRecipe(recipe));
         Promise.all(promises)
             .then((data) => {
                 let recipeData = data.map((data) => data.hits[0].recipe)
-                setRecipes(recipeData);
-                return;
+                setRecipes(recipeData)
             }).catch((error) => {
-                console.log('Error retrieving user recipes: ', error);
-                return;
+                console.log('Error retrieving user recipes: ', error)
             })
-    }
+
+    }, [name])
+
 
     // function to update recipe state; will remove deleted recipes
     const updateRecipes = (newRecipes) => {
@@ -67,11 +54,9 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
             setRecipes(newArray)
             return;
         }).catch((error) => {
-            console.log('Error updating user recipes: ', error);
-            return;
+            console.log('Error updating user recipes: ', error)
         })
     }
-
 
     return (
         <>
@@ -92,6 +77,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
                                 }
                             </div>
                             :
+                            // if users have no recipes they will be prompted to search
                             <div className="noRecipeCta">
                                 <p>It doesn't look like you have any saved recipes yet</p>
                                 <Link to={'/'}>Check out the explore page for fresh ideas!</Link>
@@ -99,6 +85,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
                         }
                     </>
                     :
+                    // will display if authenticated state is false
                     <div className="hero register">
                         <h3>Not yet a Recipe Scout user? <br></br>Sign up to Save Your Favourite Recipes</h3>
                         <div className="pleaseRegister">

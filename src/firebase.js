@@ -17,13 +17,14 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-// Export a function that returns the Firestore instance after Firebase is initialized
+// function that returns the Firestore instance after Firebase is initialized
 export const getFirestoreInstance = () => {
     return getFirestore(app);
 };
 
 
-// All Firestore functions below
+
+//////////////////////////////////////////////////////////////////// All Firestore functions below
 /**
  * returns all user data, including their saved recipes
  * @param {function} db 
@@ -44,7 +45,6 @@ export const getUserData = async (db, currentUser, setName, setSavedRecipes) => 
         return;
     }
 }
-
 
 
 
@@ -85,6 +85,7 @@ export const saveRecipe = async (db, uri, currentUser) => {
 }
 
 
+
 /**
  * removes a recipe from user's collection 
  * @param {function} db 
@@ -108,8 +109,9 @@ export const removeRecipe = async (db, currentUser, uri) => {
 }
 
 
+
 /**
- * 
+ * writes user data to db on register
  * @param {function} db 
  * @param {string} user 
  * @param {string} email 
@@ -130,7 +132,7 @@ export const writeToDatabase = async (db, user, email, firstName, lastName) => {
 }
 
 
-//////////////////////// All Firebase Login/Register/Logout functions below
+////////////////////////////////////////////////////////////////////  All Firebase Login/Register/Logout functions below
 /**
  * function used to create a user account in firebase; writes to db as well as creates auth
  * @param {function} db 
@@ -152,6 +154,7 @@ export const newUser = (db, email, password, firstName, lastName, onRegister, Se
         .catch((error) => {
             let errArray = []
             if (error.code === 'auth/email-already-in-use') {
+                // if the email already exists, they're prompted to login instead
                 errArray.push(<>
                     Email is already in use. Would you like to{' '}
                     <Link to="/login">sign in instead?</Link>
@@ -164,6 +167,7 @@ export const newUser = (db, email, password, firstName, lastName, onRegister, Se
             console.log(`Error registering user: ${error.code}`);
         })
 }
+
 
 
 /**
@@ -193,6 +197,11 @@ export const signInUser = (email, password, onLogin, SetErrorMsg) => {
         });
 }
 
+
+
+/**
+ * used to sign users out
+ */
 export const signOutUser = () => {
     const auth = getAuth();
     signOut(auth).then(() => {

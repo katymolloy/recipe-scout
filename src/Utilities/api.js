@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+
+// axios instance including our api credentials
 const instance = axios.create({
     baseURL: 'https://api.edamam.com',
     timeout: 5000,
@@ -15,10 +17,12 @@ const instance = axios.create({
 // id : d521788b
 
 
-// katy credentials
-// key : c5651d467486b3320642ff5762e7442c
-// id : adae4dea
 
+/**
+ * gets recipe data based on the uri provided
+ * @param {string} uri 
+ * @returns recipe data for that URI
+ */
 export const viewRecipe = (uri) => {
     return instance.get('/api/recipes/v2/by-uri', {
         params: {
@@ -35,6 +39,14 @@ export const viewRecipe = (uri) => {
 }
 
 
+
+/**
+ * provides search results from api using queries
+ * @param {string} search 
+ * @param {number} pagination 
+ * @param {number} add 
+ * @returns search data based on query and number of results needed
+ */
 export const getSearchResults = (search, pagination, add) => {
     return instance.get('/search', {
         params: {

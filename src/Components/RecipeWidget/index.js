@@ -5,22 +5,16 @@ import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { getSearchResults } from "../../Utilities/api";
 
-export default function Widget({ food, userLoggedIn, currentUser, addApiCall }) {
+export default function Widget({ food, userLoggedIn, currentUser }) {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
-        let currCount = addApiCall(1)
-        if (currCount === true) {
-            getWidgetData()
-        } else {
-            clearTimeout(apiTimeout)
-            addApiCall(1)
-            let apiTimeout = setTimeout(getWidgetData, 20000);
-        }
+        getWidgetData()
     }, [food]);
 
 
     const getWidgetData = () => {
+        // provides 8 recipes with the food prop provided
         let pagination = 12
         getSearchResults(food, pagination, 8)
             .then((data) => {

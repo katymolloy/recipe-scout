@@ -9,7 +9,7 @@ import { IoMdArrowRoundForward } from "react-icons/io";
 
 import './recipeResults.scss'
 
-export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, addApiCall }) {
+export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
     const { searchItem } = useParams();
     const [recipes, setRecipes] = useState([])
     const [pagination, setPagination] = useState(1);
@@ -18,17 +18,15 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, add
     useEffect(() => {
         getSearchResults(searchItem, pagination, 28)
             .then(data => {
-                addApiCall(1)
-                console.log(data)
                 setRecipes(data.hits)
                 setResultCount(data.count)
-
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
             })
     }, [searchItem, pagination])
 
 
+    // pagination functions below
     const increasePageNum = () => {
         let newPage = pagination + 28;
         setPagination(newPage)
@@ -43,7 +41,6 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin, add
         } else {
             return;
         }
-
     }
 
     return (
