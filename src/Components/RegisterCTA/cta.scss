@@ -45,3 +45,37 @@
   }
 
 }
+
+
+@media(max-width: 810px) {
+
+  .CTAbutton {
+    width: 50%;
+  }
+
+}
+
+
+@media(max-width: 580px) {
+
+  .signUpCTA {
+
+    flex-direction: column;
+    justify-content: center;
+
+    .description {
+
+      .heading {
+        text-align: center;
+      }
+  
+      .teaser {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+  
+    }
+
+  }
+
+}
