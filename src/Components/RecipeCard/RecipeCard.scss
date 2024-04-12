@@ -121,16 +121,17 @@
 }
 
 
-@media(max-width: 700px) {
+@media(max-width: 800px) {
 
-    // .recipeCard {
-    //     width: 20%;
-    // }
+    .recipeCard {
+        // width: 20%;
+        width: calc(50% - 20px);   
+    }
 
 }
 
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
 
     .recipeCard {
         width: 100%;
