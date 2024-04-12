@@ -7,7 +7,7 @@ const instance = axios.create({
     timeout: 5000,
     withCredentials: false,
     params: {
-        app_id: 'd521788b' ,
+        app_id: 'd521788b',
         app_key: 'c569f8cb415ada401f91221c983f3608',
     }
 })
@@ -31,7 +31,24 @@ export const viewRecipe = (uri) => {
         }
     })
         .then(response => {
-            console.log('API called')
+            return response.data;
+        }).catch(error => {
+            console.log('Error retrieving recipes: ', error)
+        })
+}
+
+
+
+export const getRecipeByDiet = (diet, pagination, add) => {
+    return instance.get('/api/recipes/v2', {
+        params: {
+            health: diet,
+            from: pagination,
+            to: (pagination + add),
+            type: 'public',
+        }
+    })
+        .then(response => {
             return response.data;
         }).catch(error => {
             console.log('Error retrieving recipes: ', error)

@@ -1,0 +1,70 @@
+.recipeResultContainer {
+
+    .cardContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .itemHero {
+        width: 100%;
+        padding-top: 120px;
+        padding-bottom: 30px;
+        background-color: #09b561;
+        background-image: url(../../../public/images/blob-scene-haikei.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+
+            padding-top: 10px;
+            margin: 0;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        h1 {
+            margin-left: 10px;
+            color: #fff;
+            text-transform: capitalize;
+            font-size: 3rem;
+        }
+    }
+
+    .paginationContainer {
+        ul {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            li {
+                list-style-type: none;
+                cursor: pointer;
+                margin: 20px 5px;
+                display: flex;
+                align-items: center;
+                color: #09b561;
+                text-decoration: none;
+                font-size: 1.5rem;
+                font-weight: bold;
+                transition: .3s;
+
+                svg {
+                    margin: 0 3px;
+                }
+
+                &:hover {
+                    color: #066c3b;
+                }
+            }
+
+            li:active {
+                text-decoration: underline;
+            }
+
+        }
+    }
+}

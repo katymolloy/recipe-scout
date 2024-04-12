@@ -9,6 +9,7 @@ import NotFound from './Pages/NotFound';
 import RecipePage from './Pages/RecipePage';
 import RecipeResult from './Pages/RecipeResults';
 import { useEffect, useState } from 'react';
+import HealthLabelResult from './Pages/HealthLabelResults';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false)
@@ -29,6 +30,7 @@ function App() {
           <Route path='/' element={<Landing isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId}  />} />
           <Route path='/recipe/:uri' element={<RecipePage isLoggedIn={authenticated} changeLogin={setLoggedIn}  />} />
           <Route path='/search/:searchItem' element={<RecipeResult isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId}  />} />
+          <Route path='/diet/:searchItem' element={<HealthLabelResult isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId}  />} />
           <Route path='/cookbook' element={<Cookbook isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId}  />} />
           <Route path='/login' element={<Login onLogin={setLoggedIn} />} />
           <Route path='/register' element={<Register onRegister={setLoggedIn} />} />
