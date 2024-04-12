@@ -144,28 +144,32 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
       <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
       <div className="recipePage">
         <div className="topSection">
-          <h1>{recipe.label} </h1>
-          <h1>
-            {recipe.totalTime > 0 && (
-              <>
-                <FaRegClock /> {recipe.totalTime} min
-              </>
-            )}
-          </h1>
+          <div>
+            <h1>{recipe.label} </h1>
+            <p>
+              {recipe.totalTime > 0 && (
+                <>
+                  <FaRegClock /> {recipe.totalTime} min
+                </>
+              )}
+            </p>
+          </div>
+          <div className="image-container">
+            <img src={recipe.image} alt={recipe.label}></img>
+          </div>
         </div>
 
         {recipe ? (
-          <div className="titleCard">
-            <div className="medium-heading">Ingredients</div>
-            <ol>
-              {ingredients.map((ingredient, index) => {
-                return <li key={index}>{ingredient}</li>;
-              })}
-            </ol>
-            <div className="image-container">
-              <img src={recipe.image} alt={recipe.label}></img>
-            </div>
-            <div className="top-section">
+          <div>
+            <div className="titleCard">
+              <div className="ingredients">
+                <div className="medium-heading">Ingredients</div>
+                <ol>
+                  {ingredients.map((ingredient, index) => {
+                    return <li key={index}>{ingredient}</li>;
+                  })}
+                </ol>
+              </div>
               <div className="quickInfo">
                 <div className="small-heading">Nutrition Data</div>
 
@@ -185,41 +189,33 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
                       <li className="fats">Fat</li>
                       <div>{fat} grams</div>
                     </ul>
+                    <ul>
+                      <FaFire />
+                      {cals / recipe.yield} Calories
+                    </ul>
                   </div>
                   <div className="chart">
                     <canvas ref={doughnutChartRef}></canvas>
                   </div>
-                  <div className="calory-section">
-                    <FaFire />
-                    {cals / recipe.yield} cals
-                  </div>
                 </div>
-
-                {/* <div>
-                                    {dietLabels.map((label, index) => {
-                                        return <p key={index}>{label}</p>
-                                    })}
-                                </div> */}
               </div>
             </div>
-
             <div className="health-labels">
               {/* Replace all the stuff below with the database logic */}
-              <div className="medium-heading label-heading">Diets</div>
-
+              <div className="medium-heading label-heading">
+                <h2>Diets</h2>
+              </div>
               {hasSameLabels && (
                 <div className="label-container">
                   {hasSameHealthLabels.map((label, index) => {
                     const lowercaseLabel = label.toLowerCase();
 
                     return (
-                      <div className="label-card">
-                        <Link to={`/diet/${lowercaseLabel}`}>
-                          <h2 key={index} className="dietLabel">
-                            {label}
-                          </h2>
-                        </Link>
-                      </div>
+                      <Link to={`/diet/${lowercaseLabel}`} className="label-card">
+                        <h3 key={index} className="dietLabel">
+                          {label}
+                        </h3>
+                      </Link>
                     );
                   })}
                 </div>
@@ -233,6 +229,7 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
               </a>
             </div>
           </div>
+
         ) : (
           <h1>Loading ... </h1>
         )}
