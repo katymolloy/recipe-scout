@@ -4,32 +4,60 @@
 
     width: 100%;
 
-    .titleCard,
-    h1 {
-        margin: 0 10rem;
+
+    .recipeInfo {
+        display: flex;
+    }
+
+    .titleCard {
+        width: 95%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .topSection {
-        padding-top: 120px;
-        padding-bottom: 30px;
+        padding: 120px 13% 30px;
         background-color: #09b561;
         background-image: url(../../../public/images/blob-scene-haikei.png);
         background-repeat: no-repeat;
         /* Do not repeat the image */
         background-size: cover;
-    }
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-    h1 {
-        font-size: 3rem;
-        color: white;
+        h1 {
+            font-size: 4rem;
+            color: #fff;
+
+        }
 
         svg {
-            font-size: 2rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-right: 10px;
+        }
+
+        p {
+            font-size: 3rem;
+            color: #fff;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
         }
     }
 
+
+
+    .ingredients {
+        box-shadow: 0 1px 5px rgb(0 0 0 / 0.2);
+        padding: 1rem;
+        border-radius: 13px;
+        margin: 2rem;
+    }
+
     .medium-heading {
-        margin-top: 1rem;
         text-transform: uppercase;
         font-weight: bold;
         //text-decoration: underline;
@@ -37,12 +65,12 @@
     }
 
     ol {
-        padding-left: 25px;
         font-weight: bold;
     }
 
     li {
         font-size: 1.2rem;
+        margin: 2px 0;
     }
 
     li::before {
@@ -54,91 +82,94 @@
         border-radius: 13px;
     }
 
-    .top-section {
-        width: 100%;
-        display: flex;
 
-        .quickInfo {
-            border-radius: 13px;
-            background-color: white;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            box-sizing: border-box;
-            box-shadow: 0 1px 5px rgb(0 0 0 / 0.2);
-            text-decoration: none;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-            width: 100%;
+    .quickInfo {
+        border-radius: 13px;
+        background-color: white;
+        padding: 1rem;
+        margin: 2rem 0;
+        box-sizing: border-box;
+        box-shadow: 0 1px 5px rgb(0 0 0 / 0.2);
+        text-decoration: none;
+        width: 640px;
+        height: 320px;
 
+        .small-heading {
+            text-transform: uppercase;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 1.6rem;
+        }
 
-            .small-heading {
-                text-transform: uppercase;
-                font-weight: bold;
-                text-decoration: underline;
-                font-size: 1.6rem;
+        .yield {
+            font-size: 0.9rem;
+            color: rgb(181, 181, 181);
+            font-weight: bold;
+        }
+
+        // .carbs,
+        // .protein {
+        //     border-bottom: 2px solid rgb(181, 181, 181, 0.2);
+        // }
+
+        .recipe-information {
+
+            display: flex;
+
+            .chart {
+                width: 200px;
+                height: 200px;
+                margin: 0 20px;
             }
 
-            .yield {
-                font-size: 0.9rem;
-                color: rgb(181, 181, 181);
-                font-weight: bold;
-            }
+            .breakdown {
+                width: 400px;
 
-            // .carbs,
-            // .protein {
-            //     border-bottom: 2px solid rgb(181, 181, 181, 0.2);
-            // }
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    font-weight: bold;
 
-            .recipe-information {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-bottom: 2px solid rgb(181, 181, 181, 0.2);
 
-                display: flex;
-
-                .chart {
-                    width: 40%;
+                    div {
+                        padding: 0;
+                        margin: 0;
+                    }
                 }
 
-                .breakdown {
-                    width: 60%;
+                ul:last-child {
+                    border: none;
+                    justify-content: flex-start;
+                    font-size: 1.5rem;
+                }
 
-                    ul {
-                        list-style: none;
-                        padding: 0;
-                        font-weight: bold;
+                li.carbs::before {
+                    content: "•";
+                    font-size: 1.5rem;
+                    padding-right: 8px;
+                    color: #F94642;
+                }
 
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        border-bottom: 2px solid rgb(181, 181, 181, 0.2);
+                li.protein::before {
+                    content: "•";
+                    font-size: 1.5rem;
+                    padding-right: 8px;
+                    color: #3177BB;
+                }
 
-                        div {
-                            padding: 0;
-                            margin: 0;
-                        }
-                    }
-
-                    li.carbs::before {
-                        content: "•";
-                        font-size: 1.5rem;
-                        padding-right: 8px;
-                        color: #F94642;
-                    }
-
-                    li.protein::before {
-                        content: "•";
-                        font-size: 1.5rem;
-                        padding-right: 8px;
-                        color: #3177BB;
-                    }
-
-                    li.fats::before {
-                        content: "•";
-                        font-size: 1.5rem;
-                        padding-right: 8px;
-                        color: #FDA120;
-                    }
+                li.fats::before {
+                    content: "•";
+                    font-size: 1.5rem;
+                    padding-right: 8px;
+                    color: #FDA120;
                 }
             }
         }
+
 
         .image-container {
             justify-content: flex-end;
@@ -156,74 +187,46 @@
     /* Health Labels */
     .health-labels {
 
-        width: 100%;
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
         .label-heading {
-            margin: 20px 0;
+            width: 100%;
+            margin-left: 10%;
+            text-align: left;
+            font-size: 1.5rem;
         }
 
         .label-container {
 
-            width: 100%;
+            width: 93%;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
 
             .label-card {
-
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 margin: 10px 5px;
                 border-radius: 10px;
                 box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
-
                 width: calc(25% - 20px);
+                text-decoration: none;
+                transition: .3s;
 
-                h2 {
-                    color: rgba(0, 0, 0, 0.5);
-                    transition: .3s;
-                    // &:hover {
-                    //     color: #222222
-                    // }
-                    &:hover {
-                        border-bottom: 2px solid rgba(0, 0, 0, 0.5);
-                        padding-bottom: 2px;
-                    }
+                .dietLabel {
+                    color: #333;
+                    font-size: 1.5rem;
                 }
 
-
-                a {
-                    text-decoration: none;
-                    // transition: .3s;
-                    // &:hover {
-                    //     color: #222222
-                    // }
-                    // padding: 0;
-
-                    // &:hover {
-                    //     border-bottom: 2px solid #000000;
-                    //     padding-bottom: 2px;
-                    // }
+                &:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
                 }
-                /*
-                h2 {
-                    color: #09b561;
-                    text-decoration: none;
-                    transition: .3s;
-
-                    &:hover {
-                        color: #066c3b;
-                    }
-                }
-
-
-                a {
-                    color: #09b561;
-                }
-                */
-
-
             }
 
         }
@@ -234,7 +237,10 @@
     /* Grab the Recipe */
     .recipe-link {
 
-        margin-top: 20px;
+        margin: 60px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         a {
             color: #09b561;
@@ -242,6 +248,8 @@
             font-size: 1.5rem;
             font-weight: bold;
             transition: .3s;
+            display: flex;
+            align-items: center;
 
             svg {
                 font-size: 1.5rem;
