@@ -15,6 +15,7 @@ export default function Hamburger({ isOpen }) {
                     justify-content: space-around;
                     flex-flow: column nowrap;
                     z-index: 10;
+                    cursor: pointer;
                 }
 
                 .burger{
@@ -24,6 +25,7 @@ export default function Hamburger({ isOpen }) {
                     background-color: #fff;
                     transform-origin: 1px;
                     transition: all 0.3s linear;
+                    cursor: pointer;
                 }
 
                 .burger1{
