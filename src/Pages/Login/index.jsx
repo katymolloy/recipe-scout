@@ -1,14 +1,20 @@
 import { useState } from "react";
-import "./login.scss";
 import { useNavigate, Link } from "react-router-dom";
-import { IoArrowBack } from "react-icons/io5";
 import { signInUser } from "../../firebase";
+
+import { IoArrowBack } from "react-icons/io5";
+import { FaEye } from "react-icons/fa";
+
+import "./login.scss";
+
+
 
 export default function LoginPage({ onLogin }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, SetErrorMsg] = useState([]);
+  const [view, setView] = useState('password')
 
   const loginHandler = (e) => {
     e.preventDefault();
@@ -16,6 +22,16 @@ export default function LoginPage({ onLogin }) {
     signInUser(email, password, onLogin, SetErrorMsg);
     // once user is successfully logged in, they're redirected to the cookbook page
     navigate("/cookbook");
+  };
+
+  
+  const changeVisibility = () => {
+    if (view === "password") {
+      setView("text");
+    }
+    if (view === "text") {
+      setView("password");
+    }
   };
 
   return (
@@ -50,10 +66,11 @@ export default function LoginPage({ onLogin }) {
           </div>
           <div>
             <input
-              type="password"
+              type={view}
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             ></input>
+            <FaEye onClick={changeVisibility} />
           </div>
 
           <button type="submit" onClick={loginHandler}>

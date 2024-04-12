@@ -30,7 +30,7 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
     }, [searchItem])
 
     useEffect(() => {
-        console.log(nextPage)
+        console.log('Last page: ', nextPage[nextPage.length -1])
     }, [nextPage])
 
 
@@ -61,6 +61,7 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
         lastPage.splice(lastPage.length - 1, 1);
         // state is then updated
         setNextPage(lastPage)
+        
         // api is then called based on the new last item in array
         getNextPage(nextPage[nextPage.length - 1])
             .then(data => {
