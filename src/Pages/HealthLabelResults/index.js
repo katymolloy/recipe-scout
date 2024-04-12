@@ -58,7 +58,7 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
 
     const backPageHandler = () => {
         let updatedPagination = [...paginationLink]
-        let newPagination = updatedPagination.slice(0, -1); // Removes the last link
+        let newPagination = updatedPagination.slice(0, -2); // Removes the last link
         setPaginationLink(newPagination);
         console.log('From back, updated pagination', newPagination)
 
