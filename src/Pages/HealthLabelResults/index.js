@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom"
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import { useEffect, useState } from "react";
-import { getRecipeByDiet } from "../../Utilities/api";
+import { getRecipeByDiet, getNextPage } from "../../Utilities/api";
 import RecipeCard from "../../Components/RecipeCard";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoMdArrowRoundForward } from "react-icons/io";
@@ -12,33 +12,47 @@ import './recipeResults.scss'
 export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin }) {
     const { searchItem } = useParams();
     const [recipes, setRecipes] = useState([])
-    const [pagination, setPagination] = useState(1);
+    const [nextPage, setNextPage] = useState([])
 
     useEffect(() => {
-        getRecipeByDiet(searchItem, pagination, 28)
+        getRecipeByDiet(searchItem)
             .then(data => {
                 setRecipes(data.hits)
+                let pageArray = []
+                pageArray.push(data._links.next.href)
+                setNextPage(pageArray[0]);
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
             })
-    }, [searchItem, pagination])
+    }, [searchItem])
 
 
-    // pagination functions below
-    const increasePageNum = () => {
-        let newPage = pagination + 28;
-        setPagination(newPage)
+    const nextPageHandler = () => {
+        getNextPage(nextPage)
+            .then(data => {
+                setRecipes(data.hits)
+                let pageArray = [... nextPage]
+                pageArray.push(data._links.next.href)
+                setNextPage(pageArray);
+                console.log(nextPage)
+            }).catch(error => {
+                console.log('Error retrieving recipe data: ', error)
+            })
     }
 
-    const decreasePageNum = () => {
-        console.log('back')
-        if (pagination > 28) {
-            let newPage = pagination - 28;
-            console.log(newPage)
-            setPagination(newPage)
-        } else {
-            return;
-        }
+
+    const backPageHandler = () => {
+        let previousPage = nextPage.splice(nextPage.length - 1, 1)
+        setNextPage(previousPage)
+        getNextPage(nextPage[nextPage.length - 1])
+            .then(data => {
+                setRecipes(data.hits)
+                let pageArray = [... nextPage]
+                pageArray.push(data._links.next.href)
+                setNextPage(pageArray);
+            }).catch(error => {
+                console.log('Error retrieving recipe data: ', error)
+            })
     }
 
     return (
@@ -56,8 +70,8 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
                 </div>
                 <div className="paginationContainer">
                     <ul>
-                        <li onClick={decreasePageNum}><IoMdArrowRoundBack />Back</li>
-                        <li onClick={increasePageNum}>Next<IoMdArrowRoundForward /></li>
+                        <li onClick={backPageHandler}><IoMdArrowRoundBack />Back</li>
+                        <li onClick={nextPageHandler}>Next<IoMdArrowRoundForward /></li>
                     </ul>
                 </div>
             </div>

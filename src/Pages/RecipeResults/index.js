@@ -33,7 +33,6 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
     }
 
     const decreasePageNum = () => {
-        console.log('back')
         if (pagination > 28) {
             let newPage = pagination - 28;
             console.log(newPage)
