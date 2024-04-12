@@ -5,7 +5,6 @@ import { useEffect, useState, useRef } from "react";
 import { viewRecipe } from "../../Utilities/api";
 import { FaFire } from "react-icons/fa6";
 import { FaRegClock } from "react-icons/fa";
-import { MdOutlineHealthAndSafety } from "react-icons/md";
 import { CiGlobe } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import Chart from "chart.js/auto";
@@ -215,8 +214,6 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
 
                     return (
                       <div className="label-card">
-                        <MdOutlineHealthAndSafety />
-
                         <Link to={`/diet/${lowercaseLabel}`}>
                           <h2 key={index} className="dietLabel">
                             {label}
