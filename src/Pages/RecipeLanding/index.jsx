@@ -40,13 +40,15 @@ export default function Landing({
         {/* Search Bar Form */}
         <span>
           <form action="" className="search-bar">
-            <IoSearchOutline />
-            <input
-              type="text"
-              placeholder="Search Recipes . . ."
-              maxLength="100"
-              onChange={(e) => setQuery(e.target.value)}
-            />
+            <span>
+              <IoSearchOutline />
+              <input
+                type="text"
+                placeholder="Search Recipes . . ."
+                maxLength="100"
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </span>
             <button type="submit" onClick={searchHandler}>
               Search
             </button>

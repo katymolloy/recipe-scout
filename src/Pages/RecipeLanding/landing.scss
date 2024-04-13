@@ -22,50 +22,60 @@
         }
     }
 
-    .search-bar {
-        background-color: #fff;
-        display: flex;
-        align-items: center;
-        border-radius: 50px;
+    span {
 
-        input {
-            padding: 15px 30px 15px 20px;
-            font-size: 1.2rem;
-            border-radius: 50px 0 0 50px;
-            border: none;
-            width: 500px;
-
-            &:focus {
-                outline: none;
-            }
-        }
-
-        button {
-            margin-left: -25px;
-            padding: 15px 40px;
-            font-size: 1.2rem;
+        .search-bar {
+            background-color: #fff;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
             border-radius: 50px;
-            border: none;
-            width: 200px;
-            background-color: $green-color;
-            color: #fff;
-            font-weight: bold;
-            transition: .3s;
-            cursor: pointer;
 
-            &:hover {
-                background-color: #039d53;
+
+            span {
+                display: flex;
+                align-items: center;
+
+                input {
+                    padding: 15px 30px 15px 20px;
+                    font-size: 1.2rem;
+                    border-radius: 50px 0 0 50px;
+                    border: none;
+                    width: 500px;
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                }
+
+                svg {
+                    color: gray;
+                    font-size: 1.5rem;
+                    padding-left: 20px;
+                }
+            }
+
+            button {
+                margin-left: -25px;
+                padding: 15px 40px;
+                font-size: 1.2rem;
+                border-radius: 50px;
+                border: none;
+                width: 200px;
+                background-color: $green-color;
+                color: #fff;
+                font-weight: bold;
+                transition: .3s;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #039d53;
+                }
             }
         }
     }
 
-    svg {
-
-        color: gray;
-        font-size: 1.5rem;
-        padding-left: 20px;
-
-    }
 }
 
 
@@ -88,13 +98,24 @@
 @media(max-width: 800px) {
 
     .hero {
-        .search-bar {
-    
-            input {
-                padding: 15px 20px 15px 10px;
-                width: 400px;
-            }
+        h1 {
+            font-size: 3rem;
 
+            strong {
+                font-size: 3.2rem;
+            }
+        }
+
+        span {
+            .search-bar {
+
+                span {
+                    input {
+                        width: 300px;
+                    }
+                }
+
+            }
         }
     }
 
@@ -114,12 +135,8 @@
 
     .hero {
         .search-bar {
-    
-            input {
-                padding: 15px 10px 15px 1px;
-                width: 300px;
-                font-size: 1rem;
-            }
+
+            input {}
 
         }
     }
@@ -127,12 +144,52 @@
 }
 
 
-@media(max-width: 580px) {
+@media(max-width: 600px) {
 
     .hero {
 
-        /* Set the button on a new line, reduce the padding and the width */
+        h1 {
+            font-size: 2.5rem;
 
+            strong {
+                font-size: 2.75rem;
+            }
+        }
+
+        span {
+
+            .search-bar {
+
+                flex-direction: column;
+                background-color: transparent;
+                width: 100%;
+
+                span {
+                    background-color: #fff;
+                    border-radius: 50px;
+
+                    input {
+                        border-radius: 50px;
+                        width: 100%;
+                    }
+                }
+
+                button {
+                    margin-top: 20px;
+                    margin-left: 0;
+                    width: 100%;
+                }
+
+            }
+        }
+
+        .container {
+
+            h2 {
+                font-size: 1rem;
+            }
+
+        }
     }
 
 }
