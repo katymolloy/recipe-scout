@@ -20,23 +20,13 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
     const [recipes, setRecipes] = useState([])
     const [pagination, setPagination] = useState(1);
     const [resultCount, setResultCount] = useState(0);
-    const [isButtonEnabled, setIsButtonEnabled] = useState(true); 
-    const [limit, setLimit] = useState(false)
-
+    const [isButtonEnabled, setIsButtonEnabled] = useState(true);
 
     useEffect(() => {
         getSearchResults(searchItem, pagination, 28)
             .then(data => {
-                let pageNumber = 1; 
-                if (pageNumber === 27) {
-                    setLimit(true);
-                    setIsButtonEnabled(false);
-                    console.log('Limit Reached!')
-                    return;
-                } else {
-                    setRecipes(data.hits)
-                    setResultCount(data.count)
-                }
+                setRecipes(data.hits)
+                setResultCount(data.count)
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
             })
@@ -64,7 +54,7 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
         <>
             <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
             <div className="recipeResultContainer">
-                
+
                 <div className="itemHero">
                     <Link to={'/'}><IoMdArrowRoundBack /></Link>
                     <h1>{searchItem} Recipes</h1>
@@ -79,7 +69,7 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
                 <div className="paginationContainer">
                     <ul>
                         <li onClick={decreasePageNum}><IoMdArrowRoundBack />Back</li>
-                        <li onClick={increasePageNum} disabled = {!isButtonEnabled}>Next<IoMdArrowRoundForward /></li>
+                        <li onClick={increasePageNum}>Next<IoMdArrowRoundForward /></li>
                     </ul>
                 </div>
 
