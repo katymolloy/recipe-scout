@@ -4,14 +4,15 @@
 
     width: 100%;
 
-
     .recipeInfo {
         display: flex;
     }
 
     .titleCard {
         width: 95%;
+        margin: auto;
         display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
     }
@@ -24,6 +25,7 @@
         /* Do not repeat the image */
         background-size: cover;
         display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: space-between;
 
@@ -188,6 +190,7 @@
     .health-labels {
 
         width: 95%;
+        margin: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -262,6 +265,158 @@
             }
         }
 
+    }
+
+}
+
+@media only screen and (max-width: 1100px) {
+    .recipePage {
+        .topSection {
+            padding: 120px 10px 20px;
+
+
+            h1 {
+                font-size: 3rem;
+
+            }
+
+            svg {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1.75rem;
+            }
+        }
+
+        .titleCard {
+            flex-direction: column;
+
+            .ingredients {
+                width: 98%;
+            }
+
+            .quickInfo {
+                width: 100%;
+                height: 100%;
+
+                .recipe-information {
+                    justify-content: space-between;
+
+                    .chart {
+                        height: 300px;
+                        width: 300px;
+                    }
+                }
+            }
+        }
+
+        .health-labels {
+
+            width: 98%;
+
+            .label-heading {
+                text-align: center;
+                margin: 0;
+            }
+
+            .label-container {
+                width: 98%;
+
+                .label-card {
+                    width: calc(33% - 20px);
+
+                }
+
+            }
+
+        }
+    }
+
+}
+
+@media only screen and (max-width: 700px) {
+    .recipePage {
+        .topSection {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 10px 20px;
+
+            h1 {
+                font-size: 3rem;
+                text-align: center;
+
+            }
+
+            svg {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1.75rem;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .titleCard {
+
+            .ingredients {
+                width: 98%;
+            }
+
+            .quickInfo {
+                width: 100%;
+                height: 100%;
+
+                .recipe-information {
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                    .breakdown {
+                        width: 100%;
+                    }
+
+                    .chart {
+                        height: 300px;
+                        width: 300px;
+                    }
+                }
+            }
+        }
+
+        .health-labels {
+
+            width: 95%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .label-heading {
+                width: 100%;
+                text-align: center;
+                font-size: 1.5rem;
+            }
+
+            .label-container {
+
+                width: 98%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+
+                .label-card {
+                    width: calc(50% - 20px);
+
+                }
+
+            }
+
+        }
     }
 
 }
