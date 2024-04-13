@@ -63,11 +63,11 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
     // Function to execute when user clicks back
     const backPageHandler = () => {
         let updatedPagination = [...paginationLink]
-        let newPagination = updatedPagination.slice(0, -2); // Removes the last link
-        setPaginationLink(newPagination);
-        console.log('From back, updated pagination', newPagination)
+        updatedPagination.pop();
+        setPaginationLink(updatedPagination);
+        console.log('From back, updated pagination', updatedPagination)
 
-        let link = newPagination[newPagination.length - 1];
+        let link = updatedPagination[updatedPagination.length - 2];
         getNextPage(link)
             .then(data => {
                 setRecipes(data.hits);
