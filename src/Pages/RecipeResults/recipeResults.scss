@@ -65,10 +65,20 @@
                 text-decoration: underline;
             }
 
-            .notActive{
-                color: rgba(0, 0, 0, 0.4)
+            .notActive {
+                color: rgba(0, 0, 0, 0.4);
+                cursor: default;
+
+                &:hover {
+                    color: rgba(0, 0, 0, 0.4);
+                }
+
+                &:active {
+                    color: rgba(0, 0, 0, 0.4);
+                }
             }
-        
+
+
         }
     }
 }
