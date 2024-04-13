@@ -5,16 +5,13 @@ import { useEffect, useState } from "react";
 import { getRecipeByDiet, getMoreResults } from "../../Utilities/api";
 import RecipeCard from "../../Components/RecipeCard";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { IoMdArrowRoundForward } from "react-icons/io";
 
 import './recipeResults.scss'
-
 
 /**
  * Health Label Results Page
  */
 export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin }) {
-
     // Hooks
     const { searchItem } = useParams();
     const [recipes, setRecipes] = useState([])
@@ -34,7 +31,7 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
     }, [searchItem])
 
 
-    // Function to execute when user clicks next
+    // Function to execute when user clicks more results
     const moreResults = () => {
         getMoreResults(paginationLink)
             .then(data => {
@@ -42,6 +39,7 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
                     setLimit(true);
                     return;
                 }
+                // old recipes are concatenated with new data
                 let currRecipes = [...recipes, ...data.hits]
                 setRecipes(currRecipes)
                 setPaginationLink(data._links.next.href)
@@ -55,7 +53,6 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
 
 
     return (
-
         <>
             <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
 
@@ -77,7 +74,6 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
                 {/* Pagination Container */}
                 <div className="paginationContainer">
                     <ul>
-                        {/* <li onClick={backPageHandler}><IoMdArrowRoundBack />Back</li> */}
                         {limit === true ?
                             <li className="notActive">End of Results</li>
                             :

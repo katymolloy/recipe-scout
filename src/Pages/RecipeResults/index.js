@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { getSearchResults } from "../../Utilities/api";
 import RecipeCard from "../../Components/RecipeCard";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { IoMdArrowRoundForward } from "react-icons/io";
 
 import './recipeResults.scss'
 
@@ -32,17 +31,20 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
     }, [searchItem])
 
 
-    // pagination functions below
+    // gives more results
     const moreResults = () => {
         let newPage = pagination + 28;
+        // set limit for results
         setPagination(newPage)
 
         getSearchResults(searchItem, pagination, 28)
             .then(data => {
-                if(data.more === false){
+                // if there isn't more data, limit is true
+                if (data.more === false) {
                     setLimit(true);
                     return;
                 }
+                // old recipes are concatenated with new data
                 let currRecipes = [...recipes, ...data.hits]
                 setRecipes(currRecipes)
             }).catch(error => {
