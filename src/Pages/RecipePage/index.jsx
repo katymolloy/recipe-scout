@@ -138,12 +138,12 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
 
   /* useEffect for the health labels */
   useEffect(() => {
-    // Checks to see if any of the healthLabels relate to the fixedHealthLabels array
-    //const hasSameHealthLabels = fixedHealthLabels.some(label => healthLabels.includes(label));
 
+    // Checks to see if any of the healthLabels relate to the fixedHealthLabels array
     if (hasSameHealthLabels) {
       setHasSameLabels(true);
     }
+    
   }, [healthLabels, fixedHealthLabels]);
 
 
