@@ -85,7 +85,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
                             <div className="recipeCardContainer">
                                 {
                                     recipes.map((recipe, index) => (
-                                        <RecipeCard recipe={recipe} index={index} isLoggedIn={isLoggedIn} currentUser={currentUser} isCookbook={isCookbook} updateRecipes={updateRecipes} />
+                                        <RecipeCard key={recipe.uri} recipe={recipe} index={index} isLoggedIn={isLoggedIn} currentUser={currentUser} isCookbook={isCookbook} updateRecipes={updateRecipes} />
                                     ))
                                 }
                             </div>

@@ -39,7 +39,10 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
 
         getSearchResults(searchItem, pagination, 28)
             .then(data => {
+<<<<<<< HEAD
                 // if there isn't more data, limit is true
+=======
+>>>>>>> 54879f39d6e56b2465c10a77810d08f85dc89812
                 if (data.more === false) {
                     setLimit(true);
                     return;
