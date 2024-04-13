@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { getRecipeByDiet, getMoreResults } from "../../Utilities/api";
 import RecipeCard from "../../Components/RecipeCard";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { IoMdArrowRoundForward } from "react-icons/io";
 
 import './recipeResults.scss'
 
@@ -38,14 +37,14 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
     const moreResults = () => {
         getMoreResults(paginationLink)
             .then(data => {
-                if(data.more === false){
+                if (data.more === false) {
                     setLimit(true);
                     return;
                 }
                 let currRecipes = [...recipes, ...data.hits]
                 setRecipes(currRecipes)
                 setPaginationLink(data._links.next.href)
-            
+
             }).catch(error => {
                 setLimit(true)
                 console.log('Error retrieving recipe data: ', error)
@@ -68,11 +67,11 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
                     <h1>{searchItem} Recipes</h1>
                 </div>
 
-                    <div className="cardContainer">
-                        {recipes.map((recipe, index) => (
-                            <RecipeCard recipe={recipe.recipe} key={index} isLoggedIn={isLoggedIn} currentUser={currentUser} />
-                        ))}
-                    </div>
+                <div className="cardContainer">
+                    {recipes.map((recipe, index) => (
+                        <RecipeCard recipe={recipe.recipe} key={index} isLoggedIn={isLoggedIn} currentUser={currentUser} />
+                    ))}
+                </div>
 
                 {/* Pagination Container */}
                 <div className="paginationContainer">

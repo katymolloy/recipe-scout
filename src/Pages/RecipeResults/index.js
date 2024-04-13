@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { getSearchResults } from "../../Utilities/api";
 import RecipeCard from "../../Components/RecipeCard";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { IoMdArrowRoundForward } from "react-icons/io";
 
 import './recipeResults.scss'
 
@@ -39,7 +38,7 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
 
         getSearchResults(searchItem, pagination, 28)
             .then(data => {
-                if(data.more === false){
+                if (data.more === false) {
                     setLimit(true);
                     return;
                 }
