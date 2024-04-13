@@ -43,7 +43,7 @@ export const viewRecipe = (uri) => {
  * @param {string} link 
  * @returns recipe data for next page of results
  */
-export const getNextPage = (link) => {
+export const getMoreResults = (link) => {
     return axios.get(link)
     .then(response =>{
         return response.data;

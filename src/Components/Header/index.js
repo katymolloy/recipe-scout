@@ -88,9 +88,6 @@ export default function Header({ isLoggedIn, changeLogin }) {
         background-color: #00983F;
     }
 }
-
-
-
 `}</style>
 
         </header>
