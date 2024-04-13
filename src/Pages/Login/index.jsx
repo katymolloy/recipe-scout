@@ -56,7 +56,7 @@ export default function LoginPage({ onLogin }) {
           className="logo"
           alt="Recipe Scout Logo"
         ></img>
-        
+
         {/* Heading */}
         <h1 className="title">Welcome Back</h1>
         <p className="sub">Please Sign In to get Started</p>
@@ -85,7 +85,7 @@ export default function LoginPage({ onLogin }) {
           </div>
 
           {/* Password */}
-          <div>
+          <div className="password">
             <input
               type={view}
               placeholder="Password"
