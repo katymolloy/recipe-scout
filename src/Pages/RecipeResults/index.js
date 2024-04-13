@@ -27,7 +27,8 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
     useEffect(() => {
         getSearchResults(searchItem, pagination, 28)
             .then(data => {
-                if (data === undefined) {
+                let pageNumber = 1; 
+                if (pageNumber === 27) {
                     setLimit(true);
                     setIsButtonEnabled(false);
                     console.log('Limit Reached!')
