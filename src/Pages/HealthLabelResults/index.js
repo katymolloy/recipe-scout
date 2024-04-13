@@ -38,6 +38,10 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
     const moreResults = () => {
         getMoreResults(paginationLink)
             .then(data => {
+                if(data.more === false){
+                    setLimit(true);
+                    return;
+                }
                 let currRecipes = [...recipes, ...data.hits]
                 setRecipes(currRecipes)
                 setPaginationLink(data._links.next.href)
@@ -64,24 +68,18 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
                     <h1>{searchItem} Recipes</h1>
                 </div>
 
-                {recipes.length > 0 ?
                     <div className="cardContainer">
                         {recipes.map((recipe, index) => (
                             <RecipeCard recipe={recipe.recipe} key={index} isLoggedIn={isLoggedIn} currentUser={currentUser} />
                         ))}
                     </div>
 
-                    :
-                    <div>No recipes</div>}
-                {/* The Card Container */}
-
-
                 {/* Pagination Container */}
                 <div className="paginationContainer">
                     <ul>
                         {/* <li onClick={backPageHandler}><IoMdArrowRoundBack />Back</li> */}
                         {limit === true ?
-                            <li className="notActive">No More Results<IoMdArrowRoundForward /></li>
+                            <li className="notActive">End of Results</li>
                             :
                             <li onClick={moreResults}>More Results</li>
                         }

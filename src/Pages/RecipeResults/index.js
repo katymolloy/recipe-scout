@@ -19,35 +19,37 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
     const { searchItem } = useParams();
     const [recipes, setRecipes] = useState([])
     const [pagination, setPagination] = useState(1);
-    const [resultCount, setResultCount] = useState(0);
-    const [isButtonEnabled, setIsButtonEnabled] = useState(true);
+    const [limit, setLimit] = useState(false)
 
     useEffect(() => {
         getSearchResults(searchItem, pagination, 28)
             .then(data => {
                 setRecipes(data.hits)
-                setResultCount(data.count)
+                console.log(data)
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
             })
-    }, [searchItem, pagination])
+    }, [searchItem])
 
 
     // pagination functions below
-    const increasePageNum = () => {
+    const moreResults = () => {
         let newPage = pagination + 28;
         setPagination(newPage)
+
+        getSearchResults(searchItem, pagination, 28)
+            .then(data => {
+                if(data.more === false){
+                    setLimit(true);
+                    return;
+                }
+                let currRecipes = [...recipes, ...data.hits]
+                setRecipes(currRecipes)
+            }).catch(error => {
+                console.log('Error retrieving recipe data: ', error)
+            })
     }
 
-    const decreasePageNum = () => {
-        if (pagination > 28) {
-            let newPage = pagination - 28;
-            console.log(newPage)
-            setPagination(newPage)
-        } else {
-            return;
-        }
-    }
 
     return (
 
@@ -68,8 +70,10 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
 
                 <div className="paginationContainer">
                     <ul>
-                        <li onClick={decreasePageNum}><IoMdArrowRoundBack />Back</li>
-                        <li onClick={increasePageNum}>Next<IoMdArrowRoundForward /></li>
+                        {limit === true ?
+                            <li className="notActive">End of Results</li> :
+                            <li onClick={moreResults}>More Results</li>
+                        }
                     </ul>
                 </div>
 
