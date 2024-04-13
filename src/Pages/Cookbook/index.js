@@ -7,15 +7,21 @@ import { getFirestoreInstance, getUserData } from "../../firebase";
 import RecipeCard from "../../Components/RecipeCard";
 import { viewRecipe } from "../../Utilities/api";
 
+
+/**
+ * Cookbook Page
+ */
 export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiCall }) {
+
+    // Hooks
     const [name, setName] = useState('');
     const [savedRecipes, setSavedRecipes] = useState([]);
     const [recipes, setRecipes] = useState([])
     const [isCookbook, setIsCookbook] = useState(true)
     const db = getFirestoreInstance();
 
-   
     useEffect(() => {
+        // If the user has logged in, load the getUserData hook with data
         if (isLoggedIn === true) {
             getUserData(db, currentUser, setName, setSavedRecipes, savedRecipes);
         } else {
@@ -35,6 +41,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
             .then((data) => {
                 let recipeData = data.map((data) => data.hits[0].recipe)
                 setRecipes(recipeData)
+
             }).catch((error) => {
                 console.log('Error retrieving user recipes: ', error)
             })
@@ -42,8 +49,9 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
     }, [name])
 
 
-    // function to update recipe state; will remove deleted recipes
+    // Function to update recipe state; will remove deleted recipes
     const updateRecipes = (newRecipes) => {
+
         newRecipes.then((newRecipes) => {
             let newArray = []
             for (let i = 0; i < recipes.length; i++) {
@@ -53,21 +61,26 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
             }
             setRecipes(newArray)
             return;
+
         }).catch((error) => {
             console.log('Error updating user recipes: ', error)
         })
+
     }
 
     return (
+
         <>
             <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
             <div className="cookbook">
                 {isLoggedIn ?
                     <>
+                        {/* Heading */}
                         <div className="hero">
                             <h1>My Cookbook</h1>
                             <div>Welcome back, {name}!</div>
                         </div>
+
                         {savedRecipes.length !== 0 ?
                             <div className="recipeCardContainer">
                                 {
@@ -85,7 +98,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
                         }
                     </>
                     :
-                    // will display if authenticated state is false
+                    // Will display if authenticated state is false
                     <div className="hero register">
                         <h3>Not yet a Recipe Scout user? <br></br>Sign up to Save Your Favourite Recipes</h3>
                         <div className="pleaseRegister">
@@ -96,5 +109,7 @@ export default function Cookbook({ isLoggedIn, currentUser, changeLogin, addApiC
             </div>
             <Footer />
         </>
+
     )
+
 }

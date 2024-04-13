@@ -4,8 +4,14 @@ import Footer from "../../Components/Footer"
 
 import "./NotFound.scss";
 
+
+/**
+ * Page-Not-Found Page
+ */
 export default function NotFound() {
+
     return (
+        
         <div className="notFound">
             <Header />
             <main>
@@ -15,5 +21,7 @@ export default function NotFound() {
             </main>
             <Footer />
         </div>
+
     )
+
 }

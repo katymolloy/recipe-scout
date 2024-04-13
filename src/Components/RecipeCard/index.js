@@ -6,23 +6,34 @@ import { FaHeartBroken } from "react-icons/fa";
 
 import './RecipeCard.scss';
 
+
+/**
+ * Recipe Card Component for Recipes
+ */
 export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isCookbook, updateRecipes }) {
+
     const db = getFirestoreInstance();
 
+    // Save Recipe
     const handleSaveRecipe = () => {
         saveRecipe(db, recipe.uri, currentUser);
     };
 
+    // Remove Recipe
     const handleRemoveRecipe = () => {
         let updatedRecipes = removeRecipe(db, currentUser, recipe.uri);
         updateRecipes(updatedRecipes);
     }
 
     return (
+
         <div className="recipeCard">
+
             <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index}>
                 <img src={recipe.image} alt={recipe.label} loading="lazy"></img>
             </Link >
+
+            {/* Recipes' Heading */}
             <div className="recipeHeading">
                 <Link to={`/recipe/${encodeURIComponent(recipe.uri)}`} key={index}>
                     <h2>{recipe.label}</h2>
@@ -38,6 +49,8 @@ export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isC
                     </div>
                 )}
             </div>
+
+            {/* Recipes' Information */}
             <div className="recipeInfo">
                 <div>
                     <GiMeal />
@@ -52,6 +65,8 @@ export default function RecipeCard({ recipe, index, isLoggedIn, currentUser, isC
                 </div>
             </div>
 
-        </div >
+        </div>
+
     );
+
 }

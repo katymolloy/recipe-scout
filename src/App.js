@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import HealthLabelResult from './Pages/HealthLabelResults';
 
 function App() {
+
   const [authenticated, setAuthenticated] = useState(false)
   const [userId, setUserId] = useState('');
 
@@ -24,7 +25,9 @@ function App() {
 
 
   return (
+
     <div className="App">
+
       <Router>
         <Routes>
           <Route path='/' element={<Landing isLoggedIn={authenticated} changeLogin={setLoggedIn} currentUser={userId}  />} />
@@ -35,11 +38,12 @@ function App() {
           <Route path='/login' element={<Login onLogin={setLoggedIn} />} />
           <Route path='/register' element={<Register onRegister={setLoggedIn} />} />
           <Route path='*' element={<NotFound />} />
-
         </Routes>
       </Router>
+
     </div>
   );
+
 }
 
 export default App;

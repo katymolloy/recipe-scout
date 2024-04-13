@@ -8,14 +8,20 @@ import { FaEye } from "react-icons/fa";
 import "./login.scss";
 
 
-
+/**
+ * Login Page
+ */
 export default function LoginPage({ onLogin }) {
+
+  // Navigation Constant and Hooks
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, SetErrorMsg] = useState([]);
   const [view, setView] = useState('password')
 
+
+  // Handling the Login
   const loginHandler = (e) => {
     e.preventDefault();
 
@@ -24,7 +30,7 @@ export default function LoginPage({ onLogin }) {
     navigate("/cookbook");
   };
 
-  
+  // Changing Visibility for the Password
   const changeVisibility = () => {
     if (view === "password") {
       setView("text");
@@ -35,20 +41,31 @@ export default function LoginPage({ onLogin }) {
   };
 
   return (
+
     <div className="container loginContainer">
+
+      {/* The Login Card */}
       <div className="card">
         <Link to={"/"} className="backLink">
           <IoArrowBack />
         </Link>
+
+        {/* Image */}
         <img
           src="/images/recipelogo.png"
           className="logo"
           alt="Recipe Scout Logo"
         ></img>
+        
+        {/* Heading */}
         <h1 className="title">Welcome Back</h1>
         <p className="sub">Please Sign In to get Started</p>
+
+        {/* The Login's Form */}
         <form className="loginForm">
           {errorMsg.length > 0 && (
+
+            // Error Box
             <div className="login-errorBox">
               <ul>
                 {errorMsg.map((error, index) => (
@@ -57,6 +74,8 @@ export default function LoginPage({ onLogin }) {
               </ul>
             </div>
           )}
+
+          {/* Email Address */}
           <div>
             <input
               type="text"
@@ -64,6 +83,8 @@ export default function LoginPage({ onLogin }) {
               onChange={(e) => setEmail(e.target.value)}
             ></input>
           </div>
+
+          {/* Password */}
           <div>
             <input
               type={view}
@@ -73,6 +94,7 @@ export default function LoginPage({ onLogin }) {
             <FaEye onClick={changeVisibility} />
           </div>
 
+          {/* Submission */}
           <button type="submit" onClick={loginHandler}>
             Login
           </button>
@@ -83,6 +105,9 @@ export default function LoginPage({ onLogin }) {
           </p>
         </form>
       </div>
+
     </div>
+
   );
+
 }

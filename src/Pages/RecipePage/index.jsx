@@ -11,7 +11,13 @@ import Chart from "chart.js/auto";
 
 import "./RecipePage.scss";
 
+
+/**
+ * Chosen Recipe Page
+ */
 export default function RecipePage({ isLoggedIn, changeLogin }) {
+
+  // Hooks
   const { uri } = useParams();
   const [ingredients, setIngredients] = useState([]);
   const [healthLabels, setHealthLabels] = useState([]);
@@ -49,11 +55,11 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
   /* Calories */
   const [cals, setCals] = useState("");
 
-  /* Appropriate Icons */
-  const labelIcons = [];
-
+  /* Doughnut Chart */
   const doughnutChartRef = useRef(null);
 
+
+  // Getting the data of the recipe
   useEffect(() => {
     if (uri !== undefined) {
       viewRecipe(uri)
@@ -81,6 +87,7 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
         });
     }
   }, []);
+
 
   /* Nutrient Chart */
   useEffect(() => {
@@ -139,10 +146,14 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
     }
   }, [healthLabels, fixedHealthLabels]);
 
+
   return (
+
     <>
       <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
       <div className="recipePage">
+
+        {/* The Recipe Page's Top Section */}
         <div className="topSection">
           <div>
             <h1>{recipe.label} </h1>
@@ -159,8 +170,11 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
           </div>
         </div>
 
+        {/* If there is a recipe then execute the following */}
         {recipe ? (
           <div>
+
+            {/* Card's Title */}
             <div className="titleCard">
               <div className="ingredients">
                 <div className="medium-heading">Ingredients</div>
@@ -170,6 +184,8 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
                   })}
                 </ol>
               </div>
+
+              {/* Some Recipe Information */}
               <div className="quickInfo">
                 <div className="small-heading">Nutrition Data</div>
 
@@ -177,31 +193,39 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
 
                 <div className="recipe-information">
                   <div className="breakdown">
+
                     <ul>
                       <li className="carbs">Carbs</li>
                       <div>{carbs} grams</div>
                     </ul>
+
                     <ul>
                       <li className="protein">Protein</li>
                       <div>{protein} grams</div>
                     </ul>
+
                     <ul>
                       <li className="fats">Fat</li>
                       <div>{fat} grams</div>
                     </ul>
+
                     <ul>
                       <FaFire />
                       {cals / recipe.yield} Calories
                     </ul>
+
                   </div>
+
+                  {/* Dougnut Chart */}
                   <div className="chart">
                     <canvas ref={doughnutChartRef}></canvas>
                   </div>
                 </div>
               </div>
             </div>
+
+            {/* The Health Labels */}
             <div className="health-labels">
-              {/* Replace all the stuff below with the database logic */}
               <div className="medium-heading label-heading">
                 <h2>Diets</h2>
               </div>
@@ -236,5 +260,7 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
       </div>
       <Footer />
     </>
+
   );
+
 }

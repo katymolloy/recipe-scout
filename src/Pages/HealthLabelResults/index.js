@@ -9,7 +9,13 @@ import { IoMdArrowRoundForward } from "react-icons/io";
 
 import './recipeResults.scss'
 
+
+/**
+ * Health Label Results Page
+ */
 export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin }) {
+    
+    // Hooks
     const { searchItem } = useParams();
     const [recipes, setRecipes] = useState([])
     const [paginationLink, setPaginationLink] = useState([])
@@ -17,7 +23,7 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
     // const [lastPage, setLastPage] = useState('')
     const [limit, setLimit] = useState(false)
 
-    // initially uses getRecipeByDiet function and provides the diet to search for
+    // Initially uses getRecipeByDiet function and provides the diet to search for
     useEffect(() => {
         getRecipeByDiet(searchItem)
             .then(data => {
@@ -32,9 +38,7 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
     }, [searchItem])
 
 
-
-
-    // function to execute when user clicks next
+    // Function to execute when user clicks next
     const nextPageHandler = () => {
         // first data is retrieved from endpoint
         getNextPage(paginationLink[paginationLink.length - 1])
@@ -56,6 +60,7 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
             })
     }
 
+    // Function to execute when user clicks back
     const backPageHandler = () => {
         let updatedPagination = [...paginationLink]
         let newPagination = updatedPagination.slice(0, -2); // Removes the last link
@@ -73,19 +78,29 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
             });
     }
 
+
     return (
+
         <>
             <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
+
+            {/* The Recipe Result's Container */}
             <div className="recipeResultContainer">
+
+                {/* The Hero for the Search Item's Recipe */}
                 <div className="itemHero">
                     <Link to={'/'}><IoMdArrowRoundBack /></Link>
                     <h1>{searchItem} Recipes</h1>
                 </div>
+
+                {/* The Card Container */}
                 <div className="cardContainer">
                     {recipes.map((recipe, index) => (
                         <RecipeCard recipe={recipe.recipe} key={index} isLoggedIn={isLoggedIn} currentUser={currentUser} />
                     ))}
                 </div>
+
+                {/* Pagination Container */}
                 <div className="paginationContainer">
                     <ul>
                         <li onClick={backPageHandler}><IoMdArrowRoundBack />Back</li>
@@ -96,8 +111,11 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
                         }
                     </ul>
                 </div>
+
             </div>
             <Footer />
         </>
+
     )
+
 }

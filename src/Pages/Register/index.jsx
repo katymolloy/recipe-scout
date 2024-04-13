@@ -7,7 +7,13 @@ import { FaEye } from "react-icons/fa";
 
 import "./register.scss";
 
+
+/**
+ * Register User Page
+ */
 export default function Register({ onRegister }) {
+
+  // Variables and Hooks
   const db = getFirestoreInstance();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -18,6 +24,7 @@ export default function Register({ onRegister }) {
   const [errorMsg, setErrorMsg] = useState([]);
   const [view, setView] = useState("password");
 
+  // Handling the Registration from the User
   const registerHandler = (e) => {
     e.preventDefault();
     // Validating the inputs
@@ -81,6 +88,7 @@ export default function Register({ onRegister }) {
     }
   };
 
+  // Visibility Modification
   const changeVisibility = () => {
     if (view === "password") {
       setView("text");
@@ -91,7 +99,9 @@ export default function Register({ onRegister }) {
   };
 
   return (
+
     <div className="container registerContainer">
+
       <div className="card">
         <Link to={"/"} className="backLink">
           <IoArrowBack />
@@ -103,6 +113,8 @@ export default function Register({ onRegister }) {
         ></img>
         <h1 className="title">Create An Account</h1>
         <p className="sub">Lets Get You Started</p>
+
+        {/* Register Page Form */}
         <form className="registerPage">
           {errorMsg.length > 0 && (
             <div className="register-validate">
@@ -114,6 +126,8 @@ export default function Register({ onRegister }) {
               </ul>
             </div>
           )}
+
+          {/* First Name */}
           <div>
             <input
               type="text"
@@ -122,6 +136,7 @@ export default function Register({ onRegister }) {
             ></input>
           </div>
 
+          {/* Last Name */}
           <div>
             <input
               type="text"
@@ -130,6 +145,7 @@ export default function Register({ onRegister }) {
             ></input>
           </div>
 
+          {/* Email Address */}
           <div>
             <input
               type="text"
@@ -138,6 +154,7 @@ export default function Register({ onRegister }) {
             ></input>
           </div>
 
+          {/* Password */}
           <div>
             <input
               type={view}
@@ -152,13 +169,16 @@ export default function Register({ onRegister }) {
               placeholder="Password"
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></input>
-        
           </div>
+
+          {/* Submission */}
           <button type="submit" onClick={registerHandler}>
             Create Account
           </button>
         </form>
       </div>
+
     </div>
   );
+
 }

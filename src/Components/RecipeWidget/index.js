@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { getSearchResults } from "../../Utilities/api";
 
+
+/**
+ * The Register Widget Component
+ */
 export default function Widget({ food, userLoggedIn, currentUser }) {
+
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
@@ -25,6 +30,8 @@ export default function Widget({ food, userLoggedIn, currentUser }) {
 
 
     return (
+
+        // Container of the Widget
         <div className="widgetContainer">
             {recipes.map((recipe, index) => (
                 <RecipeCard
@@ -41,5 +48,7 @@ export default function Widget({ food, userLoggedIn, currentUser }) {
                 </Link>
             </div>
         </div>
+
     );
+
 }

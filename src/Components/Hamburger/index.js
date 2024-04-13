@@ -1,3 +1,6 @@
+/**
+ * Hamburger Menu
+ */
 export default function Hamburger({ isOpen }) {
     return (
         <>

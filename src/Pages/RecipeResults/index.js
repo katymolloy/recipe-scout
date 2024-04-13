@@ -9,11 +9,18 @@ import { IoMdArrowRoundForward } from "react-icons/io";
 
 import './recipeResults.scss'
 
+
+/**
+ * Recipe Results Page
+ */
 export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
+
+    // Hooks
     const { searchItem } = useParams();
     const [recipes, setRecipes] = useState([])
     const [pagination, setPagination] = useState(1);
     const [resultCount, setResultCount] = useState(0);
+
 
     useEffect(() => {
         getSearchResults(searchItem, pagination, 28)
@@ -43,26 +50,33 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
     }
 
     return (
+
         <>
             <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
             <div className="recipeResultContainer">
+                
                 <div className="itemHero">
                     <Link to={'/'}><IoMdArrowRoundBack /></Link>
                     <h1>{searchItem} Recipes</h1>
                 </div>
+
                 <div className="cardContainer">
                     {recipes.map((recipe, index) => (
                         <RecipeCard recipe={recipe.recipe} key={index} isLoggedIn={isLoggedIn} currentUser={currentUser} />
                     ))}
                 </div>
+
                 <div className="paginationContainer">
                     <ul>
                         <li onClick={decreasePageNum}><IoMdArrowRoundBack />Back</li>
                         <li onClick={increasePageNum}>Next<IoMdArrowRoundForward /></li>
                     </ul>
                 </div>
+
             </div>
             <Footer />
         </>
+
     )
+
 }

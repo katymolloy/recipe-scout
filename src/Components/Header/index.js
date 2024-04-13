@@ -4,11 +4,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import './header.scss';
 import Hamburger from "../Hamburger";
 
+
+/**
+ * Header Component
+ */
 export default function Header({ isLoggedIn, changeLogin }) {
+
     const [scroll, setScroll] = useState(false);
     const navigate = useNavigate();
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
+    // Handling the Scrolling
     useEffect(() => {
         const handleScroll = () => {
             const isScrolled = window.scrollY > 30;
@@ -21,6 +27,7 @@ export default function Header({ isLoggedIn, changeLogin }) {
         };
     }, []);
 
+    // Sign Out Handling
     const signOutHandler = () => {
         signOutUser()
         if (true) {
@@ -28,21 +35,30 @@ export default function Header({ isLoggedIn, changeLogin }) {
             navigate('/')
         }
     }
+
+    // The Toggle of the Hamburger Menu
     const toggleHamburger = () => {
         setHamburgerOpen(!hamburgerOpen)
     }
 
 
     return (
+
         <header className={scroll ? 'scroll' : ''}>
+
+            {/* Logo and Name */}
             <Link to={'/'} className='logolink'>
                 <img src="/images/recipelogowhite.png" className="logo" alt="Recipe Scout Logo" />
                 <div className='appName'>Recipe Scout</div>
             </Link>
+
+            {/* The Navigation Part of the Header */}
             <nav>
+                
                 <div className="hamburger" onClick={toggleHamburger}>
                     <Hamburger isOpen={hamburgerOpen} />
                 </div>
+
                 <ul>
                     <li><Link to='/' className='link'>Recipes</Link></li>
                     <li><Link to='/cookbook' className='link'>My Cookbook</Link></li>
@@ -57,6 +73,7 @@ export default function Header({ isLoggedIn, changeLogin }) {
                 </ul>
 
             </nav>
+
             <style jsx>{`
 @media (max-width: 1000px){
 
@@ -76,7 +93,9 @@ export default function Header({ isLoggedIn, changeLogin }) {
 
 
 `}</style>
+
         </header>
 
     );
+
 }

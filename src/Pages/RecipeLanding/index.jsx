@@ -8,26 +8,36 @@ import { IoSearchOutline } from "react-icons/io5";
 import "./landing.scss";
 import { useNavigate } from "react-router-dom";
 
+
+/**
+ * Recipe Landing Page
+ */
 export default function Landing({
   isLoggedIn,
   currentUser,
   changeLogin,
 }) {
+
+  // Navigation Constant and Hook
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
 
+  // Handling the Searching
   const searchHandler = (e) => {
     e.preventDefault();
     navigate(`/search/${query}`);
   };
 
   return (
+
     <>
       <Header isLoggedIn={isLoggedIn} changeLogin={changeLogin} />
       <div className="hero">
         <h1>
           Explore Over <strong>1 Million+</strong> <br></br>Unique Recipes
         </h1>
+
+        {/* Search Bar Form */}
         <span>
           <form action="" className="search-bar">
             <IoSearchOutline />
@@ -43,6 +53,8 @@ export default function Landing({
           </form>
         </span>
       </div>
+
+      {/* Widgets */}
       <div className="container">
         <h2>Fuel The Gains</h2>
         <Widget
@@ -67,5 +79,7 @@ export default function Landing({
       </div>
       <Footer />
     </>
+
   );
+
 }
