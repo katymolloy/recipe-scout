@@ -20,13 +20,22 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
     const [recipes, setRecipes] = useState([])
     const [pagination, setPagination] = useState(1);
     const [resultCount, setResultCount] = useState(0);
+    const [isButtonEnabled, setIsButtonEnabled] = useState(true); 
+    const [limit, setLimit] = useState(false)
 
 
     useEffect(() => {
         getSearchResults(searchItem, pagination, 28)
             .then(data => {
-                setRecipes(data.hits)
-                setResultCount(data.count)
+                if (data === undefined) {
+                    setLimit(true);
+                    setIsButtonEnabled(false);
+                    console.log('Limit Reached!')
+                    return;
+                } else {
+                    setRecipes(data.hits)
+                    setResultCount(data.count)
+                }
             }).catch(error => {
                 console.log('Error retrieving recipe data: ', error)
             })
@@ -69,7 +78,7 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
                 <div className="paginationContainer">
                     <ul>
                         <li onClick={decreasePageNum}><IoMdArrowRoundBack />Back</li>
-                        <li onClick={increasePageNum}>Next<IoMdArrowRoundForward /></li>
+                        <li onClick={increasePageNum} disabled = {!isButtonEnabled}>Next<IoMdArrowRoundForward /></li>
                     </ul>
                 </div>
 
