@@ -29,9 +29,6 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
   const [carbs, setCarbs] = useState("");
   const [protein, setProtein] = useState("");
   const [fat, setFat] = useState("");
-  const [unitCarb, setUnitCarb] = useState("");
-  const [unitProtein, setUnitProtein] = useState("");
-  const [unitFat, setUnitFat] = useState("");
 
   /* Health Labels */
   const [fixedHealthLabels, setFixedHealthLabel] = useState([
@@ -54,6 +51,7 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
 
   /* Calories */
   const [cals, setCals] = useState("");
+  const calories = cals / recipe.yield;
 
   /* Doughnut Chart */
   const doughnutChartRef = useRef(null);
@@ -78,9 +76,6 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
           setCarbs(first.recipe.totalNutrients.CHOCDF.quantity.toFixed(0));
           setProtein(first.recipe.totalNutrients.PROCNT.quantity.toFixed(0));
           setFat(first.recipe.totalNutrients.FAT.quantity.toFixed(0));
-          setUnitCarb(first.recipe.totalNutrients.CHOCDE.unit);
-          setUnitProtein(first.recipe.totalNutrients.PROCNT.unit);
-          setUnitFat(first.recipe.totalNutrients.FAT.unit);
         })
         .catch((error) => {
           console.log("Error retrieving recipe data: ", error);
@@ -211,7 +206,7 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
 
                     <ul>
                       <FaFire />
-                      {cals / recipe.yield} Calories
+                      {calories.toFixed(2)} Calories
                     </ul>
 
                   </div>
@@ -235,8 +230,8 @@ export default function RecipePage({ isLoggedIn, changeLogin }) {
                     const lowercaseLabel = label.toLowerCase();
 
                     return (
-                      <Link to={`/diet/${lowercaseLabel}`} className="label-card">
-                        <h3 key={index} className="dietLabel">
+                      <Link key={index} to={`/diet/${lowercaseLabel}`} className="label-card">
+                        <h3 className="dietLabel">
                           {label}
                         </h3>
                       </Link>
