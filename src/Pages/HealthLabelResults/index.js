@@ -19,8 +19,6 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
     const { searchItem } = useParams();
     const [recipes, setRecipes] = useState([])
     const [paginationLink, setPaginationLink] = useState([])
-    // const [nextPage, setNextPage] = useState('')
-    // const [lastPage, setLastPage] = useState('')
     const [limit, setLimit] = useState(false)
 
     // Initially uses getRecipeByDiet function and provides the diet to search for
@@ -46,6 +44,7 @@ export default function HealthLabelResult({ isLoggedIn, currentUser, changeLogin
                 // if the data is undefined, the 'next' button is blocked out
                 if (data === undefined) {
                     setLimit(true);
+                    console.log('Limit Reached!')
                     return;
                 } else {
                     // if data is not defined, the recipes are set and the next page is stored in state
