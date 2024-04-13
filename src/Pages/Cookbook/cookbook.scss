@@ -44,3 +44,21 @@
     flex-wrap: wrap;
   }
 }
+
+
+@media (max-width: 600px) {
+
+  .cookbook {
+    h3 {
+      font-size: 2rem;
+    }
+
+    .pleaseRegister {
+      flex-direction: column;
+
+      a {
+        text-align: center;
+      }
+    }
+  }
+}

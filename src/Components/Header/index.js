@@ -54,7 +54,7 @@ export default function Header({ isLoggedIn, changeLogin }) {
 
             {/* The Navigation Part of the Header */}
             <nav>
-                
+
                 <div className="hamburger" onClick={toggleHamburger}>
                     <Hamburger isOpen={hamburgerOpen} />
                 </div>
@@ -80,13 +80,12 @@ export default function Header({ isLoggedIn, changeLogin }) {
     header nav ul{
         display: ${hamburgerOpen ? 'flex' : 'none'};
         flex-direction: column;
-        width:400px;
+        width:300px;
         position: fixed;
+        width: 100%;
+        top: 0;
         right: 0;
-        top: 50px;
         background-color: #00983F;
-        padding: 20px;
-        border-radius: 10px
     }
 }
 
