@@ -85,6 +85,16 @@ header {
 }
 
 
+
+
+.scroll {
+    background-color: #09b561;
+    background-image: url(../../../public/images/blob-scene-haikei.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0px;
+}
+
 /* Responsiveness */
 @media (max-width: 1000px) {
 
@@ -98,12 +108,21 @@ header {
         }
 
         nav {
+
             ul {
                 li {
+                    margin: 10px 0;
+
                     .cta {
                         background-color: transparent;
                         color: #fff;
                         padding: 0;
+
+                        &:hover {
+                            padding: 0;
+                            background-color: transparent;
+                            color: #ccc;
+                        }
                     }
                 }
             }
@@ -112,10 +131,17 @@ header {
     }
 }
 
-.scroll {
-    background-color: #09b561;
-    background-image: url(../../../public/images/blob-scene-haikei.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 0px;
+/* Responsiveness */
+@media (max-width: 500px) {
+
+    header {
+        .logolink {
+            margin-left: 5px;
+        }
+
+        nav {
+            margin-right: 20px;
+        }
+
+    }
 }
