@@ -45,16 +45,20 @@ export const viewRecipe = (uri) => {
  */
 export const getMoreResults = (link) => {
     return axios.get(link)
-    .then(response =>{
-        return response.data;
-    }).catch(error =>{
-      
-        console.log('Error retrieving next page of recipes: ', error)
-    })
+        .then(response => {
+            return response.data;
+        }).catch(error => {
+
+            console.log('Error retrieving next page of recipes: ', error)
+        })
 }
 
 
-
+/**
+ * provides recipes based on diet
+ * @param {string} diet 
+ * @returns recipes that fit the specified diet
+ */
 export const getRecipeByDiet = (diet) => {
     return instance.get('/api/recipes/v2', {
         params: {

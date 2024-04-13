@@ -31,17 +31,23 @@ export default function RecipeResult({ isLoggedIn, currentUser, changeLogin }) {
     }, [searchItem])
 
 
-    // pagination functions below
+    // gives more results
     const moreResults = () => {
         let newPage = pagination + 28;
+        // set limit for results
         setPagination(newPage)
 
         getSearchResults(searchItem, pagination, 28)
             .then(data => {
+<<<<<<< HEAD
+                // if there isn't more data, limit is true
+=======
+>>>>>>> 54879f39d6e56b2465c10a77810d08f85dc89812
                 if (data.more === false) {
                     setLimit(true);
                     return;
                 }
+                // old recipes are concatenated with new data
                 let currRecipes = [...recipes, ...data.hits]
                 setRecipes(currRecipes)
             }).catch(error => {
