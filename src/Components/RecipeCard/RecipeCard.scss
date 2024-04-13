@@ -100,21 +100,14 @@
 
         .recipeInfo {
             display: block;
-            //justify-content: space-between;
             padding: 10px;
             color: #888;
-    
+
             div {
                 display: block;
-                // align-items: center;
-                // justify-content: center;
                 text-transform: capitalize;
-    
-                svg {
-                    // margin-right: 3px;
-                }
             }
-    
+
         }
 
     }
@@ -125,8 +118,7 @@
 @media(max-width: 800px) {
 
     .recipeCard {
-        // width: 20%;
-        width: calc(50% - 20px);   
+        width: calc(50% - 20px);
     }
 
 }
